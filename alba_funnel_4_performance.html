@@ -1,1 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>알선프 퍼널 4 — 성과 분석</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f5f6fa;--surface:#fff;--surface2:#f0f1f5;--border:#e2e4ea;--text:#1a1d27;--text-dim:#6b7084;--accent:#4361ee;--accent2:#0ea5a0;--green:#16a34a;--orange:#e8772e;--pink:#db2e7a;--purple:#7c3aed;--red:#e0484e;--font:'Pretendard',sans-serif;--mono:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:13px;line-height:1.55}
+.topbar{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);padding:0 48px;height:56px;display:flex;align-items:center;gap:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.topbar a{text-decoration:none;color:var(--text-dim);font-size:12px;font-weight:500;transition:.15s}.topbar a:hover{color:var(--accent)}
+.topbar .logo{font-weight:700;color:var(--text);font-size:14px;letter-spacing:-.3px}
+.topbar .active{color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:2px}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
+h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
+.subtitle{color:var(--text-dim);font-size:12px;margin-bottom:20px}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.kpi-label{font-size:10.5px;color:var(--text-dim);font-weight:500;margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.kpi-value{font-family:var(--mono);font-size:28px;font-weight:700;line-height:1.1}
+.kpi-sub{font-size:10px;color:var(--text-dim);margin-top:4px}
+.section{margin-bottom:28px}
+.section-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
+.card-title{font-size:12.5px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.chart-container{position:relative;height:220px}
+.chart-container-lg{position:relative;height:280px}
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{background:var(--surface2);padding:8px 10px;text-align:center;font-weight:600;font-size:10.5px;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.data-table td{padding:7px 10px;text-align:center;border-bottom:1px solid var(--surface2)}
+.data-table tr:hover{background:rgba(67,97,238,.02)}
+.insight-box{background:rgba(67,97,238,.04);border:1px solid rgba(67,97,238,.1);border-radius:8px;padding:14px 16px;font-size:12px;line-height:1.65}
+.insight-box.orange-bg{background:rgba(232,119,46,.04);border-color:rgba(232,119,46,.15)}
+.insight-box.green-bg{background:rgba(22,163,74,.04);border-color:rgba(22,163,74,.15)}
+.insight-box.pink-bg{background:rgba(219,46,122,.04);border-color:rgba(219,46,122,.15)}
+.insight-label{font-weight:700;font-size:11.5px;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.note-box{background:var(--surface2);border-radius:6px;padding:10px 12px;font-size:10.5px;color:var(--text-dim);line-height:1.6}
+.fw7{font-weight:700}.dim{color:var(--text-dim)}.red{color:var(--red)}.green{color:var(--green)}.orange{color:var(--orange)}
+.mega-funnel{display:flex;align-items:center;gap:0;padding:18px 12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow-x:auto}
+.mf-step{text-align:center;flex:1;min-width:70px}
+.mf-num{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+.mf-label{font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4}
+.mf-arrow{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:50px}
+.mf-arrow-icon{font-size:16px;color:var(--text-dim)}
+.mf-arrow-rate{font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 6px;border-radius:8px}
+.mf-arrow-rate.high{color:var(--green);background:rgba(22,163,74,.08)}
+.mf-arrow-rate.mid{color:var(--orange);background:rgba(232,119,46,.08)}
+.mf-arrow-rate.low{color:var(--red);background:rgba(224,72,78,.08)}
+.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.funnel-label{width:72px;font-size:11px;font-weight:600;text-align:right;flex-shrink:0}
+.funnel-bar{height:28px;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;transition:width .4s}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.summary-box{border-radius:10px;padding:16px 18px;font-size:12px;line-height:1.7}
+.summary-good{background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12)}
+.summary-bad{background:rgba(224,72,78,.04);border:1px solid rgba(224,72,78,.12)}
+.summary-title{font-weight:700;font-size:12.5px;margin-bottom:8px}
+@media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr)}.grid-2,.summary-grid{grid-template-columns:1fr}}
 
+.topbar-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.5px;text-decoration:none;color:var(--text)}
+.topbar-logo .badge{background:var(--accent);color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px}
+.topbar-nav{display:flex;align-items:center;gap:4px;margin-left:32px}
+.topbar-nav a{text-decoration:none;color:var(--text-dim);font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:.15s}
+.topbar-nav a:hover{background:var(--surface2);color:var(--text)}
+.topbar-nav a.active{background:rgba(67,97,238,.08);color:var(--accent);font-weight:600}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <span class="badge">알선프</span>
+    알바 선순환 프로젝트
+  </a>
+  <div class="topbar-nav">
+  <a href="index.html">대시보드 허브</a>
+  <a href="alba_funnel_1_application.html">퍼널1 신청</a>
+  <a href="alba_funnel_2_selection.html">퍼널2 선정·정산</a>
+  <a href="alba_funnel_3_execution.html">퍼널3 실행</a>
+  <a href="alba_funnel_4_performance.html" class="active">퍼널4 성과</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <h1>퍼널 4 — 성과 분석</h1>
+  <div class="subtitle">2차 린테스트 한정 · 2026.01.17 ~ 02.02 기준 · 알바 QR 쿠폰 → 고객 첫 주문 전환 성과</div>
+
+  <!-- KPI Row (4개, CPA 제거) -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">첫 주문</div>
+      <div class="kpi-value" style="color:var(--accent)">91</div>
+      <div class="kpi-sub">재주문 22건 별도</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">성과 알바</div>
+      <div class="kpi-value" style="color:var(--green)">42</div>
+      <div class="kpi-sub">전체 142명 중 29.6%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">알바당 평균</div>
+      <div class="kpi-value" style="color:var(--orange)">2.2</div>
+      <div class="kpi-sub">중앙값 2건</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">당일 전환</div>
+      <div class="kpi-value" style="color:var(--accent2)">77%</div>
+      <div class="kpi-sub">첫이벤트 → 당일 구매</div>
+    </div>
+  </div>
+
+  <!-- Mega Funnel -->
+  <div class="mega-funnel">
+    <div class="mf-step"><div class="mf-num" style="color:var(--text-dim)">483</div><div class="mf-label">고객 CTA<br>(퍼널3 쿠폰수령)</div></div>
+    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate mid">25.9%</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--accent)">125</div><div class="mf-label">앱 설치<br>(UA Install)</div></div>
+    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate high">76.0%</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--purple)">95</div><div class="mf-label">회원가입<br>(Registration)</div></div>
+    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate high">73.7%</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--green)">70</div><div class="mf-label">신규 첫 주문<br>(+기존회원 21)</div></div>
+  </div>
+
+  <div class="insight-box" style="margin-bottom:22px">
+    <div class="insight-label">퍼널 핵심 인사이트</div>
+    퍼널3 CTA 483건 → 앱 설치 125명(25.9%) → 가입 95명(76.0%) → 첫 주문 70명(73.7%). 기존 회원 21명 포함 총 <strong>91건 첫 주문</strong>.<br>
+    가입 후 <strong>73.7%</strong>가 구매 전환 — 가입만 하면 대부분 구매. <strong>최대 병목은 CTA→설치 구간(25.9%)</strong>.
+  </div>
+
+  <!-- Section 1: Customer Journey -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--accent)"></span>고객 여정 퍼널</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🔄 전체 전환 퍼널 (UA 신규 설치 기준)</div>
+        <div style="margin-bottom:14px">
+          <div class="funnel-row">
+            <div class="funnel-label">앱 설치</div>
+            <div class="funnel-bar" style="width:100%;background:var(--accent)">125명</div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-label">회원가입</div>
+            <div class="funnel-bar" style="width:76%;background:var(--purple)">95명 (76.0%)</div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-label">첫 주문</div>
+            <div class="funnel-bar" style="width:56%;background:var(--green)">70명 (73.7%)</div>
+          </div>
+        </div>
+        <div class="note-box">
+          가입 고객 95명 중 70명(73.7%) 첫 주문 완료. 기존 회원 21명 별도.<br>
+          총 첫 주문 고객 91명 = 신규가입 70 + 기존회원 21.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">⏱️ 첫 이벤트 → 구매 소요일</div>
+        <div class="chart-container"><canvas id="chartGapDays"></canvas></div>
+        <div class="insight-box green-bg" style="margin-top:10px">
+          <div class="insight-label">핵심 발견</div>
+          <strong>77%가 당일 구매</strong>, 89%가 1일 이내. 쿠폰 수령 → 즉시 전환.<br>
+          2일+ 소요 11% — 리마인드 CRM 타겟 대상.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Daily & Weekly -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--green)"></span>일별 · 주간 첫 주문 추이</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📈 일별 첫 주문 건수</div>
+        <div class="chart-container-lg"><canvas id="chartDaily"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 주간 요약</div>
+        <table class="data-table">
+          <thead><tr><th>주차</th><th>기간</th><th>첫 주문</th><th>알바 수</th><th>주문/알바</th></tr></thead>
+          <tbody>
+            <tr><td>W3</td><td>1/17~1/18</td><td>3</td><td>3</td><td>1.0</td></tr>
+            <tr><td>W4</td><td>1/19~1/25</td><td class="green fw7">30</td><td class="fw7">18</td><td class="fw7">1.7</td></tr>
+            <tr><td>W5</td><td>1/26~2/1</td><td class="green fw7">58</td><td class="fw7">30</td><td class="green fw7">1.9</td></tr>
+          </tbody>
+        </table>
+        <div class="insight-box green-bg" style="margin-top:10px">
+          <div class="insight-label">주간 트렌드</div>
+          W4→W5 첫 주문 <strong>93% 증가</strong>(30→58건), 참여 알바 18→30명 확대.<br>
+          W5 단일주 58건(전체의 64%) — 5~7차 대거 합류 효과.
+        </div>
+        <div class="card-title" style="margin-top:16px">📅 요일별 분포</div>
+        <div class="chart-container"><canvas id="chartDOW"></canvas></div>
+        <div class="note-box" style="margin-top:8px">
+          금요일 20건(최다). 전체적으로 요일 편차 적음 — 평일·주말 골고루 전환.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Alba Performance -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--orange)"></span>알바별 첫 주문 성과</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🏆 알바 Top 15 — 첫 주문 건수</div>
+        <div class="chart-container-lg"><canvas id="chartAlbaRank"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 배치별 성과</div>
+        <table class="data-table">
+          <thead><tr><th>배치</th><th>첫 주문</th><th>알바 수</th><th>주문/알바</th></tr></thead>
+          <tbody>
+            <tr><td class="fw7">4차</td><td>28</td><td>12</td><td>2.3</td></tr>
+            <tr><td class="fw7">5차</td><td class="green fw7">29</td><td class="fw7">13</td><td>2.2</td></tr>
+            <tr><td class="fw7">6차</td><td>21</td><td>9</td><td class="green fw7">2.3</td></tr>
+            <tr><td class="fw7">7차</td><td>13</td><td>8</td><td>1.6</td></tr>
+          </tbody>
+        </table>
+        <div class="insight-box orange-bg" style="margin-top:10px">
+          <div class="insight-label">배치 비교</div>
+          4·5차가 28~29건으로 비슷, 6차는 21건이지만 관측 기간 짧음.<br>
+          7차 13건 — 합류 직후임에도 빠르게 성과.
+        </div>
+        <div class="card-title" style="margin-top:16px">👤 알바별 분포</div>
+        <div class="chart-container"><canvas id="chartAlbaDist"></canvas></div>
+        <div class="note-box" style="margin-top:8px">
+          42명 중 1건 17명(40%), 2~3건 14명(33%), 4건+ 11명(26%).<br>
+          상위 24명(57%)이 전체 첫 주문의 80% 생산 — 파레토 법칙.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Amount & UA/RT -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--purple)"></span>주문 금액 · UA vs RT</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">💰 첫 주문 금액 분포</div>
+        <div class="chart-container"><canvas id="chartAmount"></canvas></div>
+        <div class="note-box" style="margin-top:8px">
+          100원 이하(쿠폰 첫주문) 52%, 100원 초과 48%.<br>
+          가입 경로: 카카오 93%(88/95), 패스오더 4%, Apple 3%.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔄 UA vs RT (중복 제거) — 구매 · 첫 주문</div>
+        <table class="data-table" style="margin-top:4px">
+          <thead><tr><th>구분</th><th>고객</th><th>구매 고객</th><th>구매율</th><th>첫주문 고객</th><th>첫주문율</th></tr></thead>
+          <tbody>
+            <tr><td class="fw7">UA (신규)</td><td>122명</td><td>77명</td><td class="green fw7">63.1%</td><td class="green fw7">73명</td><td class="green fw7">59.8%</td></tr>
+            <tr><td class="fw7">RT only</td><td>94명</td><td>48명</td><td>51.1%</td><td>18명</td><td class="red">19.1%</td></tr>
+          </tbody>
+          <tfoot><tr style="background:var(--surface2)"><td class="fw7">합계</td><td class="fw7">216명</td><td class="fw7">125명</td><td>57.9%</td><td class="fw7">91명</td><td>42.1%</td></tr></tfoot>
+        </table>
+        <div class="insight-box" style="margin-top:10px">
+          <div class="insight-label">UA vs RT 핵심 차이</div>
+          UA(신규 설치) 첫주문율 <strong>59.8%</strong> vs RT only(기존 고객) <strong>19.1%</strong> — <strong>3.1배 차이</strong>.<br>
+          RT 고객은 이미 기존 주문 이력이 있어 재주문이 발생하거나, 가입 후 장기 미주문 상태에서 첫 주문이 발생한 경우임. 신규 설치 고객이 첫주문 전환에서 압도적.
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          UA/RT 중복 고객 26명은 UA로 분류. RT only = RT에만 존재하는 기존 고객.<br>
+          플랫폼: iOS 53% vs Android 47%.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: Retention -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--accent2)"></span>첫주문 후 재구매 리텐션</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🔄 재구매 현황 (total_purchase_count ≥ 2)</div>
+        <div style="display:flex;gap:12px;margin-bottom:14px">
+          <div style="flex:1;text-align:center;padding:14px;background:rgba(67,97,238,.03);border-radius:8px;border:1px solid rgba(67,97,238,.1)">
+            <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--accent)">75</div>
+            <div style="font-size:10px;color:var(--text-dim)">첫주문 고객 (중복 제외)</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:14px;background:rgba(22,163,74,.03);border-radius:8px;border:1px solid rgba(22,163,74,.1)">
+            <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--green)">13</div>
+            <div style="font-size:10px;color:var(--text-dim)">재구매 고객 (17.3%)</div>
+          </div>
+        </div>
+        <div class="chart-container"><canvas id="chartRetention"></canvas></div>
+        <div class="note-box" style="margin-top:8px">
+          UA/RT 중복 고객 26명 중 15명이 처음부터 count=2 → 제외.<br>
+          순수 재구매 13명: 2회 6명, 3회 4명, 4회 3명.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 재구매 고객 상세</div>
+        <table class="data-table">
+          <thead><tr><th>구매 횟수</th><th>고객 수</th><th>비율</th></tr></thead>
+          <tbody>
+            <tr><td>1회 (첫주문만)</td><td>62명</td><td class="dim">82.7%</td></tr>
+            <tr><td class="fw7">2회</td><td class="green fw7">6명</td><td>8.0%</td></tr>
+            <tr><td class="fw7">3회</td><td class="green fw7">4명</td><td>5.3%</td></tr>
+            <tr><td class="fw7">4회</td><td class="green fw7">3명</td><td>4.0%</td></tr>
+          </tbody>
+        </table>
+        <div class="insight-box green-bg" style="margin-top:10px">
+          <div class="insight-label">리텐션 인사이트</div>
+          첫주문 75명 중 <strong>13명(17.3%)</strong>이 재구매 — 리텐션 발생 확인.<br>
+          3회 이상 반복 구매자가 7명(9.3%) — 습관화 가능성 존재.<br>
+          4회 구매 고객(3명)의 누적 금액: 5,100원~18,200원으로 정가 주문 비중 증가.<br>
+          → 첫주문 쿠폰 이후 <strong>정가 전환이 일부 발생</strong>하고 있음.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 6: 24h No-Purchase & CRM -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--pink)"></span>가입 후 미구매 · 고객 리마인드 CRM</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">⏳ 가입 후 24h 미구매 추적</div>
+        <div style="display:flex;gap:12px;margin-bottom:14px">
+          <div style="flex:1;text-align:center;padding:14px;background:rgba(224,72,78,.03);border-radius:8px;border:1px solid rgba(224,72,78,.1)">
+            <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--red)">39</div>
+            <div style="font-size:10px;color:var(--text-dim)">24h 미구매 고객</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:14px;background:rgba(22,163,74,.03);border-radius:8px;border:1px solid rgba(22,163,74,.1)">
+            <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--green)">14</div>
+            <div style="font-size:10px;color:var(--text-dim)">이후 구매 전환 (36%)</div>
+          </div>
+        </div>
+        <div class="chart-container"><canvas id="chartNoPurchase"></canvas></div>
+        <div class="insight-box pink-bg" style="margin-top:10px">
+          <div class="insight-label">미구매 자연전환</div>
+          14명 자연전환 소요일: 평균 <strong>2.9일</strong>, 중앙값 2일.<br>
+          나머지 25명 미전환 → 고객 리마인드 CRM 타겟.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📩 고객 리마인드 CRM 효과</div>
+        <table class="data-table">
+          <thead><tr><th>발송일</th><th>대상</th><th>구매 전환</th><th>전환율</th></tr></thead>
+          <tbody>
+            <tr><td>1/27(월)</td><td>19명</td><td>1명</td><td>5.3%</td></tr>
+            <tr><td>1/28(화)</td><td>5명</td><td>2명</td><td class="green fw7">40.0%</td></tr>
+            <tr><td>2/3(화)</td><td>16명</td><td>0명</td><td class="red">0%</td></tr>
+          </tbody>
+          <tfoot><tr style="background:var(--surface2)"><td class="fw7">합계</td><td class="fw7">40명</td><td class="fw7">4명</td><td class="fw7">10.0%</td></tr></tfoot>
+        </table>
+        <div style="margin-top:14px">
+          <div class="card-title">전환 고객 상세</div>
+          <table class="data-table">
+            <thead><tr><th>고객</th><th>CRM 발송</th><th>구매일</th><th>소요일</th></tr></thead>
+            <tbody>
+              <tr><td>영</td><td>1/27</td><td>1/27</td><td class="green fw7">당일</td></tr>
+              <tr><td>윤영미</td><td>1/28</td><td>1/28</td><td class="green fw7">당일</td></tr>
+              <tr><td>이감독</td><td>1/28</td><td>1/29</td><td>1일</td></tr>
+              <tr><td>따닝</td><td>1/28</td><td>2/1</td><td>4일</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="insight-box" style="margin-top:10px">
+          <div class="insight-label">CRM 효과 판단</div>
+          40명 중 4명 전환(10%). 전환자 2명은 당일 구매 → CRM 즉시 반응.<br>
+          2/3 발송분(16명)은 아직 0건 → 관측 기간 추가 필요.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 7: Alba Remind CRM × First Orders -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--accent2)"></span>알바 리마인드 CRM ±2일 × 첫 주문</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📊 CRM 완독 전후 첫 주문 비교 (±2일 동일기간)</div>
+        <table class="data-table">
+          <thead><tr><th>CRM</th><th>에피소드</th><th>분석대상</th><th>전2일</th><th>후2일</th><th>리프트</th></tr></thead>
+          <tbody>
+            <tr><td class="fw7">D+1</td><td>Ep1</td><td>69명</td><td>12건</td><td>12건</td><td>0%</td></tr>
+            <tr><td class="fw7">D+3</td><td>Ep2</td><td>30명</td><td>8건</td><td>4건</td><td class="red">-50%</td></tr>
+            <tr><td class="fw7">D+5</td><td>Ep3</td><td>30명</td><td>9건</td><td>3건</td><td class="red">-67%</td></tr>
+            <tr><td class="fw7">D+7</td><td>Ep4</td><td>20명</td><td>2건</td><td>1건</td><td class="red">-50%</td></tr>
+          </tbody>
+        </table>
+        <div class="insight-box" style="margin-top:10px">
+          <div class="insight-label">CRM × 첫 주문 (전체 완독자 기준)</div>
+          전체 완독자 기준으로 재분석하면 CRM 리프트 효과가 <strong>관측되지 않음</strong>.<br>
+          Ep1: 전2일=12건, 후2일=12건으로 동일. Ep2~4는 오히려 <strong>감소 추세</strong>.<br>
+          → CRM이 첫 주문을 직접 유발한다기보다, 시간 경과에 따른 <strong>자연 감소</strong>가 더 큰 요인.<br>
+          <span class="dim">※ 이전 분석(미성과자 제외)에서 +62%로 나온 것은 성과자만 포함한 선택 편향이었음.</span>
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          <strong>CRM 완독자 중 첫주문 미발생 알바:</strong><br>
+          Ep1: 69명 완독 → 21명 성과(30.4%), <strong>48명 미성과(69.6%)</strong><br>
+          Ep2: 30명 → 10명 성과(33.3%), 20명 미성과<br>
+          Ep3: 30명 → 9명(30.0%), 21명 미성과<br>
+          Ep4: 20명 → 8명(40.0%), 12명 미성과<br><br>
+          Ep1 미성과 48명 상세: CTA 있음 21명, 앱 설치 8명, 가입 3명, UA구매 1명, RT구매 4명.<br>
+          → CRM을 읽고 쿠폰을 나눠줬지만(CTA 21명) 고객의 앱 설치·첫주문까지 이어지지 못한 케이스가 다수.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 CRM 단계별 전후 비교</div>
+        <div class="chart-container-lg"><canvas id="chartCRMPurchase"></canvas></div>
+        <div class="note-box" style="margin-top:8px">
+          <strong>전체 완독자 기준 재분석 결과:</strong><br>
+          CRM 완독 후 첫 주문이 증가하는 효과가 관측되지 않음. 시간이 지날수록 자연 감소가 주요인.<br>
+          CRM의 역할은 직접 전환보다 <strong>프로젝트 인지·참여 지속</strong>에 더 가까울 수 있음.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--text)"></span>핵심 요약 · 개선 포인트</div>
+    <div class="summary-grid">
+      <div class="summary-box summary-good">
+        <div class="summary-title" style="color:var(--green)">✅ 잘 되고 있는 것</div>
+        • 2차 린테스트 16일간 첫 주문 <strong>91건</strong> — 일평균 5.7건<br>
+        • 77%가 <strong>당일 전환</strong>, 89% 1일 이내 — 쿠폰 즉시 구매<br>
+        • 가입→첫 구매 전환율 <strong>73.7%</strong> — 가입하면 대부분 구매<br>
+        • 24h 미구매 고객 중 <strong>36%</strong>가 평균 2.9일 후 자연 전환<br>
+        • W4→W5 <strong>93% 성장</strong>(30→58건) — 뚜렷한 상승세<br>
+        • UA 신규 고객 첫주문율 <strong>59.8%</strong> — 신규 설치 고객 매우 적극적<br>
+        • 첫주문 후 재구매율 <strong>17.3%</strong>(13/75명) — 리텐션 발생 확인
+      </div>
+      <div class="summary-box summary-bad">
+        <div class="summary-title" style="color:var(--red)">⚠️ 개선이 필요한 것</div>
+        • 랜딩 참여 142명 중 <strong>100명(70.4%)</strong> 첫 주문 0건 — 대다수 미전환<br>
+        • 미성과 알바 69명의 CTA <strong>188건</strong>이 전부 첫주문 실패 — CTA→설치 전환 병목<br>
+        • CRM 완독자 중에서도 <strong>~70%</strong>가 첫주문 미발생 — CRM만으로 부족<br>
+        • 상위 24명(57%)이 80% 생산 — 소수 의존 구조, 하위 알바 활성화 필요<br>
+        • 고객 CRM 전환율 <strong>10%</strong>(4/40) — CRM 간접 전환(고객이 기존 쿠폰 재사용)도 미미<br>
+        • CTA→앱설치 전환율 <strong>25.9%</strong> — 퍼널 최대 병목 구간, 랜딩→앱스토어 경험 개선 필요
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const C = (id, cfg) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  return new Chart(el, cfg);
+};
+
+C('chartRetention',{type:'doughnut',data:{
+  labels:['1회만: 62명','2회: 6명','3회: 4명','4회: 3명'],
+  datasets:[{data:[62,6,4,3],
+    backgroundColor:['#e2e4ea','#4361ee','#16a34a','#e8772e'],
+    borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:9},padding:4}}}}
+});
+
+C('chartGapDays',{type:'bar',data:{
+  labels:['당일','1일','2일','3일','4일','7일','9일'],
+  datasets:[{data:[70,11,4,3,1,1,1],
+    backgroundColor:['#16a34a','rgba(22,163,74,0.45)','rgba(224,72,78,0.35)','rgba(224,72,78,0.35)','rgba(224,72,78,0.35)','rgba(224,72,78,0.35)','rgba(224,72,78,0.35)'],
+    borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},title:{display:true,text:'첫 이벤트 → 첫 구매 소요일 (91건)',font:{size:11,family:'Pretendard'}}},
+  scales:{y:{beginAtZero:true,ticks:{font:{size:10}}},x:{grid:{display:false},ticks:{font:{size:10}}}}}
+});
+
+C('chartDaily',{type:'bar',data:{
+  labels:['1/17','1/19','1/20','1/21','1/22','1/23','1/24','1/25','1/26','1/27','1/28','1/29','1/30','1/31','2/1'],
+  datasets:[{data:[3,1,1,3,5,11,5,4,13,8,2,9,9,6,11],
+    backgroundColor:Array(15).fill(0).map((_,i)=>i>=8?'#4361ee':i>=3?'rgba(67,97,238,0.55)':'rgba(67,97,238,0.3)'),
+    borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false}},
+  scales:{y:{beginAtZero:true},x:{grid:{display:false},ticks:{font:{size:9},maxRotation:45}}}}
+});
+
+C('chartDOW',{type:'bar',data:{
+  labels:['월','화','수','목','금','토','일'],
+  datasets:[{data:[14,9,5,14,20,14,15],
+    backgroundColor:Array(7).fill(0).map((_,i)=>i===4?'#4361ee':'rgba(67,97,238,0.3)'),
+    borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false}},
+  scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}
+});
+
+C('chartAlbaRank',{type:'bar',data:{
+  labels:['XQH131','HIK128','NTM345','GUL071','WKQ106','WCR332','ILB412','MLH383','XOV101','XFB322','ZVW108','WOB066','SBK157','VSP089','VGU111'],
+  datasets:[{data:[7,6,6,5,5,5,3,3,3,3,2,2,2,2,2],
+    backgroundColor:'#4361ee',borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false}},
+  scales:{x:{beginAtZero:true,grid:{display:false}},y:{ticks:{font:{size:9,family:'JetBrains Mono'}}}}}
+});
+
+C('chartAlbaDist',{type:'doughnut',data:{
+  labels:['1건: 17명','2~3건: 14명','4~5건: 5명','6건+: 6명'],
+  datasets:[{data:[17,14,5,6],
+    backgroundColor:['#e2e4ea','#4361ee','#16a34a','#e8772e'],
+    borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:9},padding:4}}}}
+});
+
+C('chartAmount',{type:'bar',data:{
+  labels:['~100원','101~500','501~1K','1K~5K','5K~10K','10K+'],
+  datasets:[{data:[47,16,3,16,6,3],
+    backgroundColor:['#e8772e','rgba(232,119,46,0.55)','rgba(232,119,46,0.35)','#4361ee','rgba(67,97,238,0.55)','rgba(67,97,238,0.35)'],
+    borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},title:{display:true,text:'첫 주문 금액 분포 (91건)',font:{size:11,family:'Pretendard'}}},
+  scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}
+});
+
+C('chartNoPurchase',{type:'doughnut',data:{
+  labels:['이후 구매: 14명','미전환: 25명'],
+  datasets:[{data:[14,25],
+    backgroundColor:['#16a34a','#e2e4ea'],
+    borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}}}
+});
+
+C('chartCRMPurchase',{type:'bar',data:{
+  labels:['D+1→Ep1\n(69명)','D+3→Ep2\n(30명)','D+5→Ep3\n(30명)','D+7→Ep4\n(20명)'],
+  datasets:[
+    {label:'전2일 첫주문',data:[12,8,9,2],backgroundColor:'rgba(67,97,238,0.35)',borderRadius:4},
+    {label:'후2일 첫주문',data:[12,4,3,1],backgroundColor:'rgba(224,72,78,0.5)',borderRadius:4}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:10}}}},
+  scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}
+});
+</script>
+</body>
+</html>
