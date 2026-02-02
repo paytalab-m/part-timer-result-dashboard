@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>알선프 퍼널 3 — 참여 확정 · 실행</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#f5f6fa;--surface:#fff;--surface2:#f0f1f5;--border:#e2e4ea;--text:#1a1d27;--text-dim:#6b7084;--accent:#4361ee;--accent2:#0ea5a0;--green:#16a34a;--orange:#e8772e;--pink:#db2e7a;--purple:#7c3aed;--red:#e0484e;--font:'Noto Sans KR',sans-serif;--mono:'JetBrains Mono',monospace}
+:root{--bg:#f5f6fa;--surface:#fff;--surface2:#f0f1f5;--border:#e2e4ea;--text:#1a1d27;--text-dim:#6b7084;--accent:#4361ee;--accent2:#0ea5a0;--green:#16a34a;--orange:#e8772e;--pink:#db2e7a;--purple:#7c3aed;--red:#e0484e;--font:'Pretendard',sans-serif;--mono:'JetBrains Mono',monospace}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:13px;line-height:1.55}
-.topbar{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:48px;display:flex;align-items:center;gap:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.topbar{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);padding:0 48px;height:56px;display:flex;align-items:center;gap:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .topbar a{text-decoration:none;color:var(--text-dim);font-size:12px;font-weight:500;transition:.15s}.topbar a:hover{color:var(--accent)}
 .topbar .logo{font-weight:700;color:var(--text);font-size:14px;letter-spacing:-.3px}
 .topbar .active{color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:2px}
@@ -70,16 +71,30 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
 .summary-bad{background:rgba(224,72,78,.04);border:1px solid rgba(224,72,78,.12)}
 .summary-title{font-weight:700;font-size:12.5px;margin-bottom:8px}
 @media(max-width:768px){.kpi-row{grid-template-columns:repeat(3,1fr)}.grid-2,.grid-3,.summary-grid{grid-template-columns:1fr}.tier-grid{grid-template-columns:repeat(3,1fr)}}
+
+.topbar-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.5px;text-decoration:none;color:var(--text)}
+.topbar-logo .badge{background:var(--accent);color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px}
+.topbar-nav{display:flex;align-items:center;gap:4px;margin-left:32px}
+.topbar-nav a{text-decoration:none;color:var(--text-dim);font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:.15s}
+.topbar-nav a:hover{background:var(--surface2);color:var(--text)}
+.topbar-nav a.active{background:rgba(67,97,238,.08);color:var(--accent);font-weight:600}
+
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <a href="index.html" class="logo">알선프 대시보드</a>
+  <a href="index.html" class="topbar-logo">
+    <span class="badge">알선프</span>
+    알바 선순환 프로젝트
+  </a>
+  <div class="topbar-nav">
   <a href="index.html">대시보드 허브</a>
   <a href="alba_funnel_1_application.html">퍼널1 신청</a>
   <a href="alba_funnel_2_selection.html">퍼널2 선정·정산</a>
   <a href="alba_funnel_3_execution.html" class="active">퍼널3 실행</a>
+  <a href="alba_funnel_4_performance.html">퍼널4 성과</a>
+  </div>
 </div>
 
 <div class="wrap">
@@ -371,10 +386,10 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
         <table class="data-table" style="margin-top:12px">
           <thead><tr><th>CRM</th><th>분석대상</th><th>전2일 CTA</th><th>후2일 CTA</th><th>리프트</th><th>증가</th><th>동일</th><th>감소</th></tr></thead>
           <tbody>
-            <tr><td class="fw7">D+1→Ep1</td><td>64명</td><td>66건</td><td class="green fw7">73건</td><td class="green fw7">+11%</td><td>12명</td><td>35명</td><td>17명</td></tr>
-            <tr><td class="fw7">D+3→Ep2</td><td>19명</td><td>19건</td><td>10건</td><td class="red">-47%</td><td>3명</td><td>10명</td><td>6명</td></tr>
-            <tr><td class="fw7">D+5→Ep3</td><td>21명</td><td>17건</td><td>8건</td><td class="red">-53%</td><td>4명</td><td>12명</td><td>5명</td></tr>
-            <tr><td class="fw7">D+7→Ep4</td><td>15명</td><td>5건</td><td class="green fw7">9건</td><td class="green fw7">+80%</td><td>5명</td><td>8명</td><td>2명</td></tr>
+            <tr><td class="fw7">D+1→Ep1</td><td>69명</td><td>69건</td><td class="red fw7">38건</td><td class="red fw7">-45%</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td class="fw7">D+3→Ep2</td><td>30명</td><td>37건</td><td>11건</td><td class="red">-70%</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td class="fw7">D+5→Ep3</td><td>30명</td><td>24건</td><td>9건</td><td class="red">-62%</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td class="fw7">D+7→Ep4</td><td>20명</td><td>7건</td><td class="green fw7">8건</td><td class="green fw7">+14%</td><td>—</td><td>—</td><td>—</td></tr>
           </tbody>
         </table>
 
@@ -428,11 +443,12 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
         <div style="font-size:10px;color:#999;margin-top:4px">6차 D+5, 7차 D+3~D+7: 완독 후2일이 02/02를 초과하여 관측부족 → 제외</div>
 
         <div class="insight-box green-bg" style="margin-top:10px">
-          <div class="insight-label">핵심 발견 — Ep1과 Ep4에서 완독 후 CTA 증가</div>
-          <strong>D+1→Ep1 (+11%)</strong>: 66→73건. 5차(+20%)·7차(+31%)에서 뚜렷한 증가. 첫 에피소드 완독이 배포 행동을 촉진.<br>
-          <strong>D+7→Ep4 (+80%)</strong>: 5→9건. 절대 수치는 작지만 4차(+200%)·5차(+50%) 모두 증가. 마지막 에피소드가 재활성화 효과.<br>
-          <strong>D+3→Ep2 (-47%), D+5→Ep3 (-53%)</strong>: 중간 에피소드는 오히려 감소 — 콘텐츠가 행동 전환을 유발하지 못하거나, 이미 피크 직후 감소 구간과 겹침.<br><br>
-          <strong>시사점</strong>: Ep1(동기부여)과 Ep4(재활성화)가 유효. 중간 에피소드 콘텐츠 재설계 또는 발송 시점 조정 검토.
+          <div class="insight-label">핵심 발견 — 전체 완독자 기준 재분석</div>
+          <strong>D+1→Ep1 (-45%)</strong>: 69→38건. 전체 완독자 기준으로 재분석하면 CRM 완독 후 CTA가 오히려 감소.<br>
+          <strong>D+7→Ep4 (+14%)</strong>: 7→8건. 절대 수치는 작지만 유일하게 증가. 마지막 에피소드의 재활성화 효과 가능성.<br>
+          <strong>D+3→Ep2 (-70%), D+5→Ep3 (-62%)</strong>: 중간 에피소드는 큰 폭 감소 — 시간 경과에 따른 자연 감소가 주요인.<br><br>
+          <strong>시사점</strong>: CRM이 CTA를 직접 촉진한다기보다, 시간 경과에 따른 자연 감소가 더 큰 요인. Ep4에서 미세 반등이 있어 재활성화 콘텐츠 검토 여지 있음.<br>
+          <span class="dim">※ 이전 분석(관측 기간 부족 제외)에서 Ep1 +11%, Ep4 +80%로 나온 것은 표본 편향 영향이 있었음.</span>
         </div>
       </div>
       <div class="card">
@@ -518,7 +534,7 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
         <div>• 1일만 고객 유입 <strong>51명(35.9%)</strong> — 지속적 QR 배포 유도 필요</div>
         <div>• Top 15 알바가 전체 고객 유입의 집중 — 소수 의존도 높음</div>
         <div>• 리마인드 CRM D+1→D+7 오픈율 <strong>46→21%</strong> — 진입 감소가 핵심 병목</div>
-        <div>• ±2일 동일기간 비교: Ep1 완독 후 <strong>+11%</strong>, Ep4 <strong>+80%</strong> 증가 / Ep2·3은 감소</div>
+        <div>• ±2일 동일기간 비교: 전체 완독자 기준 Ep1 <strong>-45%</strong>, Ep4 <strong>+14%</strong> / Ep2·3은 대폭 감소 → CRM 직접 효과 제한적</div>
       </div>
     </div>
   </div>
@@ -626,10 +642,10 @@ C('chartEpFunnel',{type:'bar',data:{
 
 // CRM ±2일 Before/After CTA
 C('chartCRMTrigger',{type:'bar',data:{
-  labels:['D+1→Ep1\n(64명)','D+3→Ep2\n(19명)','D+5→Ep3\n(21명)','D+7→Ep4\n(15명)'],
+  labels:['D+1→Ep1\n(69명)','D+3→Ep2\n(30명)','D+5→Ep3\n(30명)','D+7→Ep4\n(20명)'],
   datasets:[
-    {label:'완독 전2일 CTA',data:[66,19,17,5],backgroundColor:'rgba(67,97,238,0.5)',borderRadius:4},
-    {label:'완독 후2일 CTA',data:[73,10,8,9],backgroundColor:'rgba(219,46,122,0.5)',borderRadius:4}
+    {label:'완독 전2일 CTA',data:[69,37,24,7],backgroundColor:'rgba(67,97,238,0.5)',borderRadius:4},
+    {label:'완독 후2일 CTA',data:[38,11,9,8],backgroundColor:'rgba(219,46,122,0.5)',borderRadius:4}
   ]},options:{responsive:true,maintainAspectRatio:false,
   plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:10}}},
     title:{display:true,text:'±2일 동일기간: 완독 전 vs 후 고객 CTA (전체 합산)',font:{size:12}}},
