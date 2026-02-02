@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>알선프 대시보드 허브</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #f5f6fa;
+  --surface: #ffffff;
+  --surface2: #f0f1f5;
+  --border: #e2e5ed;
+  --text: #1e2132;
+  --text-dim: #8b90a5;
+  --accent: #4361ee;
+  --accent2: #0ea5a0;
+  --orange: #e8772e;
+  --red: #e0484e;
+  --green: #16a34a;
+  --purple: #7c3aed;
+  --pink: #db2e7a;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 100vh;
+}
+
+/* Top Bar */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.topbar-logo .badge {
+  background: var(--accent);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 32px;
+}
+
+.topbar-nav a {
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.topbar-nav a:hover { background: var(--surface2); color: var(--text); }
+.topbar-nav a.active { background: rgba(67,97,238,0.08); color: var(--accent); font-weight: 600; }
+
+.topbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-date {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+}
+
+/* Main Layout */
+.main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 48px;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.hero h1 {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.hero p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* Funnel Section */
+.funnel-section {
+  margin-bottom: 40px;
+}
+
+.funnel-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.funnel-section-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.funnel-section-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.funnel-section-header .desc {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* Flow Arrow between cards */
+.funnel-flow {
+  display: grid;
+  gap: 0;
+  position: relative;
+}
+
+.funnel-flow.cols-4 {
+  grid-template-columns: 1fr 32px 1fr 32px 1fr 32px 1fr;
+}
+
+.funnel-flow.cols-2 {
+  grid-template-columns: 1fr 32px 1fr;
+}
+
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--border);
+  font-size: 20px;
+  padding-top: 32px;
+}
+
+/* Funnel Card */
+.funnel-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.funnel-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.funnel-card.disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.funnel-card.disabled:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--border);
+  transform: none;
+}
+
+.funnel-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+}
+
+.funnel-card .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 12px;
+}
+
+.funnel-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+
+.funnel-card .card-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.funnel-card .card-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--surface2);
+}
+
+.funnel-card .metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+}
+
+.funnel-card .metric-label {
+  color: var(--text-dim);
+}
+
+.funnel-card .metric-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.funnel-card .status-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-ready {
+  background: rgba(22,163,74,0.1);
+  color: var(--green);
+}
+
+.status-soon {
+  background: rgba(232,119,46,0.1);
+  color: var(--orange);
+}
+
+.status-planned {
+  background: var(--surface2);
+  color: var(--text-dim);
+}
+
+/* Alba funnel colors */
+.alba-1::before { background: var(--accent); }
+.alba-1 .step-num { background: rgba(67,97,238,0.1); color: var(--accent); }
+
+.alba-2::before { background: var(--accent2); }
+.alba-2 .step-num { background: rgba(14,165,160,0.1); color: var(--accent2); }
+
+.alba-3::before { background: var(--orange); }
+.alba-3 .step-num { background: rgba(232,119,46,0.1); color: var(--orange); }
+
+.alba-4::before { background: var(--green); }
+.alba-4 .step-num { background: rgba(22,163,74,0.1); color: var(--green); }
+
+/* Customer funnel colors */
+.cust-1::before { background: var(--purple); }
+.cust-1 .step-num { background: rgba(124,58,237,0.1); color: var(--purple); }
+
+.cust-2::before { background: var(--pink); }
+.cust-2 .step-num { background: rgba(219,46,122,0.1); color: var(--pink); }
+
+/* Summary stats bar */
+.summary-bar {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: var(--shadow);
+}
+
+.summary-stat {
+  background: var(--surface);
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.summary-stat:first-child { border-radius: 10px 0 0 10px; }
+.summary-stat:last-child { border-radius: 0 10px 10px 0; }
+
+.summary-stat .label {
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.summary-stat .value {
+  font-size: 20px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.5px;
+}
+
+.summary-stat .sub {
+  font-size: 10.5px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <span class="badge">알선프</span>
+    알바 선순환 프로젝트
+  </div>
+  <div class="topbar-nav">
+    <a href="#" class="active">대시보드 허브</a>
+    <a href="알선프_채널분석_대시보드_v3.html">신청 퍼널</a>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-date">2차 린테스트 · 2026.01 – 02</div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>알선프 퍼널 대시보드</h1>
+    <p>알바 선순환 프로젝트의 전체 퍼널을 한눈에 확인하고, 각 단계별 상세 분석으로 이동합니다.</p>
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="summary-bar">
+    <div class="summary-stat">
+      <div class="label">노출 매장</div>
+      <div class="value" style="color:var(--accent)">15K</div>
+      <div class="sub">팝업/배너 기준</div>
+    </div>
+    <div class="summary-stat">
+      <div class="label">랜딩 진입</div>
+      <div class="value" style="color:var(--accent2)">6,297</div>
+      <div class="sub">신청 랜딩페이지</div>
+    </div>
+    <div class="summary-stat">
+      <div class="label">신청 완료</div>
+      <div class="value" style="color:var(--orange)">410</div>
+      <div class="sub">CVR 6.51%</div>
+    </div>
+    <div class="summary-stat">
+      <div class="label">참여 확정</div>
+      <div class="value" style="color:var(--green)">—</div>
+      <div class="sub">분석 예정</div>
+    </div>
+    <div class="summary-stat">
+      <div class="label">쿠폰 배포</div>
+      <div class="value" style="color:var(--purple)">—</div>
+      <div class="sub">분석 예정</div>
+    </div>
+    <div class="summary-stat">
+      <div class="label">고객 첫주문</div>
+      <div class="value" style="color:var(--pink)">—</div>
+      <div class="sub">분석 예정</div>
+    </div>
+  </div>
+
+  <!-- ==================== 알바 퍼널 ==================== -->
+  <div class="funnel-section">
+    <div class="funnel-section-header">
+      <div class="funnel-section-icon" style="background:rgba(67,97,238,0.08)">👷</div>
+      <div>
+        <h2>알바 퍼널</h2>
+        <div class="desc">매장 알바가 프로젝트를 인지하고, 신청 → 선정 → 실행 → 성과까지 이어지는 전체 여정</div>
+      </div>
+    </div>
+
+    <div class="funnel-flow cols-4">
+
+      <!-- 1. 신청 퍼널 -->
+      <a href="알선프_채널분석_대시보드_v3.html" class="funnel-card alba-1">
+        <span class="status-badge status-ready">분석 완료</span>
+        <div class="step-num">1</div>
+        <h3>신청 퍼널</h3>
+        <div class="card-desc">
+          채널별 유입 · 전환 분석<br>
+          영수증 QR / 팝업 / 배너 채널의<br>
+          랜딩 진입 → 신청 전환 성과
+        </div>
+        <div class="card-metrics">
+          <div class="metric-row">
+            <span class="metric-label">랜딩 진입</span>
+            <span class="metric-value" style="color:var(--accent)">6,297</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">신청 완료</span>
+            <span class="metric-value" style="color:var(--accent)">410</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">전환율 (CVR)</span>
+            <span class="metric-value" style="color:var(--green)">6.51%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">최고 채널</span>
+            <span class="metric-value" style="color:var(--accent2)">영수증 17.86%</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="flow-arrow">→</div>
+
+      <!-- 2. 선정 · 안내 · 정산 퍼널 -->
+      <!-- ★ 이 카드의 href를 실제 대시보드 파일명으로 변경하세요 -->
+      <div class="funnel-card alba-2 disabled">
+        <span class="status-badge status-soon">분석 예정</span>
+        <div class="step-num">2</div>
+        <h3>선정 · 안내 · 정산</h3>
+        <div class="card-desc">
+          신청자 심사 → 선정 안내 →<br>
+          참여 키트 발송 → 정산 처리까지<br>
+          운영 효율 분석
+        </div>
+        <div class="card-metrics">
+          <div class="metric-row">
+            <span class="metric-label">신청 접수</span>
+            <span class="metric-value dim">410</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">선정 완료</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">선정률</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">정산 완료율</span>
+            <span class="metric-value dim">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <!-- 3. 참여 확정 · 실행 퍼널 -->
+      <div class="funnel-card alba-3 disabled">
+        <span class="status-badge status-planned">분석 예정</span>
+        <div class="step-num">3</div>
+        <h3>참여 확정 · 실행</h3>
+        <div class="card-desc">
+          선정 알바의 참여 확정 →<br>
+          쿠폰 배포 실행 현황 →<br>
+          활동 유지율 분석
+        </div>
+        <div class="card-metrics">
+          <div class="metric-row">
+            <span class="metric-label">참여 확정</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">쿠폰 배포수</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">활동 유지율</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">매장당 배포</span>
+            <span class="metric-value dim">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <!-- 4. 성과 퍼널 -->
+      <div class="funnel-card alba-4 disabled">
+        <span class="status-badge status-planned">분석 예정</span>
+        <div class="step-num">4</div>
+        <h3>성과 퍼널</h3>
+        <div class="card-desc">
+          쿠폰 사용 → 첫 주문 전환 →<br>
+          재주문률 → CPA 산출 →<br>
+          ROI 분석
+        </div>
+        <div class="card-metrics">
+          <div class="metric-row">
+            <span class="metric-label">쿠폰 사용건</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">첫 주문 전환</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">CPA</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">목표 CPA 대비</span>
+            <span class="metric-value dim">—</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 고객 퍼널 ==================== -->
+  <div class="funnel-section">
+    <div class="funnel-section-header">
+      <div class="funnel-section-icon" style="background:rgba(124,58,237,0.08)">🛒</div>
+      <div>
+        <h2>고객 퍼널</h2>
+        <div class="desc">알바가 배포한 쿠폰을 통해 고객이 앱에 진입하고, 첫 주문까지 이어지는 여정</div>
+      </div>
+    </div>
+
+    <div class="funnel-flow cols-2">
+
+      <!-- 1. 앱 진입 이전 -->
+      <div class="funnel-card cust-1 disabled">
+        <span class="status-badge status-planned">분석 예정</span>
+        <div class="step-num">1</div>
+        <h3>앱 진입 이전</h3>
+        <div class="card-desc">
+          쿠폰 수령 → QR 스캔 →<br>
+          앱 다운로드 / 딥링크 진입 →<br>
+          이탈 구간 분석
+        </div>
+        <div class="card-metrics">
+          <div class="metric-row">
+            <span class="metric-label">쿠폰 배포수</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">QR 스캔수</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">앱 진입수</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">스캔→진입 전환율</span>
+            <span class="metric-value dim">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <!-- 2. 앱 진입 이후 -->
+      <div class="funnel-card cust-2 disabled">
+        <span class="status-badge status-planned">분석 예정</span>
+        <div class="step-num">2</div>
+        <h3>앱 진입 이후</h3>
+        <div class="card-desc">
+          앱 진입 → 메뉴 탐색 →<br>
+          첫 주문 완료 → 재주문 →<br>
+          리텐션 분석
+        </div>
+        <div class="card-metrics">
+          <div class="metric-row">
+            <span class="metric-label">앱 진입수</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">첫 주문 완료</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">진입→주문 CVR</span>
+            <span class="metric-value dim">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">7일 리텐션</span>
+            <span class="metric-value dim">—</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>
+
+</body>
+</html>
