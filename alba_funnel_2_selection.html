@@ -6,7 +6,8 @@
 <title>알선프 · 선정 · 안내 · 정산 퍼널</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
 :root {
   --bg: #f5f6fa;
@@ -30,7 +31,7 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard', sans-serif;
   min-height: 100vh;
   padding: 0;
 }
@@ -244,11 +245,12 @@ body {
     알바 선순환 프로젝트
   </a>
   <div class="topbar-nav">
-    <a href="index.html">대시보드 허브</a>
-    <a href="alba_funnel_1_application.html">신청 퍼널</a>
-    <a href="#" class="active">선정·안내·정산</a>
+  <a href="index.html">대시보드 허브</a>
+  <a href="alba_funnel_1_application.html">퍼널1 신청</a>
+  <a href="alba_funnel_2_selection.html" class="active">퍼널2 선정·정산</a>
+  <a href="alba_funnel_3_execution.html">퍼널3 실행</a>
+  <a href="alba_funnel_4_performance.html">퍼널4 성과</a>
   </div>
-  <div class="topbar-right">알바 퍼널 &gt; 2. 선정 · 안내 · 정산</div>
 </div>
 
 <div class="content-wrap">
@@ -313,32 +315,32 @@ body {
         <tr>
           <td>CRM 발송 → 랜딩 진입</td><td>450</td><td>329</td>
           <td><span class="fw7" style="color:var(--orange)">73.1%</span></td><td class="red">-121</td>
-          <td class="dim" style="text-align:left;font-family:'Noto Sans KR';font-size:11px">미도달(번호·딜러사 오류) + 미클릭</td>
+          <td class="dim" style="text-align:left;font-family:'Pretendard';font-size:11px">미도달(번호·딜러사 오류) + 미클릭</td>
         </tr>
         <tr>
           <td>진입 → 인트로 확인</td><td>329</td><td>318</td>
           <td><span class="fw7 green">96.7%</span></td><td class="dim">-11</td>
-          <td class="dim" style="text-align:left;font-family:'Noto Sans KR';font-size:11px">인트로 팝업에서 즉시 이탈</td>
+          <td class="dim" style="text-align:left;font-family:'Pretendard';font-size:11px">인트로 팝업에서 즉시 이탈</td>
         </tr>
         <tr>
           <td>인트로 → 폼 열기</td><td>318</td><td>259</td>
           <td><span class="fw7" style="color:var(--orange)">81.4%</span></td><td class="red">-59</td>
-          <td class="dim" style="text-align:left;font-family:'Noto Sans KR';font-size:11px">가이드만 읽고 폼 미진입 ★</td>
+          <td class="dim" style="text-align:left;font-family:'Pretendard';font-size:11px">가이드만 읽고 폼 미진입 ★</td>
         </tr>
         <tr>
           <td>폼 열기 → 제출 성공</td><td>259</td><td>216</td>
           <td><span class="fw7" style="color:var(--orange)">83.4%</span></td><td class="red">-43</td>
-          <td class="dim" style="text-align:left;font-family:'Noto Sans KR';font-size:11px">폼 내 이탈 (정보 입력 부담)</td>
+          <td class="dim" style="text-align:left;font-family:'Pretendard';font-size:11px">폼 내 이탈 (정보 입력 부담)</td>
         </tr>
         <tr>
           <td>제출 → 명함 발주</td><td>216</td><td>209</td>
           <td><span class="dim">수동 처리</span></td><td class="dim">-7</td>
-          <td class="dim" style="text-align:left;font-family:'Noto Sans KR';font-size:11px">담당자 수동 확인 · 정보오류 후 미응답 제외</td>
+          <td class="dim" style="text-align:left;font-family:'Pretendard';font-size:11px">담당자 수동 확인 · 정보오류 후 미응답 제외</td>
         </tr>
         <tr class="row-highlight" style="border-top:2px solid var(--border)">
           <td class="fw7">전체 (CRM→발주)</td><td class="fw7">450</td><td class="fw7">209</td>
           <td><span class="fw7" style="color:var(--accent2)">46.4%</span></td><td class="red fw7">-241</td>
-          <td class="dim" style="text-align:left;font-family:'Noto Sans KR';font-size:11px">유니크 Alba ID 기준 (리마인더 중복 제외)</td>
+          <td class="dim" style="text-align:left;font-family:'Pretendard';font-size:11px">유니크 Alba ID 기준 (리마인더 중복 제외)</td>
         </tr>
       </tbody>
     </table>
@@ -586,7 +588,7 @@ body {
 <script>
 Chart.defaults.color='#8b90a5';
 Chart.defaults.borderColor='rgba(0,0,0,0.06)';
-Chart.defaults.font.family="'Noto Sans KR','JetBrains Mono',sans-serif";
+Chart.defaults.font.family="'Pretendard','JetBrains Mono',sans-serif";
 Chart.defaults.font.size=11;
 
 // 1. CRM batch bar chart (precise ID matching)
