@@ -309,6 +309,11 @@ body {
   color: var(--text-dim);
 }
 
+.status-done {
+  background: rgba(67,97,238,0.08);
+  color: var(--accent);
+}
+
 /* Alba funnel colors */
 .alba-1::before { background: var(--accent); }
 .alba-1 .step-num { background: rgba(67,97,238,0.1); color: var(--accent); }
@@ -389,6 +394,8 @@ body {
     <a href="alba_funnel_2_selection.html">퍼널2 선정·정산</a>
     <a href="alba_funnel_3_execution.html">퍼널3 실행</a>
     <a href="alba_funnel_4_performance.html">퍼널4 성과</a>
+    <a href="customer_funnel_1_preapp.html">고객① 앱진입 이전</a>
+    <a href="customer_funnel_2_postapp.html">고객② 앱진입 이후</a>
   </div>
 </div>
 
@@ -589,8 +596,8 @@ body {
     <div class="funnel-flow cols-2">
 
       <!-- 1. 앱 진입 이전 -->
-      <div class="funnel-card cust-1 disabled">
-        <span class="status-badge status-planned">분석 예정</span>
+      <a href="customer_funnel_1_preapp.html" class="funnel-card cust-1">
+        <span class="status-badge status-done">2/2 업데이트</span>
         <div class="step-num">1</div>
         <h3>앱 진입 이전</h3>
         <div class="card-desc">
@@ -601,28 +608,28 @@ body {
         <div class="card-metrics">
           <div class="metric-row">
             <span class="metric-label">쿠폰 배포수</span>
-            <span class="metric-value dim">—</span>
+            <span class="metric-value" style="color:var(--purple)">493</span>
           </div>
           <div class="metric-row">
             <span class="metric-label">QR 스캔수</span>
-            <span class="metric-value dim">—</span>
+            <span class="metric-value" style="color:var(--accent)">393</span>
           </div>
           <div class="metric-row">
             <span class="metric-label">앱 진입수</span>
-            <span class="metric-value dim">—</span>
+            <span class="metric-value" style="color:var(--accent2)">91</span>
           </div>
           <div class="metric-row">
             <span class="metric-label">스캔→진입 전환율</span>
-            <span class="metric-value dim">—</span>
+            <span class="metric-value" style="color:var(--green)">23.2%</span>
           </div>
         </div>
-      </div>
+      </a>
 
       <div class="flow-arrow">→</div>
 
       <!-- 2. 앱 진입 이후 -->
-      <div class="funnel-card cust-2 disabled">
-        <span class="status-badge status-planned">분석 예정</span>
+      <a href="customer_funnel_2_postapp.html" class="funnel-card cust-2">
+        <span class="status-badge status-done">2/2 업데이트</span>
         <div class="step-num">2</div>
         <h3>앱 진입 이후</h3>
         <div class="card-desc">
@@ -633,22 +640,22 @@ body {
         <div class="card-metrics">
           <div class="metric-row">
             <span class="metric-label">앱 진입수</span>
-            <span class="metric-value dim">—</span>
+            <span class="metric-value" style="color:var(--purple)">125</span>
           </div>
           <div class="metric-row">
             <span class="metric-label">첫 주문 완료</span>
-            <span class="metric-value dim">—</span>
+            <span class="metric-value" style="color:var(--green)">91</span>
           </div>
           <div class="metric-row">
             <span class="metric-label">진입→주문 CVR</span>
-            <span class="metric-value dim">—</span>
+            <span class="metric-value" style="color:var(--accent)">72.8%</span>
           </div>
           <div class="metric-row">
-            <span class="metric-label">7일 리텐션</span>
-            <span class="metric-value dim">—</span>
+            <span class="metric-label">재구매율</span>
+            <span class="metric-value" style="color:var(--accent2)">17.1%</span>
           </div>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
