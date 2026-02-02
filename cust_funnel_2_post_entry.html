@@ -53,6 +53,16 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
 .summary-good{background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12)}
 .summary-bad{background:rgba(224,72,78,.04);border:1px solid rgba(224,72,78,.12)}
 .summary-title{font-weight:700;font-size:12.5px;margin-bottom:8px}
+.mega-funnel{display:flex;align-items:center;gap:0;padding:18px 12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow-x:auto}
+.mf-step{text-align:center;flex:1;min-width:70px}
+.mf-num{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+.mf-label{font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4}
+.mf-arrow{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:50px}
+.mf-arrow-icon{font-size:16px;color:var(--text-dim)}
+.mf-arrow-rate{font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 6px;border-radius:8px}
+.mf-arrow-rate.high{color:var(--green);background:rgba(22,163,74,.08)}
+.mf-arrow-rate.mid{color:var(--orange);background:rgba(232,119,46,.08)}
+.mf-arrow-rate.low{color:var(--red);background:rgba(224,72,78,.08)}
 @media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr)}.grid-2,.summary-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -73,11 +83,24 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
   <div class="subtitle">2차 린테스트 · 2026.01.17 ~ 02.02 기준 · 알바 QR 쿠폰 수령 고객의 설치 → 가입 → 구매 전환</div>
 
   <div class="kpi-row">
-    <div class="kpi-card"><div class="kpi-label">앱 설치 (UA)</div><div class="kpi-value" style="color:var(--accent)">125</div><div class="kpi-sub">신규 설치</div></div>
-    <div class="kpi-card"><div class="kpi-label">회원가입</div><div class="kpi-value" style="color:var(--purple)">95</div><div class="kpi-sub">설치 대비 76.0%</div></div>
+    <div class="kpi-card"><div class="kpi-label">고객 방문 (세션)</div><div class="kpi-value" style="color:var(--text-dim)">493</div><div class="kpi-sub">request_id 기준</div></div>
+    <div class="kpi-card"><div class="kpi-label">CTA 클릭 (세션)</div><div class="kpi-value" style="color:var(--accent)">393</div><div class="kpi-sub">방문 대비 79.7%</div></div>
+    <div class="kpi-card"><div class="kpi-label">앱 설치 (UA)</div><div class="kpi-value" style="color:var(--purple)">125</div><div class="kpi-sub">CTA 대비 31.8%</div></div>
     <div class="kpi-card"><div class="kpi-label">첫 주문</div><div class="kpi-value" style="color:var(--green)">91</div><div class="kpi-sub">신규 70 + 기존 21</div></div>
-    <div class="kpi-card"><div class="kpi-label">가입→24h 내 구매</div><div class="kpi-value" style="color:var(--orange)">80%</div><div class="kpi-sub">구매자 70명 중 56명</div></div>
     <div class="kpi-card"><div class="kpi-label">재구매율 (첫주문 기준)</div><div class="kpi-value" style="color:var(--accent2)">17.1%</div><div class="kpi-sub">중복 제외 76명 중 13명</div></div>
+  </div>
+
+  <!-- 메가 퍼널 -->
+  <div class="mega-funnel">
+    <div class="mf-step"><div class="mf-num" style="color:var(--text-dim)">493</div><div class="mf-label">고객 방문<br>(세션, request_id)</div></div>
+    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate high">79.7%</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--accent)">393</div><div class="mf-label">CTA 클릭<br>(세션당 1건)</div></div>
+    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate mid">31.8%</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--purple)">125</div><div class="mf-label">앱 설치<br>(UA Install)</div></div>
+    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate high">76.0%</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--accent2)">95</div><div class="mf-label">회원가입</div></div>
+    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate high">73.7%</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--green)">70</div><div class="mf-label">첫 주문(신규)<br><span style="color:var(--orange)">(+기존 21)</span></div></div>
   </div>
 
   <!-- 퍼널 구조도 -->
@@ -86,10 +109,11 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div>
         <div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:10px;padding:6px 10px;background:rgba(67,97,238,.06);border-radius:6px;display:inline-block">경로 A — 신규 고객 (설치 → 가입 → 구매)</div>
-        <div class="funnel-row"><div class="funnel-label">앱 설치</div><div class="funnel-bar" style="width:100%;background:var(--accent)">125명</div></div>
-        <div class="funnel-row"><div class="funnel-label">회원가입</div><div class="funnel-bar" style="width:76%;background:var(--purple)">95명 (76.0%)</div></div>
-        <div class="funnel-row"><div class="funnel-label">첫 주문</div><div class="funnel-bar" style="width:56%;background:var(--green)">70명 (73.7%)</div></div>
-        <div class="note-box" style="margin-top:8px">가입 95명 중 70명(73.7%) 구매. 가입 안 한 30명 중에서도 일부는 RT로 구매 발생 가능.</div>
+        <div class="funnel-row"><div class="funnel-label">CTA 클릭</div><div class="funnel-bar" style="width:100%;background:var(--accent)">393세션</div></div>
+        <div class="funnel-row"><div class="funnel-label">앱 설치</div><div class="funnel-bar" style="width:32%;background:var(--purple)">125명 (31.8%)</div></div>
+        <div class="funnel-row"><div class="funnel-label">회원가입</div><div class="funnel-bar" style="width:24%;background:var(--accent2)">95명 (76.0%)</div></div>
+        <div class="funnel-row"><div class="funnel-label">첫 주문</div><div class="funnel-bar" style="width:18%;background:var(--green)">70명 (73.7%)</div></div>
+        <div class="note-box" style="margin-top:8px">CTA 클릭 393세션 중 31.8%만 설치 — <strong>최대 병목 구간</strong>.<br>설치 후 가입 76%, 가입 후 구매 73.7%로 앱 내 퍼널은 건강.</div>
       </div>
       <div>
         <div style="font-size:11px;font-weight:700;color:var(--orange);margin-bottom:10px;padding:6px 10px;background:rgba(232,119,46,.06);border-radius:6px;display:inline-block">경로 B — 기존 회원 (설치·가입 불필요)</div>
@@ -115,9 +139,12 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
 
   <div class="insight-box" style="margin-bottom:22px">
     <div class="insight-label">퍼널 핵심 인사이트</div>
-    설치 이후 퍼널은 매우 건강함: 설치→가입 <strong>76.0%</strong>, 가입→구매 <strong>73.7%</strong>. 가입만 하면 대부분 구매.<br>
-    기존 회원 43명도 쿠폰 경로로 유입 — 이 중 21명이 첫 주문, 22명은 재주문(기존 이력).<br>
-    <strong>최대 병목은 CTA→설치 구간</strong> — 퍼널3에서의 쿠폰 수령 후 실제 앱 설치까지가 가장 큰 이탈 지점.
+    고객 방문 493세션 중 CTA 클릭 393세션(<strong>79.7%</strong>) — 랜딩 진입 후 CTA 관심도는 높음.<br>
+    <strong>최대 병목은 CTA→설치(31.8%)</strong> — 앱스토어 이동 후 68.2%가 이탈. 설치 이후 퍼널은 매우 건강(가입 76%, 구매 73.7%).<br>
+    기존 회원 43명도 쿠폰 경로로 유입 — 21명 첫 주문, 22명 재주문.
+    <div class="note-box" style="margin-top:8px">
+      <strong>세션(request_id) 카운팅 기준</strong>: 고객 방문 493건 = page_view 이벤트의 고유 request_id 수 (1/22 23시 이상치 44건 제외). CTA 클릭 393건 = cta_click_middle 또는 cta_click_bottom 이벤트 발생 세션 수 (동일 세션 내 중복 클릭은 1건).
+    </div>
   </div>
 
   <!-- 가입 분석 -->
@@ -327,18 +354,18 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
     <div class="summary-grid" style="margin-bottom:14px">
       <div class="summary-box summary-good">
         <div class="summary-title" style="color:var(--green)">✅ 잘 되고 있는 것</div>
+        • 고객 방문→CTA 클릭 <strong>79.7%</strong> — 랜딩 CTA 관심도 높음<br>
         • 설치→가입 <strong>76.0%</strong>, 가입→구매 <strong>73.7%</strong> — 앱 내 퍼널 매우 건강<br>
         • 가입 후 <strong>60%가 30분 이내</strong>, 80%가 24시간 이내 구매<br>
         • 첫주문 후 재구매율 <strong>17.1%</strong>(중복 제외 13/76명)<br>
         • UA 신규 첫주문율 <strong>59.8%</strong> · RT 평균 금액 <strong>2,731원</strong><br>
-        • 24h 미구매 중 <strong>36%</strong>가 평균 2.9일 후 자연 전환<br>
-        • 가입·구매 시간대 일치(9~15시) — 즉시 전환 패턴
+        • 24h 미구매 중 <strong>36%</strong>가 평균 2.9일 후 자연 전환
       </div>
       <div class="summary-box summary-bad">
         <div class="summary-title" style="color:var(--red)">⚠️ 개선이 필요한 것</div>
-        • CTA→설치가 퍼널 최대 병목<br>
+        • CTA→설치 <strong>31.8%</strong> — 퍼널 최대 병목(앱스토어 이탈 68%)<br>
         • 가입 후 미구매 <strong>25명(26.3%)</strong><br>
-        • CRM 전환율 <strong>10%</strong>(4/40) — 일괄 발송 시점이 개인 생활 패턴과 불일치<br>
+        • CRM 전환율 <strong>10%</strong>(4/40) — 일괄 발송 시점이 개인 패턴과 불일치<br>
         • 2/3 발송분(16명) <strong>전원 미전환</strong>
       </div>
     </div>
@@ -355,10 +382,8 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
             <span style="font-size:12px;font-weight:700;color:var(--pink)">미구매 대상 리스트업 자동화</span>
           </div>
           <div style="padding:14px 16px;font-size:12px;line-height:1.8">
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략</span>
-              <span><strong style="color:var(--red)">매일 자동으로 24h 미구매 신규 대상 추출 + 이전 CRM 발송 대상 자동 제외</strong>하여 발송 리스트 생성</span>
-            </div>
+            <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략</span>
+            <strong style="color:var(--red)"> 매일 자동으로 24h 미구매 신규 대상 추출 + 이전 CRM 발송 대상 자동 제외</strong>하여 발송 리스트 생성
           </div>
         </div>
         <div style="background:white;border:1px solid rgba(124,58,237,0.2);border-radius:10px;overflow:hidden">
@@ -367,10 +392,8 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
             <span style="font-size:12px;font-weight:700;color:var(--purple)">CRM 자동 발송 워크플로우</span>
           </div>
           <div style="padding:14px 16px;font-size:12px;line-height:1.8">
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략</span>
-              <span><strong style="color:var(--red)">리스트업 완료 즉시 CRM 메시지 자동 발송</strong> — 수동 개입 없이 리스트 생성→발송까지 자동화</span>
-            </div>
+            <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략</span>
+            <strong style="color:var(--red)"> 리스트업 완료 즉시 CRM 메시지 자동 발송</strong> — 수동 개입 없이 리스트 생성→발송까지 자동화
           </div>
         </div>
         <div style="background:white;border:1px solid rgba(232,119,46,0.2);border-radius:10px;overflow:hidden">
@@ -379,16 +402,14 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
             <span style="font-size:12px;font-weight:700;color:var(--orange)">개인화 발송 시점 설계</span>
           </div>
           <div style="padding:14px 16px;font-size:12px;line-height:1.8">
-            <div style="color:var(--text-dim);margin-bottom:8px">현재 일괄 오전 8:15 발송 → 전환된 4명 모두 오전(9~12시) 가입자. 오후·야간 가입자에게는 효과 없음.</div>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="display:flex;align-items:flex-start;gap:8px">
-                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략</span>
-                <span><strong style="color:var(--red)">개별 고객의 가입 시간 기준 +24h 또는 +48h 시점에 발송</strong> — 고객의 활동 시간대에 CRM이 도달하도록 설계. 오전 9시 가입 → 다음날 9시 발송, 오후 3시 가입 → 다음날 3시 발송</span>
-              </div>
-              <div style="display:flex;align-items:flex-start;gap:8px">
-                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(232,119,46,0.1);color:var(--orange)">기대효과</span>
-                <span>가입 시간대와 CRM 수신 시간 일치 → <strong style="color:var(--orange)">활동 중일 확률 높아 반응률 상승</strong>. 현재 10% 전환율을 개선할 수 있는 가장 현실적인 레버</span>
-              </div>
+            <div style="color:var(--text-dim);margin-bottom:8px">현재 일괄 오전 8:15 발송 → 전환 4명 모두 오전(9~12시) 가입자. 오후·야간 가입자에게는 효과 없음.</div>
+            <div style="margin-bottom:6px">
+              <span style="display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략</span>
+              <strong style="color:var(--red)"> 개별 고객의 가입 시간 기준 +24h 또는 +48h 시점에 발송</strong> — 오전 9시 가입 → 다음날 9시, 오후 3시 가입 → 다음날 3시
+            </div>
+            <div>
+              <span style="display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(232,119,46,0.1);color:var(--orange)">기대효과</span>
+              가입 시간대와 CRM 수신 시간 일치 → <strong style="color:var(--orange)">활동 중일 확률 높아 반응률 상승</strong>. 현재 10% 전환율 개선의 가장 현실적 레버
             </div>
           </div>
         </div>
