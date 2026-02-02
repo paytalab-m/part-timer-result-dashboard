@@ -1,1 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>알선프 고객 퍼널 1 — 앱 진입 이전</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f5f6fa;--surface:#fff;--surface2:#f0f1f5;--border:#e2e4ea;--text:#1a1d27;--text-dim:#6b7084;--accent:#4361ee;--accent2:#0ea5a0;--green:#16a34a;--orange:#e8772e;--pink:#db2e7a;--purple:#7c3aed;--red:#e0484e;--font:'Pretendard',sans-serif;--mono:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:13px;line-height:1.55}
+.topbar{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);padding:0 48px;height:56px;display:flex;align-items:center;gap:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.topbar-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.5px;text-decoration:none;color:var(--text)}
+.topbar-logo .badge{background:var(--accent);color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px}
+.topbar-nav{display:flex;align-items:center;gap:4px;margin-left:32px}
+.topbar-nav a{text-decoration:none;color:var(--text-dim);font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:.15s}
+.topbar-nav a:hover{background:var(--surface2);color:var(--text)}
+.topbar-nav a.active{background:rgba(124,58,237,.08);color:var(--purple);font-weight:600}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
+h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
+.subtitle{color:var(--text-dim);font-size:12px;margin-bottom:20px}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.kpi-label{font-size:10.5px;color:var(--text-dim);font-weight:500;margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.kpi-value{font-family:var(--mono);font-size:28px;font-weight:700;line-height:1.1}
+.kpi-sub{font-size:10px;color:var(--text-dim);margin-top:4px}
+.section{margin-bottom:28px}
+.section-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
+.card-title{font-size:12.5px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.chart-container{position:relative;height:220px}
+.chart-container-lg{position:relative;height:280px}
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{background:var(--surface2);padding:8px 10px;text-align:center;font-weight:600;font-size:10.5px;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.data-table td{padding:7px 10px;text-align:center;border-bottom:1px solid var(--surface2)}
+.data-table tr:hover{background:rgba(67,97,238,.02)}
+.insight-box{background:rgba(67,97,238,.04);border:1px solid rgba(67,97,238,.1);border-radius:8px;padding:14px 16px;font-size:12px;line-height:1.65}
+.insight-box.orange-bg{background:rgba(232,119,46,.04);border-color:rgba(232,119,46,.15)}
+.insight-box.green-bg{background:rgba(22,163,74,.04);border-color:rgba(22,163,74,.15)}
+.insight-box.pink-bg{background:rgba(219,46,122,.04);border-color:rgba(219,46,122,.15)}
+.insight-label{font-weight:700;font-size:11.5px;margin-bottom:6px}
+.note-box{background:var(--surface2);border-radius:6px;padding:10px 12px;font-size:10.5px;color:var(--text-dim);line-height:1.6}
+.note-box strong{color:var(--text)}
+.fw7{font-weight:700}.dim{color:var(--text-dim)}.red{color:var(--red)}.green{color:var(--green)}.orange{color:var(--orange)}.purple{color:var(--purple)}
+.mega-funnel{display:flex;align-items:center;gap:0;padding:18px 12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow-x:auto}
+.mf-step{text-align:center;flex:1;min-width:80px}
+.mf-num{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+.mf-label{font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4}
+.mf-arrow{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:60px}
+.mf-arrow-icon{font-size:16px;color:var(--text-dim)}
+.mf-arrow-rate{font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 6px;border-radius:8px}
+.mf-arrow-rate.high{color:var(--green);background:rgba(22,163,74,.08)}
+.mf-arrow-rate.low{color:var(--red);background:rgba(224,72,78,.08)}
+.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.funnel-label{width:100px;font-size:11px;font-weight:600;text-align:right;flex-shrink:0}
+.funnel-bar{height:28px;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;transition:width .4s}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.summary-box{border-radius:10px;padding:16px 18px;font-size:12px;line-height:1.7}
+.summary-good{background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12)}
+.summary-bad{background:rgba(224,72,78,.04);border:1px solid rgba(224,72,78,.12)}
+.summary-title{font-weight:700;font-size:12.5px;margin-bottom:8px}
+@media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr)}.grid-2,.summary-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
 
+<div class="topbar">
+  <a href="index.html" class="topbar-logo"><span class="badge">알선프</span>알바 선순환 프로젝트</a>
+  <div class="topbar-nav">
+  <a href="index.html">대시보드 허브</a>
+  <a href="alba_funnel_1_application.html">퍼널1 신청</a>
+  <a href="alba_funnel_2_selection.html">퍼널2 선정·정산</a>
+  <a href="alba_funnel_3_execution.html">퍼널3 실행</a>
+  <a href="alba_funnel_4_performance.html">퍼널4 성과</a>
+  <a href="customer_funnel_1_preapp.html" class="active">고객① 앱진입 이전</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <h1>고객 퍼널 1 — 앱 진입 이전 (랜딩페이지)</h1>
+  <div class="subtitle">2차 린테스트 · 2026.01.17 ~ 02.02 | 고객이 쿠폰 QR 스캔 → 랜딩페이지 진입 → CTA 클릭까지의 여정</div>
+
+  <!-- KPI -->
+  <div class="kpi-row">
+    <div class="kpi-card"><div class="kpi-label">고객 방문</div><div class="kpi-value" style="color:var(--purple)">493</div><div class="kpi-sub">QR 스캔 → 랜딩 진입 (이상치 제외)</div></div>
+    <div class="kpi-card"><div class="kpi-label">CTA 클릭 (쿠폰 수령)</div><div class="kpi-value" style="color:var(--green)">393</div><div class="kpi-sub">앱스토어 이동 버튼 클릭</div></div>
+    <div class="kpi-card"><div class="kpi-label">CTA 전환율</div><div class="kpi-value" style="color:var(--accent)">79.7%</div><div class="kpi-sub">방문 → CTA 클릭</div></div>
+    <div class="kpi-card"><div class="kpi-label">체류시간 (중앙값)</div><div class="kpi-value" style="color:var(--orange)">17<span style="font-size:14px">초</span></div><div class="kpi-sub">CTA 클릭 세션: 18초</div></div>
+  </div>
+
+  <!-- Section 1: Customer Journey Funnel -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--purple)"></span>고객 여정 퍼널</div>
+    <div class="mega-funnel">
+      <div class="mf-step"><div class="mf-num" style="color:var(--purple)">493</div><div class="mf-label">QR 스캔<br>랜딩 진입</div></div>
+      <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate high">79.7%</div></div>
+      <div class="mf-step"><div class="mf-num" style="color:var(--green)">393</div><div class="mf-label">CTA 클릭<br>(쿠폰 수령)</div></div>
+      <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate low">23.2%</div></div>
+      <div class="mf-step"><div class="mf-num" style="color:var(--accent)">91</div><div class="mf-label">첫 주문<br>(퍼널4 기준)</div></div>
+    </div>
+    <div class="note-box">
+      ※ CTA 클릭 이후 앱 설치 또는 기존 앱으로 딥링크 진입 — 고객마다 경로가 다르므로 중간 단계는 생략.<br>
+      ※ CTA 393건 → 첫 주문 91건: <strong>추정 전환율 23.2%</strong> — 이 구간이 퍼널 최대 병목.
+    </div>
+  </div>
+
+  <!-- Section 2: Scroll & Engagement -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--accent)"></span>스크롤 · 참여도 분석</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📊 스크롤 깊이 퍼널</div>
+        <div style="margin-bottom:14px">
+          <div class="funnel-row"><div class="funnel-label">랜딩 진입</div><div class="funnel-bar" style="width:100%;background:var(--purple)">493</div></div>
+          <div class="funnel-row"><div class="funnel-label">스크롤 25%+</div><div class="funnel-bar" style="width:43%;background:var(--accent)">213 <span style="font-weight:400;opacity:.8;margin-left:4px">(43.2%)</span></div></div>
+          <div class="funnel-row"><div class="funnel-label">스크롤 50%+</div><div class="funnel-bar" style="width:34%;background:var(--accent2)">168 <span style="font-weight:400;opacity:.8;margin-left:4px">(34.1%)</span></div></div>
+          <div class="funnel-row"><div class="funnel-label">스크롤 75%+</div><div class="funnel-bar" style="width:29%;background:var(--orange)">142 <span style="font-weight:400;opacity:.8;margin-left:4px">(28.8%)</span></div></div>
+          <div class="funnel-row"><div class="funnel-label">스크롤 100%</div><div class="funnel-bar" style="width:11%;background:var(--pink)">55 <span style="font-weight:400;opacity:.8;margin-left:4px">(11.2%)</span></div></div>
+          <div class="funnel-row"><div class="funnel-label green fw7">CTA 클릭</div><div class="funnel-bar" style="width:80%;background:var(--green)">393 <span style="font-weight:400;opacity:.8;margin-left:4px">(79.7%)</span></div></div>
+        </div>
+        <div class="insight-box">
+          <div class="insight-label">스크롤 인사이트</div>
+          전체 방문의 <strong>57%가 스크롤 없이(0%)</strong> 행동함. 그런데 스크롤 0%인 고객의 CTA 전환율이 <strong>82.6%</strong>로 오히려 가장 높음.<br>
+          → 랜딩페이지 하단 CTA가 <strong>플로팅 버튼 형태로 첫 화면부터 고정 노출</strong>되기 때문에, 스크롤 없이도 바로 클릭 가능.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 최대 스크롤별 CTA 전환율</div>
+        <div class="chart-container"><canvas id="chartScrollCTA"></canvas></div>
+        <div class="note-box" style="margin-top:10px">
+          <strong>CTA 위치</strong>: 중간(middle) 26건 vs 하단 플로팅(bottom) 390건 → 하단 플로팅 CTA가 압도적.<br>
+          모든 스크롤 구간에서 CTA 전환율 71~83% — 플로팅 CTA 덕분에 스크롤 깊이와 무관하게 높은 전환.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Duration -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--orange)"></span>체류시간 분석</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">⏱️ 체류시간 분포</div>
+        <div class="chart-container"><canvas id="chartDuration"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 CTA 클릭 vs 미클릭 체류시간</div>
+        <div style="display:flex;gap:12px;margin-bottom:14px">
+          <div style="flex:1;text-align:center;padding:14px;background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12);border-radius:8px">
+            <div style="font-size:10px;color:var(--text-dim)">CTA 클릭 세션</div>
+            <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--green)">18<span style="font-size:14px">초</span></div>
+            <div style="font-size:10px;color:var(--text-dim)">중앙값</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:14px;background:rgba(224,72,78,.04);border:1px solid rgba(224,72,78,.12);border-radius:8px">
+            <div style="font-size:10px;color:var(--text-dim)">CTA 미클릭 세션</div>
+            <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--red)">16<span style="font-size:14px">초</span></div>
+            <div style="font-size:10px;color:var(--text-dim)">중앙값</div>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>체류시간</th><th>세션 수</th><th>비율</th></tr></thead>
+          <tbody>
+            <tr><td>0~5초</td><td>137</td><td>30.5%</td></tr>
+            <tr><td>5~15초</td><td>92</td><td>20.5%</td></tr>
+            <tr><td>15~30초</td><td>64</td><td>14.3%</td></tr>
+            <tr><td>30~60초</td><td>31</td><td>6.9%</td></tr>
+            <tr><td>1~3분</td><td>26</td><td>5.8%</td></tr>
+            <tr><td class="dim">3분+</td><td class="dim">99</td><td class="dim">22.0%</td></tr>
+          </tbody>
+        </table>
+        <div class="insight-box orange-bg" style="margin-top:10px">
+          <div class="insight-label">체류시간 인사이트</div>
+          51%가 <strong>15초 이내</strong>에 행동을 결정. CTA 클릭 세션(18초)과 미클릭 세션(16초)의 차이가 거의 없어, 의사결정이 매우 빠름.<br>
+          3분+ 세션 22%는 <strong>탭을 열어둔 채 돌아오지 않은 세션</strong>일 가능성이 높음.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Time & Day -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--accent2)"></span>시간대 · 요일 분석</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">⏰ 시간대별 방문 · CTA</div>
+        <div class="chart-container-lg"><canvas id="chartHourly"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📅 일별 추이</div>
+        <div class="chart-container-lg"><canvas id="chartDaily"></canvas></div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:14px">
+      <div class="card">
+        <div class="card-title">🗓️ 평일 vs 주말</div>
+        <table class="data-table">
+          <thead><tr><th></th><th>방문</th><th>일평균</th><th>CTA</th><th>전환율</th><th>스크롤 25%+</th><th>스크롤 75%+</th></tr></thead>
+          <tbody>
+            <tr><td class="fw7">평일</td><td>308</td><td>28.0</td><td>242</td><td>78.6%</td><td>45%</td><td>31%</td></tr>
+            <tr><td class="fw7">주말</td><td>185</td><td>30.8</td><td>151</td><td class="green fw7">81.6%</td><td>39%</td><td>24%</td></tr>
+          </tbody>
+        </table>
+        <div class="insight-box green-bg" style="margin-top:10px">
+          <div class="insight-label">평일 vs 주말</div>
+          주말 CTA 전환율 <strong>81.6%</strong>로 평일(78.6%)보다 높음. 주말은 스크롤은 덜 하지만 CTA는 더 많이 클릭 → 카페 방문 고객의 <strong>주말 구매 의지가 더 강함</strong>.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📱 디바이스 분포</div>
+        <div class="chart-container"><canvas id="chartDevice"></canvas></div>
+        <div class="note-box" style="margin-top:10px">
+          iOS 50.2% / Android 48.3% / PC 1.3% / 기타 0.2%<br>
+          <strong>모바일 98.5%</strong> — QR 스캔 특성상 거의 전부 모바일. PC는 테스트 접속.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section">
+    <div class="section-title"><span class="dot" style="background:var(--text)"></span>핵심 요약 · 개선 포인트</div>
+    <div class="summary-grid">
+      <div class="summary-box summary-good">
+        <div class="summary-title" style="color:var(--green)">✅ 잘 되고 있는 것</div>
+        • 랜딩→CTA 전환율 <strong>79.7%</strong> — 진입 고객 10명 중 8명이 쿠폰 수령<br>
+        • 의사결정 <strong>17초</strong> 이내 — 빠른 행동 유도 성공<br>
+        • 스크롤 없이도 CTA 전환 <strong>82.6%</strong> — 플로팅 CTA 배치 효과적<br>
+        • 주말 전환율 <strong>81.6%</strong> → 카페 방문 고객의 구매 의지 반영<br>
+        • 모바일 <strong>98.5%</strong> — QR 스캔 기반 진입에 최적화
+      </div>
+      <div class="summary-box summary-bad">
+        <div class="summary-title" style="color:var(--red)">🔧 개선 포인트</div>
+        <strong>① 랜딩페이지 첫 화면 혜택 강조</strong><br>
+        스크롤 0%에서 CTA를 누르는 특성상, 첫 화면에 보이는 영역에서 <strong>고객 혜택을 더 강조</strong>하면 전환율 추가 상승 가능.<br><br>
+        <strong>② 쿠폰 디자인 개선</strong><br>
+        현재 금전적 혜택에만 치중된 디자인 → <strong>패스오더의 추가 장점</strong>(빠른 픽업, 대기 없는 주문 등)도 쿠폰에서 노출 필요. 랜딩페이지에 설명은 있지만 고객이 거의 읽지 않으므로, <strong>쿠폰 자체에서 이 정보가 보여야</strong> 함.<br><br>
+        <strong>③ CTA → 첫 주문 구간 (23.2%)</strong><br>
+        이 퍼널의 최대 병목. 앱 설치 여부에 따라 경로가 달라지는 구간 — 딥링크 최적화 등 기술적 개선 검토 필요.
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:12px">
+      ※ 알바 vs 점주 비교 · 알바별 고객 유입 랭킹은 → <a href="alba_funnel_3_execution.html" style="color:var(--accent)">알바 퍼널 3 (실행)</a>에서 확인<br>
+      ※ 알바가 행동하게 만드는 개선점은 → <a href="alba_funnel_3_execution.html" style="color:var(--accent)">알바 퍼널 3 (실행)</a>의 개선 포인트에서 확인
+    </div>
+  </div>
+
+</div>
+
+<script>
+Chart.defaults.color='#8b90a5';Chart.defaults.borderColor='rgba(0,0,0,.05)';
+Chart.defaults.font.family="'Pretendard','JetBrains Mono',sans-serif";Chart.defaults.font.size=11;
+const C=(id,cfg)=>new Chart(document.getElementById(id),cfg);
+
+C('chartScrollCTA',{type:'bar',data:{
+  labels:['스크롤 0%\n(282건)','25%\n(45건)','50%\n(26건)','75%\n(85건)','100%\n(55건)'],
+  datasets:[{label:'CTA 전환율(%)',data:[82.6,71.1,75.0,80.5,75.4],
+    backgroundColor:['#7c3aed','#4361ee','#0ea5a0','#e8772e','#db2e7a'],borderRadius:4,barThickness:28}]
+},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'%'}}},
+  scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+});
+
+C('chartDuration',{type:'bar',data:{
+  labels:['0~5초','5~15초','15~30초','30~60초','1~3분','3분+'],
+  datasets:[{data:[137,92,64,31,26,99],backgroundColor:['#e0484e','#e8772e','#e8772e80','#0ea5a080','#0ea5a0','#b0b3c0'],borderRadius:4}]
+},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}
+});
+
+C('chartHourly',{type:'bar',data:{
+  labels:Array.from({length:24},(_,i)=>i+'시'),
+  datasets:[
+    {label:'방문',data:[11,0,0,2,0,0,1,15,38,36,46,42,53,53,38,34,32,18,29,10,16,6,9,5],
+     backgroundColor:'rgba(124,58,237,.15)',borderColor:'#7c3aed',borderWidth:1,borderRadius:2,yAxisID:'y'},
+    {label:'CTA',data:[9,0,0,2,0,0,1,13,28,28,38,32,41,44,33,29,26,15,20,8,11,5,6,4],
+     backgroundColor:'#16a34a',borderRadius:2,yAxisID:'y'},
+    {label:'CVR(%)',type:'line',
+     data:[81.8,null,null,100,null,null,100,86.7,73.7,77.8,82.6,76.2,77.4,83.0,86.8,85.3,81.3,83.3,69.0,80,68.8,83.3,66.7,80],
+     borderColor:'#e8772e',pointBackgroundColor:'#e8772e',pointRadius:2,fill:false,tension:0.3,yAxisID:'y1',spanGaps:true}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{position:'top',labels:{boxWidth:10,padding:10,font:{size:10}}}},
+  scales:{y:{beginAtZero:true},y1:{beginAtZero:true,max:100,grid:{display:false},position:'right',ticks:{callback:v=>v+'%'}},x:{grid:{display:false},ticks:{font:{size:8}}}}}
+});
+
+const dD=["01/17","01/18","01/19","01/20","01/21","01/22","01/23","01/24","01/25","01/26","01/27","01/28","01/29","01/30","01/31","02/01","02/02"];
+const dV=[15,6,23,19,13,33,39,31,40,34,20,14,45,58,62,31,11];
+const dC=[13,3,18,14,11,26,30,22,33,28,17,10,34,46,52,28,8];
+const dR=dV.map((v,i)=>v>0?+(dC[i]/v*100).toFixed(1):0);
+C('chartDaily',{type:'bar',data:{labels:dD,
+  datasets:[
+    {label:'방문',data:dV,backgroundColor:'rgba(124,58,237,.12)',borderColor:'#7c3aed',borderWidth:1,borderRadius:2,yAxisID:'y'},
+    {label:'CTA',data:dC,backgroundColor:'#16a34a',borderRadius:2,yAxisID:'y'},
+    {label:'CVR(%)',type:'line',data:dR,borderColor:'#e8772e',pointBackgroundColor:'#e8772e',pointRadius:2,fill:false,tension:0.3,yAxisID:'y1'}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{position:'top',labels:{boxWidth:10,padding:10,font:{size:10}}}},
+  scales:{y:{beginAtZero:true},y1:{beginAtZero:true,max:100,grid:{display:false},position:'right',ticks:{callback:v=>v+'%'}},x:{grid:{display:false},ticks:{font:{size:8}}}}}
+});
+
+C('chartDevice',{type:'doughnut',data:{
+  labels:['iOS','Android','PC','기타'],
+  datasets:[{data:[270,260,7,1],backgroundColor:['#4361ee','#16a34a','#e0484e','#ccc'],borderWidth:0}]
+},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,padding:8,font:{size:10}}}}}
+});
+</script>
+</body>
+</html>
