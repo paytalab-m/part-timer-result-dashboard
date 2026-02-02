@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>알선프 대시보드 허브</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   --bg: #f5f6fa;
@@ -30,7 +31,7 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard', sans-serif;
   min-height: 100vh;
 }
 
@@ -378,19 +379,16 @@ body {
 
 <!-- Top Bar -->
 <div class="topbar">
-  <div class="topbar-logo">
+  <a href="index.html" class="topbar-logo">
     <span class="badge">알선프</span>
     알바 선순환 프로젝트
-  </div>
+  </a>
   <div class="topbar-nav">
-    <a href="#" class="active">대시보드 허브</a>
-    <a href="alba_funnel_1_application.html">신청 퍼널</a>
-    <a href="alba_funnel_2_selection.html">선정·안내·정산</a>
-    <a href="alba_funnel_3_execution.html">참여·실행</a>
-    <a href="alba_funnel_4_performance.html">성과 분석</a>
-  </div>
-  <div class="topbar-right">
-    <div class="topbar-date">2차 린테스트 · 2026.01 – 02</div>
+    <a href="index.html" class="active">대시보드 허브</a>
+    <a href="alba_funnel_1_application.html">퍼널1 신청</a>
+    <a href="alba_funnel_2_selection.html">퍼널2 선정·정산</a>
+    <a href="alba_funnel_3_execution.html">퍼널3 실행</a>
+    <a href="alba_funnel_4_performance.html">퍼널4 성과</a>
   </div>
 </div>
 
@@ -451,7 +449,7 @@ body {
 
       <!-- 1. 신청 퍼널 -->
       <a href="alba_funnel_1_application.html" class="funnel-card alba-1">
-        <span class="status-badge status-ready">분석 완료</span>
+        <span class="status-badge status-done">2/2 업데이트</span>
         <div class="step-num">1</div>
         <h3>신청 퍼널</h3>
         <div class="card-desc">
@@ -483,7 +481,7 @@ body {
 
       <!-- 2. 선정 · 안내 · 정산 퍼널 -->
       <a href="alba_funnel_2_selection.html" class="funnel-card alba-2">
-        <span class="status-badge status-ready">분석 완료</span>
+        <span class="status-badge status-done">2/2 업데이트</span>
         <div class="step-num">2</div>
         <h3>선정 · 안내 · 정산</h3>
         <div class="card-desc">
@@ -515,7 +513,7 @@ body {
 
       <!-- 3. 참여 확정 · 실행 퍼널 -->
       <a href="alba_funnel_3_execution.html" class="funnel-card alba-3">
-        <span class="status-badge status-done">분석 완료</span>
+        <span class="status-badge status-done">2/2 업데이트</span>
         <div class="step-num">3</div>
         <h3>참여 확정 · 실행</h3>
         <div class="card-desc">
@@ -547,7 +545,7 @@ body {
 
       <!-- 4. 성과 퍼널 -->
       <a href="alba_funnel_4_performance.html" class="funnel-card alba-4">
-        <span class="status-badge status-done">분석 완료</span>
+        <span class="status-badge status-done">2/2 업데이트</span>
         <div class="step-num">4</div>
         <h3>성과 퍼널</h3>
         <div class="card-desc">
