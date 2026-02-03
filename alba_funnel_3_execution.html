@@ -110,7 +110,7 @@ body {
 }
 
 /* === KPI (funnel 1 theme — with top color bar) === */
-.kpi-row { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:24px; }
+.kpi-row { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
 .kpi-card {
   background:var(--surface); border:1px solid var(--border);
   border-radius:10px; padding:18px; box-shadow:var(--shadow);
@@ -272,6 +272,7 @@ body {
     <a href="alba_funnel_3_execution.html" class="active">퍼널3 실행</a>
     <a href="alba_funnel_4_performance.html">퍼널4 성과</a>
     <a href="customer_funnel_1_preapp.html">고객① 앱진입 이전</a>
+    <a href="customer_funnel_2_postapp.html">고객② 앱진입 이후</a>
   </div>
 </div>
 
@@ -297,19 +298,9 @@ body {
       <div class="kpi-sub">랜딩 이벤트 발생 (67.9%)</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">고객 유입 알바</div>
-      <div class="kpi-value" style="color:var(--accent2)">142</div>
-      <div class="kpi-sub">1명 이상 고객 방문</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">고객 방문</div>
-      <div class="kpi-value" style="color:var(--orange)">1,000</div>
-      <div class="kpi-sub">QR 스캔 → 랜딩 진입</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">고객 CTA</div>
-      <div class="kpi-value" style="color:var(--green)">483</div>
-      <div class="kpi-sub">전환율 48.3%</div>
+      <div class="kpi-label">CTA 유도 알바</div>
+      <div class="kpi-value" style="color:var(--accent2)">111</div>
+      <div class="kpi-sub">고객 CTA 클릭 1건+ 발생</div>
     </div>
   </div>
 
@@ -317,17 +308,15 @@ body {
   <div class="mega-funnel">
     <div class="mf-step"><div class="mf-num" style="color:var(--text-dim)">209</div><div class="mf-label">명함 발주<br>(퍼널2)</div></div>
     <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate mid">67.9%</div></div>
-    <div class="mf-step"><div class="mf-num" style="color:var(--accent)">142</div><div class="mf-label">고객 유입 알바<br>(QR→랜딩 발생)</div></div>
-    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate high" style="font-size:10px">알바당 7.0</div></div>
-    <div class="mf-step"><div class="mf-num" style="color:var(--accent2)">1,000</div><div class="mf-label">고객 방문<br>(page_view)</div></div>
-    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate mid">48.3%</div></div>
-    <div class="mf-step"><div class="mf-num" style="color:var(--orange)">483</div><div class="mf-label">고객 CTA 클릭<br>(쿠폰 수령)</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--accent)">142</div><div class="mf-label">참여 알바<br>(랜딩 이벤트 발생)</div></div>
+    <div class="mf-arrow"><div class="mf-arrow-icon">→</div><div class="mf-arrow-rate mid">78.2%</div></div>
+    <div class="mf-step"><div class="mf-num" style="color:var(--accent2)">111</div><div class="mf-label">CTA 유도 알바<br>(고객 CTA 1건+)</div></div>
   </div>
 
   <div class="insight-box" style="margin-bottom:22px">
     <div class="insight-label">퍼널 핵심 인사이트</div>
     명함 발주 209명 중 <strong>142명(67.9%)</strong>의 QR을 통해 고객이 1명 이상 방문. 나머지 67명은 아직 고객 유입 기록 없음.<br>
-    142명의 알바를 통해 고객 <strong>1,000명 방문</strong>(알바당 평균 7.0명), 그 중 <strong>483명(48.3%)</strong>이 CTA 클릭 → 쿠폰 수령.<br>
+    142명 중 <strong>111명(78.2%)</strong>은 고객의 CTA 클릭(쿠폰 수령)까지 유도 성공. 31명은 고객이 방문은 했으나 CTA 미클릭.<br>
     ※ 이벤트의 주체는 고객입니다. Alba ID는 해당 알바의 QR 쿠폰을 스캔한 고객을 의미합니다.
   </div>
 
@@ -579,20 +568,20 @@ body {
 
     <div class="grid-2" style="margin-top:14px">
       <div class="card">
-        <div class="card-title">🔄 CRM 완독 전후 고객 CTA 변화 — ±2일 동일기간 비교</div>
+        <div class="card-title">🔄 CRM 완독 전후 고객 방문 변화 — ±2일 동일기간 비교</div>
         <div style="font-size:11px;color:#666;margin-bottom:10px">
-          각 에피소드를 <strong>완독한 알바</strong>의 고객 CTA가 완독 전2일 vs 후2일에 어떻게 변했는지 비교 (동일 기간으로 공정 비교)
+          각 에피소드를 <strong>완독한 알바</strong>의 랜딩페이지 고객 방문 수(세션 단위)가 완독 전2일 vs 후2일에 어떻게 변했는지 비교 (동일 기간으로 공정 비교)
         </div>
 
         <div class="chart-container-lg"><canvas id="chartCRMTrigger"></canvas></div>
 
         <table class="data-table" style="margin-top:12px">
-          <thead><tr><th>CRM</th><th>분석대상</th><th>전2일 CTA</th><th>후2일 CTA</th><th>리프트</th><th>증가</th><th>동일</th><th>감소</th></tr></thead>
+          <thead><tr><th>CRM</th><th>분석대상</th><th>전2일 방문</th><th>후2일 방문</th><th>리프트</th><th>증가</th><th>동일</th><th>감소</th></tr></thead>
           <tbody>
-            <tr><td>D+1→Ep1</td><td>69명</td><td>69건</td><td class="red fw7">38건</td><td class="red fw7">-45%</td><td>—</td><td>—</td><td>—</td></tr>
-            <tr><td>D+3→Ep2</td><td>30명</td><td>37건</td><td>11건</td><td class="red">-70%</td><td>—</td><td>—</td><td>—</td></tr>
-            <tr><td>D+5→Ep3</td><td>30명</td><td>24건</td><td>9건</td><td class="red">-62%</td><td>—</td><td>—</td><td>—</td></tr>
-            <tr><td>D+7→Ep4</td><td>20명</td><td>7건</td><td class="green fw7">8건</td><td class="green fw7">+14%</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>D+1→Ep1</td><td>66명</td><td>100건</td><td class="green fw7">114건</td><td class="green fw7">+14%</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>D+3→Ep2</td><td>21명</td><td>30건</td><td class="green fw7">39건</td><td class="green fw7">+30%</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>D+5→Ep3</td><td>23명</td><td>41건</td><td>32건</td><td class="red">-22%</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>D+7→Ep4</td><td>17명</td><td>9건</td><td class="green fw7">18건</td><td class="green fw7">+100%</td><td>—</td><td>—</td><td>—</td></tr>
           </tbody>
         </table>
 
@@ -601,10 +590,10 @@ body {
         <table class="data-table" style="font-size:11px">
           <thead><tr><th>차수</th><th>발송</th><th>분석</th><th>전2일</th><th>후2일</th><th>리프트</th><th>증가/동일/감소</th></tr></thead>
           <tbody>
-            <tr><td>4차</td><td>01/23</td><td>16명</td><td>12</td><td>9</td><td class="red">-25%</td><td>3 / 10 / 3</td></tr>
-            <tr><td>5차</td><td>01/25</td><td>20명</td><td>20</td><td class="green fw7">24</td><td class="green fw7">+20%</td><td>4 / 9 / 7</td></tr>
-            <tr><td>6차</td><td>01/28</td><td>12명</td><td>8</td><td>6</td><td class="red">-25%</td><td>1 / 7 / 4</td></tr>
-            <tr><td>7차</td><td>01/31</td><td>21명</td><td>29</td><td class="red fw7">-1</td><td class="red">-103%</td><td>3 / 12 / 6</td></tr>
+            <tr><td>4차</td><td>01/23</td><td>15명</td><td>14</td><td>14</td><td class="dim">0%</td><td>2 / 10 / 3</td></tr>
+            <tr><td>5차</td><td>01/25</td><td>20명</td><td>30</td><td class="green fw7">39</td><td class="green fw7">+30%</td><td>5 / 9 / 6</td></tr>
+            <tr><td>6차</td><td>01/28</td><td>13명</td><td>18</td><td>19</td><td class="green">+6%</td><td>3 / 6 / 4</td></tr>
+            <tr><td>7차</td><td>01/31</td><td>16명</td><td>38</td><td class="green fw7">42</td><td class="green fw7">+11%</td><td>4 / 8 / 4</td></tr>
           </tbody>
         </table>
 
@@ -613,10 +602,10 @@ body {
         <table class="data-table" style="font-size:11px">
           <thead><tr><th>차수</th><th>발송</th><th>분석</th><th>전2일</th><th>후2일</th><th>리프트</th><th>증가/동일/감소</th></tr></thead>
           <tbody>
-            <tr><td>4차</td><td>01/27</td><td>5명</td><td>4</td><td>2</td><td class="red">-50%</td><td>1 / 3 / 1</td></tr>
-            <tr><td>5차</td><td>01/27</td><td>10명</td><td>13</td><td>8</td><td class="red">-38%</td><td>2 / 4 / 4</td></tr>
-            <tr><td>6차</td><td>01/30</td><td>4명</td><td>2</td><td>0</td><td class="red">-100%</td><td>0 / 3 / 1</td></tr>
-            <tr><td>7차</td><td>02/02</td><td colspan="4" class="dim">관측부족 (9명 전원 제외)</td></tr>
+            <tr><td>4차</td><td>01/27</td><td>5명</td><td>5</td><td class="green fw7">24</td><td class="green fw7">+380%</td><td>1 / 3 / 1</td></tr>
+            <tr><td>5차</td><td>01/27</td><td>11명</td><td>22</td><td>14</td><td class="red">-36%</td><td>2 / 5 / 4</td></tr>
+            <tr><td>6차</td><td>01/30</td><td>4명</td><td>3</td><td>1</td><td class="red">-67%</td><td>0 / 3 / 1</td></tr>
+            <tr><td>7차</td><td>02/02</td><td colspan="5" class="dim">관측부족 (9명 전원 제외)</td></tr>
           </tbody>
         </table>
 
@@ -625,9 +614,9 @@ body {
         <table class="data-table" style="font-size:11px">
           <thead><tr><th>차수</th><th>발송</th><th>분석</th><th>전2일</th><th>후2일</th><th>리프트</th><th>증가/동일/감소</th></tr></thead>
           <tbody>
-            <tr><td>4차</td><td>01/29</td><td>7명</td><td>8</td><td>3</td><td class="red">-62%</td><td>1 / 4 / 2</td></tr>
-            <tr><td>5차</td><td>01/29</td><td>14명</td><td>9</td><td>5</td><td class="red">-44%</td><td>3 / 8 / 3</td></tr>
-            <tr><td>6차</td><td>02/01</td><td colspan="5" class="dim">완독 후2일이 02/03 → 관측부족 제외 (5명)</td></tr>
+            <tr><td>4차</td><td>01/29</td><td>7명</td><td>27</td><td>19</td><td class="red">-30%</td><td>1 / 4 / 2</td></tr>
+            <tr><td>5차</td><td>01/29</td><td>14명</td><td>14</td><td>13</td><td class="red">-7%</td><td>3 / 8 / 3</td></tr>
+            <tr><td>6차</td><td>02/01</td><td colspan="5" class="dim">관측부족 (6명 제외)</td></tr>
             <tr><td>7차</td><td>02/04</td><td colspan="5" class="dim">미발송</td></tr>
           </tbody>
         </table>
@@ -637,21 +626,21 @@ body {
         <table class="data-table" style="font-size:11px">
           <thead><tr><th>차수</th><th>발송</th><th>분석</th><th>전2일</th><th>후2일</th><th>리프트</th><th>증가/동일/감소</th></tr></thead>
           <tbody>
-            <tr><td>4차</td><td>01/31</td><td>5명</td><td>1</td><td class="green fw7">3</td><td class="green fw7">+200%</td><td>2 / 3 / 0</td></tr>
-            <tr><td>5차</td><td>01/31</td><td>10명</td><td>4</td><td class="green fw7">6</td><td class="green fw7">+50%</td><td>3 / 5 / 2</td></tr>
-            <tr><td>6차</td><td>02/03</td><td colspan="5" class="dim">미발송</td></tr>
+            <tr><td>4차</td><td>01/31</td><td>5명</td><td>1</td><td class="green fw7">7</td><td class="green fw7">+600%</td><td>2 / 3 / 0</td></tr>
+            <tr><td>5차</td><td>01/31</td><td>10명</td><td>8</td><td class="green fw7">11</td><td class="green fw7">+38%</td><td>3 / 5 / 2</td></tr>
+            <tr><td>6차</td><td>02/03</td><td colspan="5" class="dim">관측부족 (1명 제외)</td></tr>
             <tr><td>7차</td><td>02/06</td><td colspan="5" class="dim">미발송</td></tr>
           </tbody>
         </table>
         <div style="font-size:10px;color:#999;margin-top:4px">6차 D+5, 7차 D+3~D+7: 완독 후2일이 02/02를 초과하여 관측부족 → 제외</div>
 
         <div class="insight-box green-bg" style="margin-top:10px">
-          <div class="insight-label">핵심 발견 — 전체 완독자 기준 재분석</div>
-          <strong>D+1→Ep1 (-45%)</strong>: 69→38건. 전체 완독자 기준으로 재분석하면 CRM 완독 후 CTA가 오히려 감소.<br>
-          <strong>D+7→Ep4 (+14%)</strong>: 7→8건. 절대 수치는 작지만 유일하게 증가. 마지막 에피소드의 재활성화 효과 가능성.<br>
-          <strong>D+3→Ep2 (-70%), D+5→Ep3 (-62%)</strong>: 중간 에피소드는 큰 폭 감소 — 시간 경과에 따른 자연 감소가 주요인.<br><br>
-          <strong>시사점</strong>: CRM이 CTA를 직접 촉진한다기보다, 시간 경과에 따른 자연 감소가 더 큰 요인. Ep4에서 미세 반등이 있어 재활성화 콘텐츠 검토 여지 있음.<br>
-          <span class="dim">※ 이전 분석(관측 기간 부족 제외)에서 Ep1 +11%, Ep4 +80%로 나온 것은 표본 편향 영향이 있었음.</span>
+          <div class="insight-label">핵심 발견 — 고객 방문(세션) 기준 재분석</div>
+          <strong>D+1→Ep1 (+14%)</strong>: 100→114건. 완독 후 고객 방문이 증가 — 리마인드 CRM 학습 후 QR 배포 활동이 소폭 활성화.<br>
+          <strong>D+3→Ep2 (+30%)</strong>: 30→39건. 두 번째 에피소드 완독 후에도 방문 증가 유지.<br>
+          <strong>D+5→Ep3 (-22%)</strong>: 41→32건. 세 번째 에피소드에서 감소 — 시간 경과에 따른 자연 감소 또는 콘텐츠 흡인력 저하.<br>
+          <strong>D+7→Ep4 (+100%)</strong>: 9→18건. 절대 수치는 작지만 마지막 에피소드에서 큰 폭 반등 — 재활성화 효과 가능성.<br><br>
+          <strong>시사점</strong>: 고객 방문(세션) 기준으로 보면 Ep1·Ep2·Ep4에서 완독 후 방문 증가가 관측됨. CTA 기준과 달리 고객 유입 자체는 CRM 완독 후 증가하는 경향. 다만 Ep3 감소는 2·3일차 콘텐츠의 <strong>주제 궁금증 또는 내용 연결이 부족</strong>한 것이 원인일 수 있음.
         </div>
       </div>
       <div class="card">
@@ -718,27 +707,108 @@ body {
     </div>
   </div>
 
-  <!-- SUMMARY -->
+  <!-- SUMMARY & IMPROVEMENT (고객② 디자인) -->
   <div class="section">
     <div class="section-title"><span class="dot" style="background:var(--text)"></span>핵심 요약 · 개선 포인트</div>
-    <div class="summary-grid">
-      <div class="summary-box summary-good">
-        <div class="summary-title" style="color:var(--green)">✅ 잘 되고 있는 것</div>
-        <div>• 고객 랜딩 <strong>493건, CTA 393건</strong>(79.7%) — QR→쿠폰 수령 전환 우수</div>
-        <div>• 5주차 고객 CTA <strong>264회(43%↑)</strong> — 시간이 지날수록 유입 증가</div>
-        <div>• 알바 인당 고객 <strong>4.6명</strong>(점주 3.2명) — 대면 효과 확인</div>
-        <div>• 고객 CTA의 <strong>52%가 10~15시</strong> — 오전~점심 카페 유동인구 핵심 시간대</div>
-        <div>• 알바 CTA 전환율 <strong>81.5%</strong> vs 점주 75.4% — 대면 설명 효과 우위</div>
-        <div>• CRM 진입→완독률 <strong>70~86%</strong> — 열기만 하면 끝까지 읽음</div>
+    <div class="card" style="margin-bottom:14px">
+      <div style="border-radius:10px;padding:16px 18px;font-size:12.5px;line-height:2;background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.15)">
+        <div style="font-weight:700;font-size:12.5px;margin-bottom:8px;color:var(--green)">✅ 잘 되고 있는 것</div>
+        • 142명(67.9%) 참여, 그 중 <strong>111명(78.2%)</strong>이 고객 CTA 클릭까지 유도 성공<br>
+        • 5주차 고객 CTA <strong>264회(43%↑)</strong> — 시간이 지날수록 유입 증가<br>
+        • 알바 인당 고객 <strong>4.6명</strong>(점주 3.2명) — 대면 효과 확인<br>
+        • 알바 CTA 전환율 <strong>81.5%</strong> vs 점주 75.4% — 대면 설명 효과 우위<br>
+        • CRM 진입→완독률 <strong>70~86%</strong> — 열기만 하면 끝까지 읽음<br>
+        • 고객 방문(세션) 기준 CRM 완독 전후비교: Ep1 <strong>+14%</strong>, Ep2 <strong>+30%</strong>, Ep4 <strong>+100%</strong>
       </div>
-      <div class="summary-box summary-bad">
-        <div class="summary-title" style="color:var(--red)">⚠️ 개선이 필요한 것</div>
-        <div>• 67명(32.1%) <strong>고객 유입 0건</strong> — 27명은 CRM은 읽었으나 실행 안 함</div>
-        <div>• 1일만 고객 유입 <strong>51명(35.9%)</strong> — 지속적 QR 배포 유도 필요</div>
-        <div>• 알바당 고객 중앙값 <strong>2명</strong> — 34%의 알바가 1명만 유도 → 비활성 알바 재활성화 필요</div>
-        <div>• Top 10 알바가 전체 방문의 <strong>31.4%</strong> 차지 — 소수 의존도 높음</div>
-        <div>• 리마인드 CRM D+1→D+7 오픈율 <strong>46→21%</strong> — 진입 감소가 핵심 병목</div>
-        <div>• ±2일 동일기간 비교: 전체 완독자 기준 Ep1 <strong>-45%</strong>, Ep4 <strong>+14%</strong> / Ep2·3은 대폭 감소 → CRM 직접 효과 제한적</div>
+    </div>
+
+    <div class="card">
+      <div style="background:rgba(224,72,78,.04);border:1px solid rgba(224,72,78,.15);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:12px;line-height:1.7">
+        <strong style="color:var(--red)">현재 문제</strong>: 명함 발주까지 마쳤으나 참여하지 않는 대상자가 <strong>67명(32.1%)</strong>이나 됨. 리마인드 CRM을 진행했으나, 27명은 CRM 클릭하여 진입은 했지만 실질적 활동 없음. 리마인드 CRM 오픈률도 일차가 지날수록 저조해짐.
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+
+        <!-- 1. 미활동 67명 대응 -->
+        <div style="background:white;border:1px solid rgba(219,46,122,.2);border-radius:10px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(219,46,122,.06);border-bottom:1px solid rgba(219,46,122,.12)">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--pink);color:white;font-size:11px;font-weight:800;flex-shrink:0">1</span>
+            <span style="font-size:12px;font-weight:700;color:var(--pink)">미활동 67명 재활성화</span>
+          </div>
+          <div style="padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="color:var(--text-dim);margin-bottom:10px">67명 중 27명은 리마인드 CRM을 읽었으나 실행하지 않음 → "아는데 안 하는" 동기 부족. 40명은 CRM 자체를 열지 않음 → 메시지 도달 또는 관심 자체가 없음. 두 그룹에 다른 접근 필요.</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 A</span>
+                <span><strong style="color:var(--red)">미입력자·누락자 추가 리마인드 CRM 발송</strong> — Alba ID 파라미터 기반으로 진입·이벤트 미발생 대상을 정확히 추적 가능. 8차까지 누락자에게 보낸 것처럼, 미활동자에게 참여 의지를 돋우는 별도 메시지 발송</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 B</span>
+                <span><strong style="color:var(--red)">미활동 시 손해 구조 도입 — "쿠폰 비용 청구" 경고</strong> — 현재는 참여하지 않아도 본인에게 가는 손해가 없어 동기 부여가 약함. 쿠폰을 받고 미활동 시 비용 청구 가능 안내를 추가. 참여률이 줄어들 수 있으나, <strong style="color:var(--red)">의지가 높은 진성 참여자만 걸러내는 효과</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 리마인드 CRM 오픈률 개선 -->
+        <div style="background:white;border:1px solid rgba(67,97,238,.2);border-radius:10px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(67,97,238,.06);border-bottom:1px solid rgba(67,97,238,.12)">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:800;flex-shrink:0">2</span>
+            <span style="font-size:12px;font-weight:700;color:var(--accent)">리마인드 CRM 오픈률 개선 (46% → 21% 하락)</span>
+          </div>
+          <div style="padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="color:var(--text-dim);margin-bottom:10px">오픈률이 일차가 지날수록 저조해지는 이유: 첫 콘텐츠는 주목도가 높지만, 이후 메시지는 비슷한 내용으로 인식되어 관심이 떨어지는 것으로 판단됨. 도달률 자체가 낮은 것도 원인.</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 A</span>
+                <span><strong style="color:var(--red)">첫 CRM에서 시리즈 예고</strong> — 첫 메시지 발송 시 "4편의 꿀팁 시리즈를 보내드릴 예정"이라는 암시를 미리 주어, 이후 메시지에 대한 기대감과 연속성을 형성</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 B</span>
+                <span><strong style="color:var(--red)">메시지 미리보기 주목도 강화 + 도달 채널 다변화</strong> — 각 에피소드별로 확실히 다른 주제임을 미리보기에서 명확히 전달. 문자 외 카카오톡 등 다양한 채널로 도달률 자체를 높임</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. 완독률 개선 -->
+        <div style="background:white;border:1px solid rgba(14,165,160,.2);border-radius:10px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(14,165,160,.06);border-bottom:1px solid rgba(14,165,160,.12)">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent2);color:white;font-size:11px;font-weight:800;flex-shrink:0">3</span>
+            <span style="font-size:12px;font-weight:700;color:var(--accent2)">Ep2 · Ep3 완독률 개선</span>
+          </div>
+          <div style="padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="color:var(--text-dim);margin-bottom:10px">Ep1(70%)과 Ep4(86%)는 완독률이 높은 반면, Ep2(45%)·Ep3(67%)는 상대적으로 저조. 주제 자체의 궁금증이 떨어지거나 내용 연결이 부족한 것으로 판단됨.</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략</span>
+                <span><strong style="color:var(--red)">Ep2·Ep3 콘텐츠 내용 수정</strong> — 주제 간 연결고리를 강화하고, 각 에피소드가 독립적으로도 가치 있으면서 다음 편에 대한 궁금증을 유발하도록 재설계. 특히 Ep2("사장님 눈치")와 Ep3("다른 알바들 성과")의 실질적 도움 체감도를 높여야 함</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. CRM 진입 데이터 해석 참고 -->
+        <div style="background:white;border:1px solid rgba(124,58,237,.2);border-radius:10px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(124,58,237,.06);border-bottom:1px solid rgba(124,58,237,.12)">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:11px;font-weight:800;flex-shrink:0">4</span>
+            <span style="font-size:12px;font-weight:700;color:var(--purple)">알바 의지 돋우기 — 실행 단계의 핵심 액션</span>
+          </div>
+          <div style="padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="color:var(--text-dim);margin-bottom:10px">실행 단계에서 가장 중요한 것은 알바의 참여 의지를 돋우는 것. 현재 리마인드 CRM이 유일한 레버이나, 열면 끝까지 읽는(진입→완독 70~86%) 것에 비해 "안 여는 것"이 핵심 병목.</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략</span>
+                <span><strong style="color:var(--red)">도달 방식의 다양화</strong> — 문자 CRM 외에 카카오톡, 앱 내 알림, 챌린지 대시보드 등 다양한 채널을 통해 리마인드. 특히 카카오톡은 미리보기 영역이 넓어 콘텐츠 주목도를 높일 수 있음</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(232,119,46,.1);color:var(--orange)">참고</span>
+                <span>CRM 진입 수는 <strong>해당 에피소드의 page_view 총 건수</strong>이며, CRM 링크로 직접 접근한 것뿐 아니라 홈에서 다른 에피소드로 이동한 것도 포함됨. 따라서 2·3·4일차 진입 수에는 1일차에서 넘어온 사람이 포함되어 있을 수 있고, 4일차가 적은 것은 발송 수 자체(101명)가 적기 때문이기도 함</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -861,14 +931,14 @@ C('chartEpFunnel',{type:'bar',data:{
 
 // CRM ±2일 Before/After CTA
 C('chartCRMTrigger',{type:'bar',data:{
-  labels:['D+1→Ep1\n(69명)','D+3→Ep2\n(30명)','D+5→Ep3\n(30명)','D+7→Ep4\n(20명)'],
+  labels:['D+1→Ep1\n(66명)','D+3→Ep2\n(21명)','D+5→Ep3\n(23명)','D+7→Ep4\n(17명)'],
   datasets:[
-    {label:'완독 전2일 CTA',data:[69,37,24,7],backgroundColor:'rgba(67,97,238,0.5)',borderRadius:4},
-    {label:'완독 후2일 CTA',data:[38,11,9,8],backgroundColor:'rgba(219,46,122,0.5)',borderRadius:4}
+    {label:'완독 전2일 고객방문',data:[100,30,41,9],backgroundColor:'rgba(67,97,238,0.5)',borderRadius:4},
+    {label:'완독 후2일 고객방문',data:[114,39,32,18],backgroundColor:'rgba(219,46,122,0.5)',borderRadius:4}
   ]},options:{responsive:true,maintainAspectRatio:false,
   plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:10}}},
-    title:{display:true,text:'±2일 동일기간: 완독 전 vs 후 고객 CTA (전체 합산)',font:{size:12}}},
-  scales:{y:{beginAtZero:true,title:{display:true,text:'고객 CTA 건수',font:{size:9}}},x:{grid:{display:false}}}}
+    title:{display:true,text:'±2일 동일기간: 완독 전 vs 후 고객 방문 수 — 세션 단위 (전체 합산)',font:{size:12}}},
+  scales:{y:{beginAtZero:true,title:{display:true,text:'고객 방문 건수',font:{size:9}}},x:{grid:{display:false}}}}
 });
 </script>
 </body>
