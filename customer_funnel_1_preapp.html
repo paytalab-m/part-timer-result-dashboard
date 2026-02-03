@@ -77,6 +77,7 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
   <a href="alba_funnel_3_execution.html">퍼널3 실행</a>
   <a href="alba_funnel_4_performance.html">퍼널4 성과</a>
   <a href="customer_funnel_1_preapp.html" class="active">고객① 앱진입 이전</a>
+    <a href="customer_funnel_2_postapp.html">고객② 앱진입 이후</a>
   </div>
 </div>
 
@@ -223,23 +224,83 @@ h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}
   <!-- Summary -->
   <div class="section">
     <div class="section-title"><span class="dot" style="background:var(--text)"></span>핵심 요약 · 개선 포인트</div>
-    <div class="summary-grid">
-      <div class="summary-box summary-good">
-        <div class="summary-title" style="color:var(--green)">✅ 잘 되고 있는 것</div>
-        • 랜딩→CTA 전환율 <strong>79.7%</strong> — 진입 고객 10명 중 8명이 쿠폰 수령<br>
-        • 의사결정 <strong>17초</strong> 이내 — 빠른 행동 유도 성공<br>
-        • 스크롤 없이도 CTA 전환 <strong>82.6%</strong> — 플로팅 CTA 배치 효과적<br>
-        • 주말 전환율 <strong>81.6%</strong> → 카페 방문 고객의 구매 의지 반영<br>
-        • 모바일 <strong>98.5%</strong> — QR 스캔 기반 진입에 최적화
+
+    <div class="card" style="margin-bottom:14px">
+      <div style="background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12);border-radius:8px;padding:12px 16px;font-size:12px;line-height:1.7">
+        <strong style="color:var(--green)">잘 되고 있는 것</strong>: 랜딩→CTA 전환율 <strong>79.7%</strong>(10명 중 8명 쿠폰 수령), 의사결정 <strong>17초</strong> 이내, 스크롤 없이 CTA 전환 <strong>82.6%</strong>, 주말 전환율 <strong>81.6%</strong>, 모바일 <strong>98.5%</strong> — QR 스캔 기반 진입 최적화.
       </div>
-      <div class="summary-box summary-bad">
-        <div class="summary-title" style="color:var(--red)">🔧 개선 포인트</div>
-        <strong>① 랜딩페이지 첫 화면 혜택 강조</strong><br>
-        스크롤 0%에서 CTA를 누르는 특성상, 첫 화면에 보이는 영역에서 <strong>고객 혜택을 더 강조</strong>하면 전환율 추가 상승 가능.<br><br>
-        <strong>② 쿠폰 디자인 개선</strong><br>
-        현재 금전적 혜택에만 치중된 디자인 → <strong>패스오더의 추가 장점</strong>(빠른 픽업, 대기 없는 주문 등)도 쿠폰에서 노출 필요. 랜딩페이지에 설명은 있지만 고객이 거의 읽지 않으므로, <strong>쿠폰 자체에서 이 정보가 보여야</strong> 함.<br><br>
-        <strong>③ CTA → 첫 주문 구간 (23.2%)</strong><br>
-        이 퍼널의 최대 병목. 앱 설치 여부에 따라 경로가 달라지는 구간 — 딥링크 최적화 등 기술적 개선 검토 필요.
+    </div>
+
+    <div class="card">
+      <div style="background:rgba(224,72,78,.04);border:1px solid rgba(224,72,78,.15);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:12px;line-height:1.7">
+        <strong style="color:var(--red)">현재 상황</strong>: 랜딩→CTA는 이미 79.7%로 높지만, CTA→첫 주문 구간이 <strong>23.2%</strong>로 최대 병목. QR 스캔 랜딩 진입 자체의 절대량을 늘리고, CTA 이후 전환 구간을 세분화해서 개선할 여지가 있음.
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+
+        <!-- 1. 쿠폰 디자인 강화 -->
+        <div style="background:white;border:1px solid rgba(124,58,237,.2);border-radius:10px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(124,58,237,.06);border-bottom:1px solid rgba(124,58,237,.12)">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:11px;font-weight:800;flex-shrink:0">1</span>
+            <span style="font-size:12px;font-weight:700;color:var(--purple)">쿠폰 디자인 강화 — QR 스캔 랜딩 유입량 자체를 늘리기</span>
+          </div>
+          <div style="padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="color:var(--text-dim);margin-bottom:10px">현재 쿠폰은 금전적 혜택(할인, 무료 음료)에만 치중된 디자인. 고객이 QR을 스캔하게 만드는 동기를 더 다양화하면 랜딩 진입 절대 수를 늘릴 수 있음.</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 A</span>
+                <span><strong style="color:var(--red)">패스오더 장점 쿠폰 노출</strong> — 빠른 픽업, 대기 없는 주문, 앱으로 미리 주문 등의 편의성 메시지를 쿠폰 자체에 표기. 랜딩페이지에 설명은 있지만 고객이 거의 읽지 않으므로, <strong>쿠폰 자체에서 이 정보가 보여야</strong> 함</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 B</span>
+                <span><strong style="color:var(--red)">쿠폰 시각 주목도 개선</strong> — QR 코드 주변의 시각적 강조(컬러, 화살표, 아이콘)로 스캔 행동 유도 강화. 현재 카드 형태에서 "지금 스캔하면 바로 쿠폰!" 같은 행동 유도 문구 추가</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 랜딩페이지 첫 화면 혜택 강조 -->
+        <div style="background:white;border:1px solid rgba(67,97,238,.2);border-radius:10px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(67,97,238,.06);border-bottom:1px solid rgba(67,97,238,.12)">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:800;flex-shrink:0">2</span>
+            <span style="font-size:12px;font-weight:700;color:var(--accent)">랜딩페이지 첫 화면 혜택 강조 — CTA 전환율 추가 상승</span>
+          </div>
+          <div style="padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="color:var(--text-dim);margin-bottom:10px">현재 CTA 전환율 79.7%로 높지만, 스크롤 0%에서 CTA를 누르는 특성(82.6%)을 고려하면 첫 화면 최적화로 추가 상승 가능. 스크롤하지 않는 고객이 대다수이므로, 첫 화면에서 보여주는 내용이 곧 전부.</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략</span>
+                <span><strong style="color:var(--red)">첫 화면 Above-the-fold 최적화</strong> — 쿠폰 혜택 금액, 사용 기한, "지금 바로 쓸 수 있다"는 즉시성 메시지를 첫 화면 상단 영역에 집중 배치. 하단 스크롤 콘텐츠보다 첫 화면 밀도를 높이는 것이 효과적</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. CTA → 첫 주문 전환 구간 세분화 -->
+        <div style="background:white;border:1px solid rgba(219,46,122,.2);border-radius:10px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(219,46,122,.06);border-bottom:1px solid rgba(219,46,122,.12)">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--pink);color:white;font-size:11px;font-weight:800;flex-shrink:0">3</span>
+            <span style="font-size:12px;font-weight:700;color:var(--pink)">CTA → 첫 주문 23.2% 병목 — 고객 퍼널 세분화 대응</span>
+          </div>
+          <div style="padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="color:var(--text-dim);margin-bottom:10px">이 퍼널의 최대 병목. 딥링크는 이미 적용 완료된 상태이므로, 기술적 개선보다는 퍼널 중간 단계에서 고객을 더 잡아두는 전략이 필요.</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 A</span>
+                <span><strong style="color:var(--red)">회원가입 시점 CRM 발송</strong> — CTA 클릭 후 앱 설치·회원가입까지는 도달했지만 첫 주문을 안 한 고객에게 즉시 CRM 발송. "가입 축하 + 쿠폰 사용법 안내 + 지금 주문하면 바로 픽업" 형태의 행동 유도 메시지</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 B</span>
+                <span><strong style="color:var(--red)">고객 퍼널 세분화</strong> — CTA→설치, 설치→가입, 가입→첫 주문 각 구간별 이탈률을 더 세밀하게 추적. 구간별로 다른 CRM·푸시·리마인드 전략 적용 (현재 고객② 퍼널에서 72.8% 전환되는 가입→첫 주문 구간도 추가 개선 가능)</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(232,119,46,.1);color:var(--orange)">전략 C</span>
+                <span><strong style="color:var(--orange)">24h 미구매 리마인드 강화</strong> — 현재 퍼널4에서 24h 미구매 39명 중 14명(36%)이 자연 전환. 나머지 25명에게 발송 중인 고객 리마인드 CRM의 타이밍·빈도·메시지를 최적화하면 추가 전환 확보 가능</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="note-box" style="margin-top:12px">
