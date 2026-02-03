@@ -8,1081 +8,175 @@
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-:root {
-  --bg: #f5f6fa;
-  --surface: #ffffff;
-  --surface2: #f0f1f5;
-  --border: #e2e5ed;
-  --text: #1e2132;
-  --text-dim: #8b90a5;
-  --accent: #4361ee;
-  --accent2: #0ea5a0;
-  --orange: #e8772e;
-  --red: #e0484e;
-  --green: #16a34a;
-  --purple: #7c3aed;
-  --pink: #db2e7a;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-  min-height: 100vh;
-  padding: 0;
-}
-
-.topbar {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 0 48px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-
-.topbar-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 16px;
-  letter-spacing: -0.5px;
-  text-decoration: none;
-  color: var(--text);
-}
-
-.topbar-logo .badge {
-  background: var(--accent);
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 4px;
-  letter-spacing: 0.5px;
-}
-
-.topbar-nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: 32px;
-}
-
-.topbar-nav a {
-  text-decoration: none;
-  color: var(--text-dim);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 6px;
-  transition: all 0.15s;
-}
-
-.topbar-nav a:hover { background: var(--surface2); color: var(--text); }
-.topbar-nav a.active { background: rgba(67,97,238,0.08); color: var(--accent); font-weight: 600; }
-
-.topbar-right {
-  margin-left: auto;
-  font-size: 12px;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--text-dim);
-}
-
-.content-wrap {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 24px;
-}
-
-.header {
-  display:flex; align-items:center; gap:14px;
-  margin-bottom:28px; padding-bottom:20px;
-  border-bottom:2px solid var(--border);
-}
-.header-badge {
-  background:var(--accent); color:white;
-  font-size:11px; font-weight:700;
-  padding:4px 10px; border-radius:5px; letter-spacing:0.5px;
-}
-.header h1 { font-size:21px; font-weight:800; letter-spacing:-0.5px; }
-.header .subtitle {
-  color:var(--text-dim); font-size:12px;
-  margin-left:auto; font-family:'JetBrains Mono',monospace;
-}
-
-.kpi-row { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:24px; }
-.kpi-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:10px; padding:18px; box-shadow:var(--shadow);
-  position:relative; overflow:hidden;
-}
-.kpi-card::before {
-  content:''; position:absolute; top:0; left:0; right:0;
-  height:3px; border-radius:10px 10px 0 0;
-}
-.kpi-card:nth-child(1)::before{background:var(--accent)}
-.kpi-card:nth-child(2)::before{background:var(--accent2)}
-.kpi-card:nth-child(3)::before{background:var(--orange)}
-.kpi-card:nth-child(4)::before{background:var(--green)}
-.kpi-card:nth-child(5)::before{background:var(--purple)}
-.kpi-label {
-  font-size:10.5px; color:var(--text-dim);
-  text-transform:uppercase; letter-spacing:0.8px;
-  font-weight:600; margin-bottom:6px;
-}
-.kpi-value {
-  font-size:26px; font-weight:800;
-  font-family:'JetBrains Mono',monospace; letter-spacing:-1px;
-}
-.kpi-sub { font-size:11px; color:var(--text-dim); margin-top:3px; }
-
-.section { margin-bottom:24px; }
-.section-title {
-  font-size:14px; font-weight:700; margin-bottom:14px;
-  display:flex; align-items:center; gap:8px;
-}
-.section-title .dot { width:8px; height:8px; border-radius:50%; }
-
-.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
-
-.card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:10px; padding:18px; box-shadow:var(--shadow);
-}
-.card-title {
-  font-size:12.5px; font-weight:600; color:var(--text-dim);
-  margin-bottom:14px; display:flex; align-items:center; gap:6px;
-}
-
-.data-table { width:100%; border-collapse:collapse; font-size:12.5px; }
-.data-table th {
-  text-align:left; color:var(--text-dim); font-weight:500;
-  font-size:10.5px; text-transform:uppercase; letter-spacing:0.5px;
-  padding:8px 10px; border-bottom:2px solid var(--border);
-}
-.data-table th:not(:first-child) { text-align:right; }
-.data-table td {
-  padding:9px 10px; border-bottom:1px solid var(--surface2);
-}
-.data-table td:not(:first-child) {
-  text-align:right; font-family:'JetBrains Mono',monospace; font-size:11.5px;
-}
-.data-table tr:hover td { background:rgba(67,97,238,0.03); }
-
-.channel-tag { display:inline-flex; align-items:center; gap:6px; font-weight:500; }
-.channel-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-
-.cvr-cell { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
-.cvr-bar-bg { width:56px; height:5px; background:var(--surface2); border-radius:3px; overflow:hidden; }
-.cvr-bar { height:100%; border-radius:3px; }
-
-.row-highlight td { background:rgba(14,165,160,0.05)!important; }
-
-.chart-container { position:relative; height:250px; }
-.chart-container-lg { position:relative; height:280px; }
-
-.insight-box {
-  background:#f0f4ff; border:1px solid #d5ddf8;
-  border-radius:8px; padding:14px 18px; margin-top:12px;
-  font-size:12.5px; line-height:1.75; color:#2d3460;
-}
-.insight-box strong { color:var(--accent); }
-.insight-label {
-  font-size:10px; font-weight:700; text-transform:uppercase;
-  letter-spacing:1.5px; color:var(--accent); margin-bottom:5px;
-}
-.insight-box.green-bg { background:#f0faf4; border-color:#c6e7d4; }
-.insight-box.green-bg strong { color:var(--green); }
-.insight-box.green-bg .insight-label { color:var(--green); }
-.insight-box.orange-bg { background:#fef7f0; border-color:#f0dcc8; }
-.insight-box.orange-bg strong { color:var(--orange); }
-.insight-box.orange-bg .insight-label { color:var(--orange); }
-.insight-box.pink-bg { background:#fdf0f6; border-color:#f0c8d8; }
-.insight-box.pink-bg strong { color:var(--pink); }
-.insight-box.pink-bg .insight-label { color:var(--pink); }
-/* 추가: purple-bg */
-.insight-box.purple-bg { background:#f5f0ff; border-color:#d8c8f0; }
-.insight-box.purple-bg strong { color:var(--purple); }
-.insight-box.purple-bg .insight-label { color:var(--purple); }
-
-.funnel { display:flex; align-items:center; gap:0; margin:14px 0; }
-.funnel-step { flex:1; text-align:center; padding:14px 10px; }
-.funnel-step-value { font-size:22px; font-weight:800; font-family:'JetBrains Mono',monospace; }
-.funnel-step-label { font-size:10.5px; color:var(--text-dim); margin-top:3px; }
-.funnel-arrow { font-size:16px; color:var(--text-dim); padding:0 4px; }
-.funnel-rate { font-size:11px; font-weight:700; font-family:'JetBrains Mono',monospace; padding:2px 8px; border-radius:4px; }
-.funnel-rate.red { color:var(--red); background:rgba(224,72,78,0.08); }
-.funnel-rate.green { color:var(--green); background:rgba(22,163,74,0.08); }
-
-.store-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; }
-.store-metric { background:var(--surface2); border-radius:8px; padding:14px 16px; text-align:center; }
-.store-metric-label { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px; }
-.store-metric-value { font-size:20px; font-weight:800; font-family:'JetBrains Mono',monospace; }
-.store-metric-sub { font-size:10.5px; color:var(--text-dim); margin-top:2px; }
-
-.compare-arrow {
-  display:inline-flex; align-items:center; gap:3px;
-  font-size:11px; font-weight:700; font-family:'JetBrains Mono',monospace;
-  padding:2px 6px; border-radius:4px;
-}
-.compare-arrow.up { color:var(--green); background:rgba(22,163,74,0.08); }
-.compare-arrow.down { color:var(--red); background:rgba(224,72,78,0.08); }
-
-.note-box {
-  font-size:11px; color:var(--text-dim); margin-top:8px;
-  padding:8px 12px; background:var(--surface2); border-radius:6px;
-  line-height:1.6;
-}
-.note-box strong { color:var(--text); }
-
-.phase-badge {
-  display:inline-block; font-size:10px; font-weight:700;
-  padding:2px 8px; border-radius:4px; letter-spacing:0.3px;
-}
-.phase-badge.active { background:rgba(22,163,74,0.1); color:var(--green); }
-.phase-badge.winding { background:rgba(232,119,46,0.1); color:var(--orange); }
-.phase-badge.ended { background:rgba(224,72,78,0.1); color:var(--red); }
-
-.mono { font-family:'JetBrains Mono',monospace; }
-.dim { color:var(--text-dim); }
-.green { color:var(--green); }
-.red { color:var(--red); }
-.accent { color:var(--accent); }
-.fw7 { font-weight:700; }
-
-/* 추가: 탭 전환 스타일 */
-.view-tabs {
-  display:inline-flex; background:var(--surface2); border-radius:8px; padding:3px; margin-bottom:16px;
-}
-.view-tab {
-  padding:7px 16px; font-size:11.5px; font-weight:600; border-radius:6px;
-  cursor:pointer; transition:all 0.2s; color:var(--text-dim); border:none; background:none;
-  font-family:'Pretendard',sans-serif;
-}
-.view-tab:hover { color:var(--text); }
-.view-tab.active { background:var(--surface); color:var(--accent); box-shadow:0 1px 3px rgba(0,0,0,0.08); }
-
-.view-panel { display:none; }
-.view-panel.active { display:block; }
-
-/* 추가: 대비 하이라이트 카드 */
-.compare-card {
-  background:var(--surface2); border-radius:8px; padding:16px; text-align:center;
-  border:1px solid transparent; transition:border-color 0.2s;
-}
-.compare-card:hover { border-color:var(--border); }
-.compare-card-label { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
-.compare-card-value { font-size:22px; font-weight:800; font-family:'JetBrains Mono',monospace; }
-.compare-card-sub { font-size:10.5px; color:var(--text-dim); margin-top:4px; line-height:1.5; }
-.compare-card-vs { font-size:11px; font-weight:700; margin-top:6px; padding:3px 8px; border-radius:4px; display:inline-block; }
+:root{--bg:#f5f6fa;--surface:#fff;--surface2:#f0f1f5;--border:#e2e5ed;--text:#1e2132;--text-dim:#8b90a5;--accent:#4361ee;--accent2:#0ea5a0;--orange:#e8772e;--red:#e0484e;--green:#16a34a;--purple:#7c3aed;--pink:#db2e7a;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;min-height:100vh}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 48px;height:56px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.topbar-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.5px;text-decoration:none;color:var(--text)}
+.topbar-logo .badge{background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px}
+.topbar-nav{display:flex;align-items:center;gap:4px;margin-left:32px}
+.topbar-nav a{text-decoration:none;color:var(--text-dim);font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:.15s}
+.topbar-nav a:hover{background:var(--surface2);color:var(--text)}
+.topbar-nav a.active{background:rgba(67,97,238,.08);color:var(--accent);font-weight:600}
+.topbar-right{margin-left:auto;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--text-dim)}
+.content-wrap{max-width:1280px;margin:0 auto;padding:24px}
+.header{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid var(--border)}
+.header-badge{background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;letter-spacing:.5px}
+.header h1{font-size:21px;font-weight:800;letter-spacing:-.5px}
+.header .subtitle{color:var(--text-dim);font-size:12px;margin-left:auto;font-family:'JetBrains Mono',monospace}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:10px 10px 0 0}
+.kpi-card:nth-child(1)::before{background:var(--accent)}.kpi-card:nth-child(2)::before{background:var(--accent2)}.kpi-card:nth-child(3)::before{background:var(--orange)}.kpi-card:nth-child(4)::before{background:var(--green)}.kpi-card:nth-child(5)::before{background:var(--purple)}
+.kpi-label{font-size:10.5px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-bottom:6px}
+.kpi-value{font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;letter-spacing:-1px}
+.kpi-sub{font-size:11px;color:var(--text-dim);margin-top:3px}
+.section{margin-bottom:24px}.section-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}.section-title .dot{width:8px;height:8px;border-radius:50%}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:var(--shadow)}
+.card-title{font-size:12.5px;font-weight:600;color:var(--text-dim);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.data-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.data-table th{text-align:left;color:var(--text-dim);font-weight:500;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-bottom:2px solid var(--border)}
+.data-table th:not(:first-child){text-align:right}
+.data-table td{padding:9px 10px;border-bottom:1px solid var(--surface2)}
+.data-table td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-size:11.5px}
+.data-table tr:hover td{background:rgba(67,97,238,.03)}
+.channel-tag{display:inline-flex;align-items:center;gap:6px;font-weight:500}.channel-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.cvr-cell{display:flex;align-items:center;justify-content:flex-end;gap:8px}.cvr-bar-bg{width:56px;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}.cvr-bar{height:100%;border-radius:3px}
+.row-highlight td{background:rgba(14,165,160,.05)!important}
+.chart-container{position:relative;height:250px}.chart-container-lg{position:relative;height:280px}
+.insight-box{background:#f0f4ff;border:1px solid #d5ddf8;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:12.5px;line-height:1.75;color:#2d3460}
+.insight-box strong{color:var(--accent)}.insight-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:5px}
+.insight-box.green-bg{background:#f0faf4;border-color:#c6e7d4}.insight-box.green-bg strong{color:var(--green)}.insight-box.green-bg .insight-label{color:var(--green)}
+.insight-box.orange-bg{background:#fef7f0;border-color:#f0dcc8}.insight-box.orange-bg strong{color:var(--orange)}.insight-box.orange-bg .insight-label{color:var(--orange)}
+.insight-box.pink-bg{background:#fdf0f6;border-color:#f0c8d8}.insight-box.pink-bg strong{color:var(--pink)}.insight-box.pink-bg .insight-label{color:var(--pink)}
+.insight-box.purple-bg{background:#f5f0ff;border-color:#d8c8f0}.insight-box.purple-bg strong{color:var(--purple)}.insight-box.purple-bg .insight-label{color:var(--purple)}
+.funnel{display:flex;align-items:center;gap:0;margin:14px 0}.funnel-step{flex:1;text-align:center;padding:14px 10px}.funnel-step-value{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace}.funnel-step-label{font-size:10.5px;color:var(--text-dim);margin-top:3px}.funnel-arrow{font-size:16px;color:var(--text-dim);padding:0 4px}.funnel-rate{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:2px 8px;border-radius:4px}.funnel-rate.red{color:var(--red);background:rgba(224,72,78,.08)}.funnel-rate.green{color:var(--green);background:rgba(22,163,74,.08)}
+.store-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.store-metric{background:var(--surface2);border-radius:8px;padding:14px 16px;text-align:center}.store-metric-label{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}.store-metric-value{font-size:20px;font-weight:800;font-family:'JetBrains Mono',monospace}.store-metric-sub{font-size:10.5px;color:var(--text-dim);margin-top:2px}
+.compare-arrow{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:4px}.compare-arrow.up{color:var(--green);background:rgba(22,163,74,.08)}.compare-arrow.down{color:var(--red);background:rgba(224,72,78,.08)}
+.note-box{font-size:11px;color:var(--text-dim);margin-top:8px;padding:8px 12px;background:var(--surface2);border-radius:6px;line-height:1.6}.note-box strong{color:var(--text)}
+.phase-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.3px}.phase-badge.active{background:rgba(22,163,74,.1);color:var(--green)}.phase-badge.winding{background:rgba(232,119,46,.1);color:var(--orange)}.phase-badge.ended{background:rgba(224,72,78,.1);color:var(--red)}
+.mono{font-family:'JetBrains Mono',monospace}.dim{color:var(--text-dim)}.green{color:var(--green)}.red{color:var(--red)}.accent{color:var(--accent)}.fw7{font-weight:700}
+.view-tabs{display:inline-flex;background:var(--surface2);border-radius:8px;padding:3px;margin-bottom:16px}
+.view-tab{padding:7px 16px;font-size:11.5px;font-weight:600;border-radius:6px;cursor:pointer;transition:.2s;color:var(--text-dim);border:none;background:none;font-family:'Pretendard',sans-serif}
+.view-tab:hover{color:var(--text)}.view-tab.active{background:var(--surface);color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.view-panel{display:none}.view-panel.active{display:block}
+.compare-card{background:var(--surface2);border-radius:8px;padding:16px;text-align:center;border:1px solid transparent;transition:border-color .2s}.compare-card:hover{border-color:var(--border)}.compare-card-label{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}.compare-card-value{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace}.compare-card-sub{font-size:10.5px;color:var(--text-dim);margin-top:4px;line-height:1.5}.compare-card-vs{font-size:11px;font-weight:700;margin-top:6px;padding:3px 8px;border-radius:4px;display:inline-block}
 </style>
 </head>
 <body>
-
-<!-- Top Bar -->
 <div class="topbar">
-  <a href="index.html" class="topbar-logo">
-    <span class="badge">알선프</span>
-    알바 선순환 프로젝트
-  </a>
+  <a href="index.html" class="topbar-logo"><span class="badge">알선프</span>알바 선순환 프로젝트</a>
   <div class="topbar-nav">
     <a href="index.html">대시보드 허브</a>
-    <a href="#" class="active">신청 퍼널</a>
+    <a href="alba_funnel_1_application.html" class="active">퍼널1 신청</a>
+    <a href="alba_funnel_2_selection.html">퍼널2 선정·정산</a>
+    <a href="alba_funnel_3_execution.html">퍼널3 실행</a>
+    <a href="alba_funnel_4_performance.html">퍼널4 성과</a>
+    <a href="customer_funnel_1_preapp.html">고객① 앱진입 이전</a>
+    <a href="customer_funnel_2_postapp.html">고객② 앱진입 이후</a>
   </div>
   <div class="topbar-right">알바 퍼널 &gt; 1. 신청 퍼널 · 채널별 분석</div>
 </div>
-
 <div class="content-wrap">
-
-<div class="header">
-  <div class="header-badge">알선프 2차</div>
-  <h1>채널별 유입 · 전환 분석 대시보드</h1>
-  <div class="subtitle">2026.01.07 – 02.02 | PAGE_VIEWS + APPLICATIONS</div>
-</div>
-
-<!-- KPIs -->
+<div class="header"><div class="header-badge">알선프 2차</div><h1>채널별 유입 · 전환 분석 대시보드</h1><div class="subtitle">2026.01.07 – 02.02 | PAGE_VIEWS + APPLICATIONS</div></div>
 <div class="kpi-row">
-  <div class="kpi-card">
-    <div class="kpi-label">총 랜딩 진입</div>
-    <div class="kpi-value" style="color:var(--accent)">6,297</div>
-    <div class="kpi-sub">신청 랜딩페이지 진입 수</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-label">총 신청건</div>
-    <div class="kpi-value" style="color:var(--accent2)">410</div>
-    <div class="kpi-sub">폼 제출 완료 기준</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-label">전체 전환율</div>
-    <div class="kpi-value" style="color:var(--orange)">6.51%</div>
-    <div class="kpi-sub">랜딩 진입 → 신청 기준</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-label">신청 소요시간 (중앙값)</div>
-    <div class="kpi-value" style="color:var(--green)">1.9<span style="font-size:14px">min</span></div>
-    <div class="kpi-sub">진입→제출 | 평균 22.7min</div>
-  </div>
-  <div class="kpi-card">
-    <div class="kpi-label">영수증 채널 전환율</div>
-    <div class="kpi-value" style="color:var(--purple)">14.56%</div>
-    <div class="kpi-sub">receipt + banner_qr60 합산</div>
-  </div>
+  <div class="kpi-card"><div class="kpi-label">총 랜딩 진입</div><div class="kpi-value" style="color:var(--accent)">6,297</div><div class="kpi-sub">신청 랜딩페이지 진입 수</div></div>
+  <div class="kpi-card"><div class="kpi-label">총 신청건</div><div class="kpi-value" style="color:var(--accent2)">410</div><div class="kpi-sub">폼 제출 완료 기준</div></div>
+  <div class="kpi-card"><div class="kpi-label">전체 전환율</div><div class="kpi-value" style="color:var(--orange)">6.51%</div><div class="kpi-sub">랜딩 진입 → 신청 기준</div></div>
+  <div class="kpi-card"><div class="kpi-label">신청 소요시간 (중앙값)</div><div class="kpi-value" style="color:var(--green)">1.9<span style="font-size:14px">min</span></div><div class="kpi-sub">진입→제출 | 평균 22.7min</div></div>
+  <div class="kpi-card"><div class="kpi-label">영수증 채널 전환율</div><div class="kpi-value" style="color:var(--purple)">14.56%</div><div class="kpi-sub">receipt + banner_qr60 합산</div></div>
 </div>
-
-<!-- Section 1: Channel Group -->
-<div class="section">
-  <div class="section-title"><span class="dot" style="background:var(--accent)"></span>채널 그룹별 유입 vs 전환</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">📊 채널그룹 비교 (랜딩 진입 vs 신청)</div>
-      <div class="chart-container"><canvas id="chartGroupBar"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">🎯 전환율 비교 (CVR %)</div>
-      <div class="chart-container"><canvas id="chartGroupCVR"></canvas></div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-top:14px">
-    <div class="card-title">📋 채널그룹 상세 테이블</div>
-    <table class="data-table">
-      <thead><tr><th>채널 그룹</th><th>랜딩 진입</th><th>진입 비중</th><th>신청건</th><th>신청 비중</th><th>전환율 (CVR)</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent)"></span>popup</span></td>
-          <td>3,534</td><td class="dim">56.1%</td><td>134</td><td class="dim">32.7%</td>
-          <td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:21%;background:var(--accent)"></div></div>3.79%</div></td>
-        </tr>
-        <tr class="row-highlight">
-          <td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent2)"></span>receipt (영수증 QR)</span></td>
-          <td>1,170</td><td class="dim">18.6%</td><td>209</td><td class="green fw7">51.0%</td>
-          <td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:100%;background:var(--accent2)"></div></div><span class="green fw7">17.86%</span></div></td>
-        </tr>
-        <tr>
-          <td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>banner_twice (시급2배)</span></td>
-          <td>614</td><td class="dim">9.8%</td><td>17</td><td class="dim">4.1%</td>
-          <td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:15%;background:var(--purple)"></div></div>2.77%</div></td>
-        </tr>
-        <tr>
-          <td><span class="channel-tag"><span class="channel-dot" style="background:var(--orange)"></span>banner_exclusive (전용혜택)</span></td>
-          <td>494</td><td class="dim">7.8%</td><td>20</td><td class="dim">4.9%</td>
-          <td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:23%;background:var(--orange)"></div></div>4.05%</div></td>
-        </tr>
-        <tr class="row-highlight">
-          <td><span class="channel-tag"><span class="channel-dot" style="background:var(--pink)"></span>banner_qr60 (포스트잇 QR)</span></td>
-          <td>472</td><td class="dim">7.5%</td><td>30</td><td class="dim">7.3%</td>
-          <td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:36%;background:var(--pink)"></div></div>6.36%</div></td>
-        </tr>
-        <tr style="border-top:2px solid var(--border)">
-          <td><span class="channel-tag fw7" style="color:var(--accent2)">📌 영수증 합산</span></td>
-          <td class="fw7">1,642</td><td class="dim fw7">26.1%</td><td class="fw7">239</td><td class="green fw7">58.3%</td>
-          <td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:82%;background:var(--green)"></div></div><span class="green fw7">14.56%</span></div></td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="insight-box">
-      <div class="insight-label">핵심 인사이트</div>
-      <strong>영수증 채널</strong>이 전체 진입의 26.1%만 차지하면서도 <strong>신청의 58.3%</strong>를 만들어냄. 전환율 14.56%로 popup(3.79%) 대비 <strong>3.8배 높음</strong>.<br>
-      popup은 전체 진입의 56.1%를 차지하지만 대부분이 PC 조회(2,387건)로 모바일 전환 없이 이탈. 또한 배너 채널의 클릭·신청 증가에는 영수증의 <strong>간접 영향</strong>이 존재할 가능성 있음 (아래 상세 분석 참조).
-    </div>
-  </div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--accent)"></span>채널 그룹별 유입 vs 전환</div><div class="grid-2"><div class="card"><div class="card-title">📊 채널그룹 비교 (랜딩 진입 vs 신청)</div><div class="chart-container"><canvas id="chartGroupBar"></canvas></div></div><div class="card"><div class="card-title">🎯 전환율 비교 (CVR %)</div><div class="chart-container"><canvas id="chartGroupCVR"></canvas></div></div></div>
+<div class="card" style="margin-top:14px"><div class="card-title">📋 채널그룹 상세 테이블</div><table class="data-table"><thead><tr><th>채널 그룹</th><th>랜딩 진입</th><th>진입 비중</th><th>신청건</th><th>신청 비중</th><th>전환율 (CVR)</th></tr></thead><tbody>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent)"></span>popup</span></td><td>3,534</td><td class="dim">56.1%</td><td>134</td><td class="dim">32.7%</td><td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:21%;background:var(--accent)"></div></div>3.79%</div></td></tr>
+<tr class="row-highlight"><td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent2)"></span>receipt (영수증 QR)</span></td><td>1,170</td><td class="dim">18.6%</td><td>209</td><td class="green fw7">51.0%</td><td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:100%;background:var(--accent2)"></div></div><span class="green fw7">17.86%</span></div></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>banner_twice (시급2배)</span></td><td>614</td><td class="dim">9.8%</td><td>17</td><td class="dim">4.1%</td><td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:15%;background:var(--purple)"></div></div>2.77%</div></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--orange)"></span>banner_exclusive (전용혜택)</span></td><td>494</td><td class="dim">7.8%</td><td>20</td><td class="dim">4.9%</td><td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:23%;background:var(--orange)"></div></div>4.05%</div></td></tr>
+<tr class="row-highlight"><td><span class="channel-tag"><span class="channel-dot" style="background:var(--pink)"></span>banner_qr60 (포스트잇 QR)</span></td><td>472</td><td class="dim">7.5%</td><td>30</td><td class="dim">7.3%</td><td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:36%;background:var(--pink)"></div></div>6.36%</div></td></tr>
+<tr style="border-top:2px solid var(--border)"><td><span class="channel-tag fw7" style="color:var(--accent2)">📌 영수증 합산</span></td><td class="fw7">1,642</td><td class="dim fw7">26.1%</td><td class="fw7">239</td><td class="green fw7">58.3%</td><td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:82%;background:var(--green)"></div></div><span class="green fw7">14.56%</span></div></td></tr>
+</tbody></table>
+<div class="insight-box"><div class="insight-label">핵심 인사이트</div><strong>영수증 채널</strong>이 전체 진입의 26.1%만 차지하면서도 <strong>신청의 58.3%</strong>를 만들어냄. 전환율 14.56%로 popup(3.79%) 대비 <strong>3.8배 높음</strong>.<br>popup은 전체 진입의 56.1%를 차지하지만 대부분이 PC 조회(2,387건)로 모바일 전환 없이 이탈. 또한 배너 채널의 클릭·신청 증가에는 영수증의 <strong>간접 영향</strong>이 존재할 가능성 있음 (아래 상세 분석 참조).</div></div></div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--orange)"></span>디바이스 경로별 분석 (PC vs Mobile)</div><div class="grid-2"><div class="card"><div class="card-title">📱 디바이스별 랜딩 진입 · 전환율</div><div class="chart-container"><canvas id="chartDevice"></canvas></div><div class="insight-box" style="margin-top:12px"><div class="insight-label">디바이스 요약</div>모바일 직접 진입(영수증 QR + _mo 채널) CVR <strong>14.70%</strong>.<br>PC QR 스캔 후 진입 CVR <strong>18.95%</strong>.<br>PC 조회는 의도적으로 차단하고, <strong>모바일 진입을 유도</strong>하는 구조로 운영 중.</div></div>
+<div class="card"><div class="card-title">🔀 PC → QR 전환 퍼널</div><div class="funnel"><div class="funnel-step" style="background:rgba(67,97,238,.06);border-radius:8px 0 0 8px"><div class="funnel-step-value" style="color:var(--accent)">3,613</div><div class="funnel-step-label">PC 조회만</div></div><div style="text-align:center;padding:0 6px"><div class="funnel-arrow">→</div><div class="funnel-rate red">8.7%</div></div><div class="funnel-step" style="background:rgba(124,58,237,.06)"><div class="funnel-step-value" style="color:var(--purple)">343</div><div class="funnel-step-label">QR 스캔 진입</div></div><div style="text-align:center;padding:0 6px"><div class="funnel-arrow">→</div><div class="funnel-rate green">18.95%</div></div><div class="funnel-step" style="background:rgba(22,163,74,.06);border-radius:0 8px 8px 0"><div class="funnel-step-value" style="color:var(--green)">65</div><div class="funnel-step-label">신청 완료</div></div></div>
+<div style="margin-top:20px"><div class="card-title">📊 디바이스 경로 상세</div><table class="data-table"><thead><tr><th>경로</th><th>랜딩 진입</th><th>신청</th><th>CVR</th></tr></thead><tbody><tr><td>📱 모바일 직접 진입</td><td>2,334</td><td>343</td><td><span class="green fw7">14.70%</span></td></tr><tr><td>📲 PC → QR → 모바일</td><td>343</td><td>65</td><td><span class="green fw7">18.95%</span></td></tr><tr><td>🖥️ PC 조회만</td><td>3,613</td><td>2</td><td><span class="red">0.06%</span></td></tr></tbody></table>
+<div class="note-box">※ <strong>모바일 직접 진입</strong> = popup_mo + banner_*_mo + receipt 전체 (영수증 QR 스캔으로 모바일 진입)<br>※ <strong>PC → QR → 모바일</strong> = popup_pcqr + banner_*_pcqr + banner_qr60_pcqr<br>※ PC 신청 2건은 초기에 PC 제출이 가능했던 시점의 데이터이며, 이후 <strong>PC 신청을 차단</strong>하고 QR을 통해 모바일에서만 신청 가능하도록 변경함</div></div></div></div></div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--green)"></span>매장 모수 대비 효율 분석</div><div class="card"><div class="card-title">🔬 채널별 매장당 효율 상세</div><div class="view-tabs"><button class="view-tab active" onclick="switchDetailView('detail-store')">🏪 매장당</button><button class="view-tab" onclick="switchDetailView('detail-imp')">📡 노출당</button></div>
+<div id="view-detail-store" class="view-panel active"><table class="data-table"><thead><tr><th>채널 유형</th><th>매장 수</th><th>랜딩 진입</th><th>매장당 진입률</th><th>신청</th><th>매장당 신청률</th><th>영수증 대비</th></tr></thead><tbody>
+<tr class="row-highlight"><td><span class="channel-tag fw7"><span class="channel-dot" style="background:var(--accent2)"></span>receipt (영수증 QR)</span></td><td>8,148</td><td>1,170</td><td class="fw7">14.36%</td><td class="fw7">209</td><td class="fw7">2.56%</td><td><span class="compare-arrow up">기준</span></td></tr>
+<tr class="row-highlight"><td><span class="channel-tag fw7"><span class="channel-dot" style="background:var(--pink)"></span>banner_qr60 (포스트잇 QR)</span></td><td>15,000</td><td>472</td><td>3.15%</td><td>30</td><td>0.20%</td><td><span class="compare-arrow down">↓ 92.2%</span></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent)"></span>popup (팝업)</span></td><td>15,000</td><td>3,534</td><td>23.56%</td><td>134</td><td>0.89%</td><td><span class="compare-arrow down">↓ 65.2%</span></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>banner_twice (시급2배)</span></td><td>15,000</td><td>614</td><td>4.09%</td><td>17</td><td>0.11%</td><td><span class="compare-arrow down">↓ 95.7%</span></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--orange)"></span>banner_exclusive (전용혜택)</span></td><td>15,000</td><td>494</td><td>3.29%</td><td>20</td><td>0.13%</td><td><span class="compare-arrow down">↓ 94.9%</span></td></tr>
+</tbody></table><div class="insight-box green-bg" style="margin-top:12px"><div class="insight-label">매장당 효율 인사이트</div>매장당 진입률은 팝업(23.6%)이 영수증(20.2%)과 비슷하지만, <strong>매장당 신청률은 영수증이 3.3배 높음</strong> (2.93% vs 0.89%).<br>영수증은 8,148개 매장에서만 운영 → <strong>전매장 15,000개 확대 시</strong> 단순 추산으로 신청 <strong>440건 이상</strong> 기대.<br>팝업은 1.84배 많은 매장에 노출됨에도 영수증 대비 신청 수 44% 적음.</div></div>
+<div id="view-detail-imp" class="view-panel"><table class="data-table"><thead><tr><th>채널 유형</th><th>총 노출(추정)</th><th>랜딩 진입</th><th>노출당 진입률</th><th>신청</th><th>노출당 신청률</th><th>영수증 대비</th></tr></thead><tbody>
+<tr class="row-highlight"><td><span class="channel-tag fw7"><span class="channel-dot" style="background:var(--accent2)"></span>receipt (영수증 QR)</span></td><td>~285,180</td><td>1,170</td><td class="fw7">0.410%</td><td class="fw7">209</td><td class="fw7">0.073%</td><td><span class="compare-arrow up">기준</span></td></tr>
+<tr class="row-highlight"><td><span class="channel-tag fw7"><span class="channel-dot" style="background:var(--pink)"></span>banner_qr60 (포스트잇 QR)</span></td><td>~210,000</td><td>472</td><td>0.225%</td><td>30</td><td>0.014%</td><td><span class="compare-arrow down">↓ 80.8%</span></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent)"></span>popup (팝업)</span></td><td>~210,000</td><td>3,534</td><td>1.683%</td><td>134</td><td>0.064%</td><td><span class="compare-arrow down">↓ 12.3%</span></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>banner_twice (시급2배)</span></td><td>~210,000</td><td>614</td><td>0.292%</td><td>17</td><td>0.008%</td><td><span class="compare-arrow down">↓ 89.0%</span></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--orange)"></span>banner_exclusive (전용혜택)</span></td><td>~210,000</td><td>494</td><td>0.235%</td><td>20</td><td>0.010%</td><td><span class="compare-arrow down">↓ 86.3%</span></td></tr>
+</tbody></table><div class="note-box" style="margin-top:8px">※ 총 노출 추정 기준 — 영수증: 매장수(8,148) × 기간 × 빈도(하루 3~4회) ≈ 285,180 / 팝업·배너: 앱 접속자 기반 ≈ 210,000<br>※ banner_qr60(포스트잇 QR)도 전매장 15,000개에 배포되었으므로 팝업/배너와 동일한 ~210,000 노출 기준 적용.</div>
+<div class="insight-box purple-bg" style="margin-top:12px"><div class="insight-label">노출당 효율 인사이트</div>노출당 진입률은 팝업(1.68%)이 영수증(0.58%)의 <strong>2.9배</strong>로 클릭 유도에 유리하나,<br><strong>노출당 신청률은 영수증(0.073%)이 팝업(0.064%)보다 14% 높음</strong>. 팝업은 "가볍게 눌러보고 이탈"하는 패턴이 많고, 영수증은 진입 자체가 행동 의지를 동반함을 시사.</div></div>
+<div class="insight-box orange-bg" style="margin-top:12px"><div class="insight-label">영수증 vs 디지털 채널 효율 격차</div>영수증 QR은 특정 시간에 자동 출력되어, 실물 영수증을 받는 순간 자연스럽게 노출됨 → 물리적 접점이 디지털 배너(점주 앱 접속 필요)보다 <strong>행동 전환에 압도적으로 유리</strong>.<br>포스트잇 QR(banner_qr60)은 QR 미출력 매장 대안이지만, 매장당 신청률 0.20%로 직접 영수증(2.56%) 대비 크게 낮음 → 영수증 자동 출력의 자연스러운 노출이 핵심.<br><strong>노출당 관점</strong>에서도 영수증의 신청 전환률(0.073%)이 팝업(0.064%)보다 높아, 볼륨과 효율 모두 영수증이 우위.</div></div></div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--red)"></span>영수증 매장 종료 추이 · 영향 분석</div><div class="grid-2"><div class="card"><div class="card-title">📉 영수증 매장 점진적 종료 타임라인</div><div class="chart-container-lg"><canvas id="chartPhaseout"></canvas></div></div>
+<div class="card"><div class="card-title">📊 운영 단계별 성과 비교</div><table class="data-table" style="margin-bottom:12px"><thead><tr><th>운영 단계</th><th>기간</th><th>랜딩 진입</th><th>신청</th><th>CVR</th></tr></thead><tbody>
+<tr><td><span class="phase-badge active">정상 운영</span></td><td class="dim" style="text-align:left;font-family:'Pretendard'">1/7 – 1/26 (20일)</td><td>5,286</td><td>382</td><td class="green fw7">7.23%</td></tr>
+<tr><td><span class="phase-badge winding">점진 종료</span></td><td class="dim" style="text-align:left;font-family:'Pretendard'">1/27 – 1/30 (4일)</td><td>996</td><td>27</td><td class="red">2.71%</td></tr>
+<tr><td><span class="phase-badge ended">완전 종료</span></td><td class="dim" style="text-align:left;font-family:'Pretendard'">1/31 – 2/2 (3일)</td><td>15</td><td>1</td><td class="dim">—</td></tr>
+</tbody></table>
+<div class="card-title" style="margin-top:16px">채널별 단계 비교</div><table class="data-table"><thead><tr><th>채널</th><th colspan="2">정상 운영 (CVR)</th><th colspan="2">점진 종료 (CVR)</th><th>변화</th></tr></thead><tbody>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent2)"></span>영수증</span></td><td>221건</td><td class="green fw7">15.21%</td><td>17건</td><td>9.29%</td><td><span class="compare-arrow down">↓ 38.9%</span></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent)"></span>팝업</span></td><td>127건</td><td>4.39%</td><td>7건</td><td class="red">1.11%</td><td><span class="compare-arrow down">↓ 74.7%</span></td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>배너</span></td><td>34건</td><td>3.68%</td><td>3건</td><td class="red">1.68%</td><td><span class="compare-arrow down">↓ 54.3%</span></td></tr>
+</tbody></table>
+<div class="insight-box" style="margin-top:12px"><div class="insight-label">종료 영향 분석</div>영수증 매장 종료와 함께 <strong>전 채널의 CVR이 동반 하락</strong>함.<br>특히 팝업 CVR이 4.39% → 1.11%로 <strong>74.7% 급감</strong>한 것은, 팝업/배너 채널도 영수증에 의한 <strong>간접적 관심 유발</strong> 효과를 받고 있었음을 시사.</div></div></div></div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--pink)"></span>영수증의 간접 영향 분석 (배너 채널)</div><div class="card"><div class="card-title">🔗 영수증 → 배너 채널 간접 전환 가설</div><div class="grid-2" style="gap:20px"><div><div style="font-size:12.5px;line-height:1.8;color:var(--text)"><div style="font-weight:700;margin-bottom:8px">영수증이 배너 채널에 미치는 간접 효과</div><div style="margin-bottom:12px">영수증에는 "시급 2배 챌린지" 안내 문구가 포함되어 있으므로, 영수증을 본 점주/알바가 반드시 영수증의 QR 코드만 스캔하는 것이 아님.</div><div style="background:var(--surface2);padding:12px 16px;border-radius:8px;margin-bottom:12px"><div style="font-weight:600;font-size:11px;color:var(--text-dim);margin-bottom:6px">가능한 간접 경로</div><div>① 영수증 확인 → 점주 앱에서 <strong>popup</strong> 클릭하여 신청</div><div>② 영수증 확인 → 앱 내 <strong>banner_twice</strong> (시급2배) 클릭하여 신청</div><div>③ 영수증 확인 → 앱 내 <strong>banner_exclusive</strong> (전용혜택) 클릭하여 신청</div><div>④ QR 미출력 매장 → <strong>banner_qr60</strong> (포스트잇 QR) 통해 신청 (직접 유도)</div></div></div></div>
+<div><div class="card-title">📊 배너 채널 pcqr 전환율</div><table class="data-table"><thead><tr><th>배너 채널</th><th>QR 진입</th><th>신청</th><th>CVR</th></tr></thead><tbody>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--pink)"></span>qr60 (포스트잇QR)</span></td><td>70</td><td>23</td><td class="green fw7">32.86%</td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--orange)"></span>exclusive (전용혜택)</span></td><td>101</td><td>20</td><td class="green fw7">19.80%</td></tr>
+<tr><td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>twice (시급2배)</span></td><td>112</td><td>16</td><td>14.29%</td></tr>
+</tbody></table><div class="note-box" style="margin-top:10px">※ 배너 3종의 pcqr CVR이 모두 14~33%로 높은 것은, 이미 <strong>영수증을 통해 관심을 가진 사용자</strong>가 배너를 클릭하고 있을 가능성을 시사함.<br>※ 배너 간 A/B 비교보다는 <strong>영수증이 1차 관심을 만들고, 배너가 2차 전환 접점</strong>으로 작용하는 구조로 해석하는 것이 적절함.</div></div></div>
+<div class="insight-box pink-bg" style="margin-top:14px"><div class="insight-label">간접 영향 결론</div>배너 캠페인 간 순수 A/B 비교는 한계가 있음 — 영수증이 안내하는 특정 배너(banner_qr60)뿐 아니라, 영수증의 내용과 유사한 다른 배너도 클릭될 수 있는 상황.<br>영수증 매장 종료 후 팝업/배너 CVR이 동반 급감한 점이 이를 뒷받침함. 즉, <strong>영수증이 전체 채널 생태계의 관심 발생기(trigger) 역할</strong>을 하고 있었으며, 배너는 그 관심을 받아 전환하는 보조 채널로 기능.</div></div></div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--purple)"></span>시간 분석</div><div class="grid-2"><div class="card"><div class="card-title">⏰ 시간대별 유입 · 전환</div><div class="chart-container-lg"><canvas id="chartHourly"></canvas></div></div><div class="card"><div class="card-title">📅 일별 추이</div><div class="chart-container-lg"><canvas id="chartDaily"></canvas></div></div></div>
+<div class="grid-2" style="margin-top:14px"><div class="card"><div class="card-title">⏱️ 채널별 신청 소요시간 (진입→제출)</div><div class="chart-container"><canvas id="chartTTS"></canvas></div><div class="insight-box" style="margin-top:12px"><div class="insight-label">소요시간 인사이트</div>전체 중앙값 <strong>113초(1.9분)</strong>. <strong>receipt</strong> 중앙값 <strong>102초</strong>로 가장 빠름 — 영수증 QR 스캔의 즉시 행동 효과.<br><strong>banner_exclusive</strong> 중앙값 <strong>107초</strong>로 2위 — "전용혜택" 메시징의 명확한 동기부여.</div></div>
+<div class="card"><div class="card-title">👤 채널그룹 × 역할 (점주 vs 알바)</div><div class="chart-container"><canvas id="chartRole"></canvas></div><div class="insight-box" style="margin-top:12px"><div class="insight-label">역할별 특징</div><strong>receipt</strong>: 점주 비중 <strong>35.9%</strong>로 가장 높음 | <strong>banner_qr60</strong>: 점주 <strong>50%</strong> — 포스트잇 QR은 점주가 더 많이 활용<br>popup/banner: 알바 비중 70~80% 압도적 — 점주용 프로그램이지만, 주요 업무를 진행하는 알바가 주로 노출되는 채널임이 분명함</div></div></div></div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--accent2)"></span>개별 채널 상세 (Raw)</div><div class="card"><div class="card-title">🔬 채널 파라미터별 상세 성과</div><table class="data-table" id="rawTable"><thead><tr><th>채널 파라미터</th><th>랜딩 진입</th><th>신청건</th><th>전환율</th><th>비고</th></tr></thead><tbody></tbody></table></div></div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--orange)"></span>사장님 직접 컨택 — 알바 모집 소구 캠페인</div><div class="grid-2"><div class="card"><div class="card-title">📩 캠페인 퍼널</div><div style="margin-bottom:14px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:100px;font-size:11px;font-weight:600;text-align:right;flex-shrink:0">문자 발송</div><div style="height:28px;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;width:100%;background:var(--orange)">1,019건</div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:100px;font-size:11px;font-weight:600;text-align:right;flex-shrink:0">랜딩 진입</div><div style="height:28px;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;min-width:80px;width:3.3%;background:var(--accent)">34매장 (3.3%)</div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:100px;font-size:11px;font-weight:600;text-align:right;flex-shrink:0">스크롤 발생</div><div style="height:28px;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;min-width:75px;width:2.2%;background:var(--purple)">22매장 (2.2%)</div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:100px;font-size:11px;font-weight:600;text-align:right;flex-shrink:0">액션(복사·클릭)</div><div style="height:28px;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;min-width:62px;width:0.5%;background:var(--green)">4매장 (0.4%)</div></div></div><div class="insight-box orange-bg"><div class="insight-label">캠페인 개요</div>1,019개 매장 사장님/신청자에게 "알바에게 알선프 참여를 권유해달라"는 문자 + 랜딩페이지 발송.<br>오픈률 <strong>3.3%</strong>(34매장), 실제 액션(공고 복사·알바몬 클릭·1:1 문의)은 <strong>4매장</strong>에 그침.<br>→ 채널 특성상 문자 오픈률 자체가 낮아 대규모 발송이 필요하거나, 메시지·접근 방식 개선 필요.</div></div><div class="card"><div class="card-title">📊 세부 분석</div><table class="data-table"><thead><tr><th>지표</th><th>수치</th><th>비고</th></tr></thead><tbody><tr><td style="font-weight:700">발송 대상</td><td>1,019매장</td><td>신청자번호 953 · 사장님번호 64 · 불일치 2</td></tr><tr><td style="font-weight:700">오픈률</td><td style="color:var(--red);font-weight:700">3.3%</td><td>봇 제외 시 2.8%(29매장)</td></tr><tr><td style="font-weight:700">재방문</td><td>8매장</td><td>진입 34매장 중 23.5%가 재방문</td></tr><tr><td style="font-weight:700">스크롤 75%+</td><td>11매장</td><td>진입 대비 32.4% — 진입하면 관심은 높음</td></tr><tr><td style="font-weight:700">액션 전환</td><td style="color:var(--green);font-weight:700">4매장</td><td>공고 복사 3 · 알바몬 1 · 1:1 문의 1</td></tr></tbody></table><div class="insight-box" style="margin-top:10px"><div class="insight-label">번호 유형별 반응</div>신청자번호(D) 발송: 33/953 = <strong>3.5%</strong> vs 사장님번호(C): 1/64 = <strong>1.6%</strong>.<br>신청자 DB로 발송한 것이 반응률 2배 → 사장님 번호보다 신청자번호 비중을 높이는 것이 효과적.</div><div style="background:var(--surface2);border-radius:6px;padding:10px 12px;font-size:10.5px;color:var(--text-dim);line-height:1.6;margin-top:8px"><strong style="color:var(--text)">시간 감쇠:</strong> 발송일(1/20) 31건(72%) → D+1 9건 → D+2 2건 → D+6 1건.<br>반응의 72%가 <strong style="color:var(--text)">당일 집중</strong>. 3일 이후 반응 거의 없음 → 리마인드 발송 미적용 상태.</div></div></div></div>
+<div class="section"><div class="section-title"><span class="dot" style="background:var(--red)"></span>종합 요약 · 액션 아이템</div>
+<div class="card" style="margin-bottom:14px"><div class="insight-label" style="color:var(--green);font-size:11px;margin-bottom:12px">✅ 잘 되고 있는 것</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+<div style="background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12);border-radius:8px;padding:14px"><div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">최고 효율 채널</div><div style="font-size:18px;font-weight:800;color:var(--green);font-family:'JetBrains Mono',monospace">17.86%</div><div style="font-size:11.5px;color:var(--text);margin-top:4px">영수증 QR CVR · 매장당 신청률 <strong>2.93%</strong></div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">매장당 기준 팝업 대비 <strong style="color:var(--green)">3.3배</strong> · 노출당도 <strong style="color:var(--green)">1.3배</strong> 우위</div></div>
+<div style="background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12);border-radius:8px;padding:14px"><div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">모바일 전환력</div><div style="font-size:18px;font-weight:800;color:var(--green);font-family:'JetBrains Mono',monospace">14.7~19.0%</div><div style="font-size:11.5px;color:var(--text);margin-top:4px">모바일 진입자 CVR · 신청 소요 중앙값 <strong>1.9분</strong></div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">오전 8시 피크 · 오후 2~3시 CVR 최고(12.9%)</div></div>
+<div style="background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12);border-radius:8px;padding:14px"><div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">생태계 효과</div><div style="font-size:18px;font-weight:800;color:var(--green);font-family:'JetBrains Mono',monospace">58.3%</div><div style="font-size:11.5px;color:var(--text);margin-top:4px">영수증 채널이 전체 신청의 과반 이상 차지</div><div style="font-size:11px;color:var(--text-dim);margin-top:2px">전체 채널 생태계의 <strong style="color:var(--green)">관심 trigger</strong> 역할 수행</div></div></div></div>
+<div class="card"><div class="insight-label" style="color:var(--red);font-size:11px;margin-bottom:14px">🔧 개선이 필요한 것 · 액션</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
+<div style="background:var(--surface2);border-radius:8px;padding:12px 14px;text-align:center"><div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px">영수증 출력 홍보 전매장 확대 시 예상 신청</div><div style="font-size:20px;font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-top:4px">~440건+</div><div style="font-size:10.5px;color:var(--text-dim);margin-top:2px">8,148 → 15,000매장 · 현재 신청률 2.93%</div><div style="font-size:10px;color:var(--red);font-weight:600;margin-top:4px">↓ 아래 전략으로 신청률을 2.93%보다 더 끌어올려서 신청 건도 늘려야 함</div></div>
+<div style="background:var(--surface2);border-radius:8px;padding:12px 14px;text-align:center"><div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px">PC QR 미스캔 이탈</div><div style="font-size:20px;font-weight:800;color:var(--red);font-family:'JetBrains Mono',monospace;margin-top:4px">91.3%</div><div style="font-size:10.5px;color:var(--text-dim);margin-top:2px">PC 조회 3,613건 중 QR 전환 실패</div></div>
+<div style="background:var(--surface2);border-radius:8px;padding:12px 14px;text-align:center"><div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px">팝업 독립 전환력</div><div style="font-size:20px;font-weight:800;color:var(--orange);font-family:'JetBrains Mono',monospace;margin-top:4px">3.79%</div><div style="font-size:10.5px;color:var(--text-dim);margin-top:2px">영수증 없이는 독립 전환 어려움</div></div></div>
+<div style="background:rgba(67,97,238,.04);border:1px solid rgba(67,97,238,.15);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:12px;line-height:1.7"><strong style="color:var(--accent)">🎯 신청률 개선 전략 로드맵</strong><br><span style="color:var(--text-dim)">전매장 확대(15,000개)를 전제로, 아래 전략들을 통해 신청률을 끌어올려 440건+를 초과 달성하는 것이 목표</span></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="background:white;border:1px solid rgba(219,46,122,.2);border-radius:10px;overflow:hidden"><div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(219,46,122,.06);border-bottom:1px solid rgba(219,46,122,.12)"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--pink);color:white;font-size:11px;font-weight:800;flex-shrink:0">1</span><span style="font-size:12px;font-weight:700;color:var(--pink)">QR 미출력 매장 대안 채널 개선 (banner_qr60) · 매장당 신청률 0.20%</span></div><div style="padding:14px 16px;font-size:12px;line-height:1.8"><div style="color:var(--text-dim);margin-bottom:10px">현재 설정: QR매장 → QR 인쇄 / 혼합매장 → QR 인쇄 / 문자매장 → 문자 인쇄</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 A</span><span><strong style="color:var(--red)">혼합매장을 "문자 인쇄"로 변경</strong> — 혼합매장은 QR 인쇄가 안 되는 매장도 포함되어 있으므로, 문자형으로 통일하여 출력 실패 방지</span></div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 B</span><span><strong style="color:var(--red)">문자형 안내를 "○○○이 적힌 이미지 클릭"처럼 직관적 행동 유도로 변경</strong> — 현재 문자형 출력물은 "점주용 프로그램 내 노란 포스트잇 이미지 속 QR 코드를 스캔하라"는 안내인데, 어떤 이미지인지 정확히 특정하기 어렵고 설명이 길어 혼란 발생</span></div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 C</span><span><strong style="color:var(--red)">문자형 영수증 전용 신청 채널 신설 검토 (MO 방식 등)</strong> — 현재 문자형 영수증은 배너(banner_qr60)를 통해 신청하도록 유도하여 채널 구분이 어려움</span></div></div></div></div>
+<div style="background:white;border:1px solid rgba(67,97,238,.2);border-radius:10px;overflow:hidden"><div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(67,97,238,.06);border-bottom:1px solid rgba(67,97,238,.12)"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:800;flex-shrink:0">2</span><span style="font-size:12px;font-weight:700;color:var(--accent)">팝업/배너 진입 후 이탈 문제</span></div><div style="padding:14px 16px;font-size:12px;line-height:1.8"><div style="color:var(--text-dim);margin-bottom:8px">노출당 진입률 1.68%로 클릭은 많으나, 이미지 형태 팝업의 특성상 <strong style="color:var(--text)">자세한 내용을 알지 못한 채 클릭하거나 QR을 인식</strong>하는 경우가 많아 이탈이 높음.</div><div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 A</span><span><strong style="color:var(--red)">모바일 팝업 이미지 자체에 프로그램 설명·혜택 정보를 추가</strong></span></div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 B</span><span><strong style="color:var(--red)">신청 랜딩 첫 페이지에서 혜택 중심 후킹 포인트 배치</strong></span></div></div></div></div>
+<div style="background:white;border:1px solid rgba(14,165,160,.2);border-radius:10px;overflow:hidden"><div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(14,165,160,.06);border-bottom:1px solid rgba(14,165,160,.12)"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent2);color:white;font-size:11px;font-weight:800;flex-shrink:0">3</span><span style="font-size:12px;font-weight:700;color:var(--accent2)">신청 폼 간소화 — 주소 입력 제거</span></div><div style="padding:14px 16px;font-size:12px;line-height:1.8"><div style="color:var(--text-dim);margin-bottom:8px">현재 신청 단계에서 주소까지 입력받고 있으나, 이 퍼널의 목적은 <strong style="color:var(--text)">혜택에 관심 있는 사람의 DB를 일차적으로 수집</strong>하는 것.</div><div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략</span><span><strong style="color:var(--red)">신청 시 매장명 · 연락처 · 닉네임만 수집</strong>하여 입력 장벽을 낮춤 → 주소는 추후 리워드 정산 정보 입력 단계에서 수집</span></div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(14,165,160,.1);color:var(--accent2)">기대효과</span><span>폼 입력 시간 단축으로 <strong style="color:var(--accent2)">신청 전환율 상승</strong> + 리워드 정산 단계와 주소 중복 입력 문제 해소로 <strong style="color:var(--accent2)">데이터 관리 효율화</strong></span></div></div></div></div>
+<div style="background:white;border:1px solid rgba(224,72,78,.2);border-radius:10px;overflow:hidden"><div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(224,72,78,.06);border-bottom:1px solid rgba(224,72,78,.12)"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--red);color:white;font-size:11px;font-weight:800;flex-shrink:0">4</span><span style="font-size:12px;font-weight:700;color:var(--red)">영수증 채널 종료 후 전 채널 CVR 동반 급감 (팝업 -74.7%)</span></div><div style="padding:14px 16px;font-size:12px;line-height:1.8"><div style="color:var(--text-dim);margin-bottom:8px">영수증 채널 상시 운영이 이상적이나, <strong style="color:var(--text)">영수증 자체가 단기적 채널</strong>인 점을 감안해야 함.</div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략</span><span><strong style="color:var(--red)">프로젝트 구조가 검증되면, 신규 매장 도입 시 프로모션 패키지에 해당 프로모션을 포함</strong>하는 등 지속 가능한 운영 구조 설계 필요</span></div></div></div>
+<div style="background:white;border:1px solid rgba(124,58,237,.2);border-radius:10px;overflow:hidden"><div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(124,58,237,.06);border-bottom:1px solid rgba(124,58,237,.12)"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:11px;font-weight:800;flex-shrink:0">5</span><span style="font-size:12px;font-weight:700;color:var(--purple)">운영 자동화 — 매장명 매칭 · CRM 발송</span></div><div style="padding:14px 16px;font-size:12px;line-height:1.8"><div style="color:var(--text-dim);margin-bottom:8px">현재 신청이 들어오면 <strong style="color:var(--text)">매장명 확인 → 패스오더 매장명 매칭을 수동으로 진행</strong>하고 있어, 신청 볼륨 증가 시 운영 병목 발생.</div><div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 A</span><span><strong style="color:var(--red)">매장명 자동 매칭 시스템 구축</strong> — 기존 패스오더 서비스 매장 리스트를 활용하여, 신청 시 입력된 매장명을 자동으로 매칭</span></div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 B</span><span><strong style="color:var(--red)">선정 안내 CRM 발송 자동화</strong> — 매장명 매칭 완료 후 대상자에게 선정 안내 메시지를 자동 발송하는 워크플로우 구축</span></div></div></div></div>
+<div style="background:white;border:1px solid rgba(232,119,46,.2);border-radius:10px;overflow:hidden"><div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(232,119,46,.06);border-bottom:1px solid rgba(232,119,46,.12)"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--orange);color:white;font-size:11px;font-weight:800;flex-shrink:0">6</span><span style="font-size:12px;font-weight:700;color:var(--orange)">사장님 직접 컨택 알바 모집 소구 — 확대 및 방식 개선</span></div><div style="padding:14px 16px;font-size:12px;line-height:1.8"><div style="color:var(--text-dim);margin-bottom:10px">1,019매장 문자 발송 → 34매장 진입(3.3%) → 4매장 액션(0.4%). 오픈률은 낮지만, 진입한 매장의 관여도는 높음(64.7% 스크롤, 23.5% 재방문). 반응의 72%가 당일에 집중되고 3일 후 거의 소멸.</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 A</span><span><strong style="color:var(--red)">대규모 발송 확대</strong> — 오픈률 3.3% 기준, 액션 전환 4매장/1,019 = 0.4%. 절대 수를 늘리려면 발송 모수를 대폭 확대 필요. 5,000매장 발송 시 약 20매장 액션 기대</span></div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 B</span><span><strong style="color:var(--red)">리마인드 문자 추가</strong> — 반응의 72%가 당일 집중, 3일 후 거의 소멸. 현재 1회성 발송 → D+2~3에 리마인드 발송을 추가하면 미오픈자 재접촉 가능. 제목·프리뷰 문구도 차별화</span></div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,.1);color:var(--red)">전략 C</span><span><strong style="color:var(--red)">신청자번호(D) 발송 집중</strong> — 사장님 직접 발송(1.6%) 대비 신청자번호 발송(3.5%)이 2배 반응률. 현재는 알바 사이트 정보와 통합하여 사장님 번호가 있으면 사장님에게 보냈으나, 신청자 DB로 주로 발송하는 방향이 더 효과적 → 신청자번호 비중을 높여 발송 전략 설계</span></div><div style="display:flex;align-items:flex-start;gap:8px"><span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(232,119,46,.1);color:var(--orange)">전략 D</span><span><strong style="color:var(--orange)">문자 메시지 자체 개선</strong> — 현재 오픈률 3.3%는 문자 마케팅 평균(~5%) 대비 낮은 편. 첫 줄 미리보기 영역에서 "사장님 매장 알바 추가 수익" 등 즉각적 이점을 강조하고, 발송 시간대를 오전 영업 전(8~9시) 등으로 테스트</span></div></div></div></div>
+</div></div></div>
 </div>
-
-<!-- Section 2: Device Path -->
-<div class="section">
-  <div class="section-title"><span class="dot" style="background:var(--orange)"></span>디바이스 경로별 분석 (PC vs Mobile)</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">📱 디바이스별 랜딩 진입 · 전환율</div>
-      <div class="chart-container"><canvas id="chartDevice"></canvas></div>
-      <div class="insight-box" style="margin-top:12px">
-        <div class="insight-label">디바이스 요약</div>
-        모바일 직접 진입(영수증 QR + _mo 채널) CVR <strong>14.70%</strong>.<br>
-        PC QR 스캔 후 진입 CVR <strong>18.95%</strong>.<br>
-        PC 조회는 의도적으로 차단하고, <strong>모바일 진입을 유도</strong>하는 구조로 운영 중.
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">🔀 PC → QR 전환 퍼널</div>
-      <div class="funnel">
-        <div class="funnel-step" style="background:rgba(67,97,238,0.06);border-radius:8px 0 0 8px">
-          <div class="funnel-step-value" style="color:var(--accent)">3,613</div>
-          <div class="funnel-step-label">PC 조회만</div>
-        </div>
-        <div style="text-align:center;padding:0 6px">
-          <div class="funnel-arrow">→</div>
-          <div class="funnel-rate red">8.7%</div>
-        </div>
-        <div class="funnel-step" style="background:rgba(124,58,237,0.06)">
-          <div class="funnel-step-value" style="color:var(--purple)">343</div>
-          <div class="funnel-step-label">QR 스캔 진입</div>
-        </div>
-        <div style="text-align:center;padding:0 6px">
-          <div class="funnel-arrow">→</div>
-          <div class="funnel-rate green">18.95%</div>
-        </div>
-        <div class="funnel-step" style="background:rgba(22,163,74,0.06);border-radius:0 8px 8px 0">
-          <div class="funnel-step-value" style="color:var(--green)">65</div>
-          <div class="funnel-step-label">신청 완료</div>
-        </div>
-      </div>
-      <div style="margin-top:20px">
-        <div class="card-title">📊 디바이스 경로 상세</div>
-        <table class="data-table">
-          <thead><tr><th>경로</th><th>랜딩 진입</th><th>신청</th><th>CVR</th></tr></thead>
-          <tbody>
-            <tr><td>📱 모바일 직접 진입</td><td>2,334</td><td>343</td><td><span class="green fw7">14.70%</span></td></tr>
-            <tr><td>📲 PC → QR → 모바일</td><td>343</td><td>65</td><td><span class="green fw7">18.95%</span></td></tr>
-            <tr><td>🖥️ PC 조회만</td><td>3,613</td><td>2</td><td><span class="red">0.06%</span></td></tr>
-          </tbody>
-        </table>
-        <div class="note-box">
-          ※ <strong>모바일 직접 진입</strong> = popup_mo + banner_*_mo + receipt 전체 (영수증 QR 스캔으로 모바일 진입)<br>
-          ※ <strong>PC → QR → 모바일</strong> = popup_pcqr + banner_*_pcqr + banner_qr60_pcqr<br>
-          ※ PC 신청 2건은 초기에 PC 제출이 가능했던 시점의 데이터이며, 이후 <strong>PC 신청을 차단</strong>하고 QR을 통해 모바일에서만 신청 가능하도록 변경함
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================ -->
-<!-- Section 3: Store Exposure — 매장당/노출당 상세 테이블만 -->
-<!-- ============================================================ -->
-<div class="section">
-  <div class="section-title"><span class="dot" style="background:var(--green)"></span>매장 모수 대비 효율 분석</div>
-
-  <div class="card">
-    <div class="card-title">🔬 채널별 매장당 효율 상세</div>
-
-    <!-- 탭 전환: 매장당 vs 노출당 -->
-    <div class="view-tabs">
-      <button class="view-tab active" onclick="switchDetailView('detail-store')">🏪 매장당</button>
-      <button class="view-tab" onclick="switchDetailView('detail-imp')">📡 노출당</button>
-    </div>
-
-    <!-- 매장당 상세 -->
-    <div id="view-detail-store" class="view-panel active">
-      <table class="data-table">
-        <thead><tr><th>채널 유형</th><th>매장 수</th><th>랜딩 진입</th><th>매장당 진입률</th><th>신청</th><th>매장당 신청률</th><th>영수증 대비</th></tr></thead>
-        <tbody>
-          <tr class="row-highlight">
-            <td><span class="channel-tag fw7"><span class="channel-dot" style="background:var(--accent2)"></span>receipt (영수증 QR)</span></td>
-            <td>8,148</td><td>1,170</td><td class="fw7">14.36%</td><td class="fw7">209</td><td class="fw7">2.56%</td>
-            <td><span class="compare-arrow up">기준</span></td>
-          </tr>
-          <tr class="row-highlight">
-            <td><span class="channel-tag fw7"><span class="channel-dot" style="background:var(--pink)"></span>banner_qr60 (포스트잇 QR)</span></td>
-            <td>15,000</td><td>472</td><td>3.15%</td><td>30</td><td>0.20%</td>
-            <td><span class="compare-arrow down">↓ 92.2%</span></td>
-          </tr>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent)"></span>popup (팝업)</span></td>
-            <td>15,000</td><td>3,534</td><td>23.56%</td><td>134</td><td>0.89%</td>
-            <td><span class="compare-arrow down">↓ 65.2%</span></td>
-          </tr>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>banner_twice (시급2배)</span></td>
-            <td>15,000</td><td>614</td><td>4.09%</td><td>17</td><td>0.11%</td>
-            <td><span class="compare-arrow down">↓ 95.7%</span></td>
-          </tr>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--orange)"></span>banner_exclusive (전용혜택)</span></td>
-            <td>15,000</td><td>494</td><td>3.29%</td><td>20</td><td>0.13%</td>
-            <td><span class="compare-arrow down">↓ 94.9%</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="insight-box green-bg" style="margin-top:12px">
-        <div class="insight-label">매장당 효율 인사이트</div>
-        매장당 진입률은 팝업(23.6%)이 영수증(20.2%)과 비슷하지만, <strong>매장당 신청률은 영수증이 3.3배 높음</strong> (2.93% vs 0.89%).<br>
-        영수증은 8,148개 매장에서만 운영 → <strong>전매장 15,000개 확대 시</strong> 단순 추산으로 신청 <strong>440건 이상</strong> 기대.<br>
-        팝업은 1.84배 많은 매장에 노출됨에도 영수증 대비 신청 수 44% 적음.
-      </div>
-    </div>
-
-    <!-- 노출당 상세 -->
-    <div id="view-detail-imp" class="view-panel">
-      <table class="data-table">
-        <thead><tr><th>채널 유형</th><th>총 노출(추정)</th><th>랜딩 진입</th><th>노출당 진입률</th><th>신청</th><th>노출당 신청률</th><th>영수증 대비</th></tr></thead>
-        <tbody>
-          <tr class="row-highlight">
-            <td><span class="channel-tag fw7"><span class="channel-dot" style="background:var(--accent2)"></span>receipt (영수증 QR)</span></td>
-            <td>~285,180</td><td>1,170</td><td class="fw7">0.410%</td><td class="fw7">209</td><td class="fw7">0.073%</td>
-            <td><span class="compare-arrow up">기준</span></td>
-          </tr>
-          <tr class="row-highlight">
-            <td><span class="channel-tag fw7"><span class="channel-dot" style="background:var(--pink)"></span>banner_qr60 (포스트잇 QR)</span></td>
-            <td>~210,000</td><td>472</td><td>0.225%</td><td>30</td><td>0.014%</td>
-            <td><span class="compare-arrow down">↓ 80.8%</span></td>
-          </tr>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent)"></span>popup (팝업)</span></td>
-            <td>~210,000</td><td>3,534</td><td>1.683%</td><td>134</td><td>0.064%</td>
-            <td><span class="compare-arrow down">↓ 12.3%</span></td>
-          </tr>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>banner_twice (시급2배)</span></td>
-            <td>~210,000</td><td>614</td><td>0.292%</td><td>17</td><td>0.008%</td>
-            <td><span class="compare-arrow down">↓ 89.0%</span></td>
-          </tr>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--orange)"></span>banner_exclusive (전용혜택)</span></td>
-            <td>~210,000</td><td>494</td><td>0.235%</td><td>20</td><td>0.010%</td>
-            <td><span class="compare-arrow down">↓ 86.3%</span></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="note-box" style="margin-top:8px">
-        ※ 총 노출 추정 기준 — 영수증: 매장수(8,148) × 기간 × 빈도(하루 3~4회) ≈ 285,180 / 팝업·배너: 앱 접속자 기반 ≈ 210,000<br>
-        ※ banner_qr60(포스트잇 QR)도 전매장 15,000개에 배포되었으므로 팝업/배너와 동일한 ~210,000 노출 기준 적용.
-      </div>
-
-      <div class="insight-box purple-bg" style="margin-top:12px">
-        <div class="insight-label">노출당 효율 인사이트</div>
-        노출당 진입률은 팝업(1.68%)이 영수증(0.58%)의 <strong>2.9배</strong>로 클릭 유도에 유리하나,<br>
-        <strong>노출당 신청률은 영수증(0.073%)이 팝업(0.064%)보다 14% 높음</strong>. 팝업은 "가볍게 눌러보고 이탈"하는 패턴이 많고, 영수증은 진입 자체가 행동 의지를 동반함을 시사.
-      </div>
-    </div>
-
-    <div class="insight-box orange-bg" style="margin-top:12px">
-      <div class="insight-label">영수증 vs 디지털 채널 효율 격차</div>
-      영수증 QR은 특정 시간에 자동 출력되어, 실물 영수증을 받는 순간 자연스럽게 노출됨 → 물리적 접점이 디지털 배너(점주 앱 접속 필요)보다 <strong>행동 전환에 압도적으로 유리</strong>.<br>
-      포스트잇 QR(banner_qr60)은 QR 미출력 매장 대안이지만, 매장당 신청률 0.20%로 직접 영수증(2.56%) 대비 크게 낮음 → 영수증 자동 출력의 자연스러운 노출이 핵심.<br>
-      <strong>노출당 관점</strong>에서도 영수증의 신청 전환률(0.073%)이 팝업(0.064%)보다 높아, 볼륨과 효율 모두 영수증이 우위.
-    </div>
-  </div>
-</div>
-
-<!-- Section 4: Receipt Phase-out Impact -->
-<div class="section">
-  <div class="section-title"><span class="dot" style="background:var(--red)"></span>영수증 매장 종료 추이 · 영향 분석</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">📉 영수증 매장 점진적 종료 타임라인</div>
-      <div class="chart-container-lg"><canvas id="chartPhaseout"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">📊 운영 단계별 성과 비교</div>
-      <table class="data-table" style="margin-bottom:12px">
-        <thead><tr><th>운영 단계</th><th>기간</th><th>랜딩 진입</th><th>신청</th><th>CVR</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="phase-badge active">정상 운영</span></td>
-            <td class="dim" style="font-family:'Pretendard';text-align:left">1/7 – 1/26 (20일)</td>
-            <td>5,286</td><td>382</td><td class="green fw7">7.23%</td>
-          </tr>
-          <tr>
-            <td><span class="phase-badge winding">점진 종료</span></td>
-            <td class="dim" style="font-family:'Pretendard';text-align:left">1/27 – 1/30 (4일)</td>
-            <td>996</td><td>27</td><td class="red">2.71%</td>
-          </tr>
-          <tr>
-            <td><span class="phase-badge ended">완전 종료</span></td>
-            <td class="dim" style="font-family:'Pretendard';text-align:left">1/31 – 2/2 (3일)</td>
-            <td>15</td><td>1</td><td class="dim">—</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="card-title" style="margin-top:16px">채널별 단계 비교</div>
-      <table class="data-table">
-        <thead><tr><th>채널</th><th colspan="2">정상 운영 (CVR)</th><th colspan="2">점진 종료 (CVR)</th><th>변화</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent2)"></span>영수증</span></td>
-            <td>221건</td><td class="green fw7">15.21%</td>
-            <td>17건</td><td>9.29%</td>
-            <td><span class="compare-arrow down">↓ 38.9%</span></td>
-          </tr>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--accent)"></span>팝업</span></td>
-            <td>127건</td><td>4.39%</td>
-            <td>7건</td><td class="red">1.11%</td>
-            <td><span class="compare-arrow down">↓ 74.7%</span></td>
-          </tr>
-          <tr>
-            <td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>배너</span></td>
-            <td>34건</td><td>3.68%</td>
-            <td>3건</td><td class="red">1.68%</td>
-            <td><span class="compare-arrow down">↓ 54.3%</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="insight-box" style="margin-top:12px">
-        <div class="insight-label">종료 영향 분석</div>
-        영수증 매장 종료와 함께 <strong>전 채널의 CVR이 동반 하락</strong>함.<br>
-        특히 팝업 CVR이 4.39% → 1.11%로 <strong>74.7% 급감</strong>한 것은, 팝업/배너 채널도 영수증에 의한 <strong>간접적 관심 유발</strong> 효과를 받고 있었음을 시사.
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Section 5: Receipt Indirect Effect on Banners -->
-<div class="section">
-  <div class="section-title"><span class="dot" style="background:var(--pink)"></span>영수증의 간접 영향 분석 (배너 채널)</div>
-  <div class="card">
-    <div class="card-title">🔗 영수증 → 배너 채널 간접 전환 가설</div>
-    <div class="grid-2" style="gap:20px">
-      <div>
-        <div style="font-size:12.5px;line-height:1.8;color:var(--text)">
-          <div style="font-weight:700;margin-bottom:8px;">영수증이 배너 채널에 미치는 간접 효과</div>
-          <div style="margin-bottom:12px">영수증에는 "시급 2배 챌린지" 안내 문구가 포함되어 있으므로, 영수증을 본 점주/알바가 반드시 영수증의 QR 코드만 스캔하는 것이 아님.</div>
-          
-          <div style="background:var(--surface2);padding:12px 16px;border-radius:8px;margin-bottom:12px">
-            <div style="font-weight:600;font-size:11px;color:var(--text-dim);margin-bottom:6px">가능한 간접 경로</div>
-            <div>① 영수증 확인 → 점주 앱에서 <strong>popup</strong> 클릭하여 신청</div>
-            <div>② 영수증 확인 → 앱 내 <strong>banner_twice</strong> (시급2배) 클릭하여 신청</div>
-            <div>③ 영수증 확인 → 앱 내 <strong>banner_exclusive</strong> (전용혜택) 클릭하여 신청</div>
-            <div>④ QR 미출력 매장 → <strong>banner_qr60</strong> (포스트잇 QR) 통해 신청 (직접 유도)</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="card-title">📊 배너 채널 pcqr 전환율</div>
-        <table class="data-table">
-          <thead><tr><th>배너 채널</th><th>QR 진입</th><th>신청</th><th>CVR</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="channel-tag"><span class="channel-dot" style="background:var(--pink)"></span>qr60 (포스트잇QR)</span></td>
-              <td>70</td><td>23</td><td class="green fw7">32.86%</td>
-            </tr>
-            <tr>
-              <td><span class="channel-tag"><span class="channel-dot" style="background:var(--orange)"></span>exclusive (전용혜택)</span></td>
-              <td>101</td><td>20</td><td class="green fw7">19.80%</td>
-            </tr>
-            <tr>
-              <td><span class="channel-tag"><span class="channel-dot" style="background:var(--purple)"></span>twice (시급2배)</span></td>
-              <td>112</td><td>16</td><td>14.29%</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="note-box" style="margin-top:10px">
-          ※ 배너 3종의 pcqr CVR이 모두 14~33%로 높은 것은, 이미 <strong>영수증을 통해 관심을 가진 사용자</strong>가 배너를 클릭하고 있을 가능성을 시사함.<br>
-          ※ 배너 간 A/B 비교보다는 <strong>영수증이 1차 관심을 만들고, 배너가 2차 전환 접점</strong>으로 작용하는 구조로 해석하는 것이 적절함.
-        </div>
-      </div>
-    </div>
-
-    <div class="insight-box pink-bg" style="margin-top:14px">
-      <div class="insight-label">간접 영향 결론</div>
-      배너 캠페인 간 순수 A/B 비교는 한계가 있음 — 영수증이 안내하는 특정 배너(banner_qr60)뿐 아니라, 영수증의 내용과 유사한 다른 배너도 클릭될 수 있는 상황.<br>
-      영수증 매장 종료 후 팝업/배너 CVR이 동반 급감한 점이 이를 뒷받침함. 즉, <strong>영수증이 전체 채널 생태계의 관심 발생기(trigger) 역할</strong>을 하고 있었으며, 배너는 그 관심을 받아 전환하는 보조 채널로 기능.
-    </div>
-  </div>
-</div>
-
-<!-- Section 6: Time Analysis -->
-<div class="section">
-  <div class="section-title"><span class="dot" style="background:var(--purple)"></span>시간 분석</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">⏰ 시간대별 유입 · 전환</div>
-      <div class="chart-container-lg"><canvas id="chartHourly"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">📅 일별 추이</div>
-      <div class="chart-container-lg"><canvas id="chartDaily"></canvas></div>
-    </div>
-  </div>
-
-  <div class="grid-2" style="margin-top:14px">
-    <div class="card">
-      <div class="card-title">⏱️ 채널별 신청 소요시간 (진입→제출)</div>
-      <div class="chart-container"><canvas id="chartTTS"></canvas></div>
-      <div class="insight-box" style="margin-top:12px">
-        <div class="insight-label">소요시간 인사이트</div>
-        전체 중앙값 <strong>113초(1.9분)</strong>. <strong>receipt</strong> 중앙값 <strong>102초</strong>로 가장 빠름 — 영수증 QR 스캔의 즉시 행동 효과.<br>
-        <strong>banner_exclusive</strong> 중앙값 <strong>107초</strong>로 2위 — "전용혜택" 메시징의 명확한 동기부여.
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">👤 채널그룹 × 역할 (점주 vs 알바)</div>
-      <div class="chart-container"><canvas id="chartRole"></canvas></div>
-      <div class="insight-box" style="margin-top:12px">
-        <div class="insight-label">역할별 특징</div>
-        <strong>receipt</strong>: 점주 비중 <strong>35.9%</strong>로 가장 높음 |
-        <strong>banner_qr60</strong>: 점주 <strong>50%</strong> — 포스트잇 QR은 점주가 더 많이 활용<br>
-        popup/banner: 알바 비중 70~80% 압도적 — 점주용 프로그램이지만, 주요 업무를 진행하는 알바가 주로 노출되는 채널임이 분명함
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Section 7: Raw Channel -->
-<div class="section">
-  <div class="section-title"><span class="dot" style="background:var(--accent2)"></span>개별 채널 상세 (Raw)</div>
-  <div class="card">
-    <div class="card-title">🔬 채널 파라미터별 상세 성과</div>
-    <table class="data-table" id="rawTable">
-      <thead><tr><th>채널 파라미터</th><th>랜딩 진입</th><th>신청건</th><th>전환율</th><th>비고</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- Section 8: Summary -->
-<div class="section">
-  <div class="section-title"><span class="dot" style="background:var(--red)"></span>종합 요약 · 액션 아이템</div>
-
-  <!-- 잘 되고 있는 것 -->
-  <div class="card" style="margin-bottom:14px">
-    <div class="insight-label" style="color:var(--green);font-size:11px;margin-bottom:12px">✅ 잘 되고 있는 것</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-      <div style="background:rgba(22,163,74,0.04);border:1px solid rgba(22,163,74,0.12);border-radius:8px;padding:14px">
-        <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">최고 효율 채널</div>
-        <div style="font-size:18px;font-weight:800;color:var(--green);font-family:'JetBrains Mono',monospace">17.86%</div>
-        <div style="font-size:11.5px;color:var(--text);margin-top:4px">영수증 QR CVR · 매장당 신청률 <strong>2.93%</strong></div>
-        <div style="font-size:11px;color:var(--text-dim);margin-top:2px">매장당 기준 팝업 대비 <strong style="color:var(--green)">3.3배</strong> · 노출당도 <strong style="color:var(--green)">1.3배</strong> 우위</div>
-      </div>
-      <div style="background:rgba(22,163,74,0.04);border:1px solid rgba(22,163,74,0.12);border-radius:8px;padding:14px">
-        <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">모바일 전환력</div>
-        <div style="font-size:18px;font-weight:800;color:var(--green);font-family:'JetBrains Mono',monospace">14.7~19.0%</div>
-        <div style="font-size:11.5px;color:var(--text);margin-top:4px">모바일 진입자 CVR · 신청 소요 중앙값 <strong>1.9분</strong></div>
-        <div style="font-size:11px;color:var(--text-dim);margin-top:2px">오전 8시 피크 · 오후 2~3시 CVR 최고(12.9%)</div>
-      </div>
-      <div style="background:rgba(22,163,74,0.04);border:1px solid rgba(22,163,74,0.12);border-radius:8px;padding:14px">
-        <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">생태계 효과</div>
-        <div style="font-size:18px;font-weight:800;color:var(--green);font-family:'JetBrains Mono',monospace">58.3%</div>
-        <div style="font-size:11.5px;color:var(--text);margin-top:4px">영수증 채널이 전체 신청의 과반 이상 차지</div>
-        <div style="font-size:11px;color:var(--text-dim);margin-top:2px">전체 채널 생태계의 <strong style="color:var(--green)">관심 trigger</strong> 역할 수행</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 개선이 필요한 것 -->
-  <div class="card">
-    <div class="insight-label" style="color:var(--red);font-size:11px;margin-bottom:14px">🔧 개선이 필요한 것 · 액션</div>
-
-    <!-- 상단 핵심 수치 -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
-      <div style="background:var(--surface2);border-radius:8px;padding:12px 14px;text-align:center">
-        <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">영수증 출력 홍보 전매장 확대 시 예상 신청</div>
-        <div style="font-size:20px;font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-top:4px">~440건+</div>
-        <div style="font-size:10.5px;color:var(--text-dim);margin-top:2px">8,148 → 15,000매장 · 현재 신청률 2.93%</div>
-        <div style="font-size:10px;color:var(--red);font-weight:600;margin-top:4px">↓ 아래 전략으로 신청률을 2.93%보다 더 끌어올려서 신청 건도 늘려야 함</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:8px;padding:12px 14px;text-align:center">
-        <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">PC QR 미스캔 이탈</div>
-        <div style="font-size:20px;font-weight:800;color:var(--red);font-family:'JetBrains Mono',monospace;margin-top:4px">91.3%</div>
-        <div style="font-size:10.5px;color:var(--text-dim);margin-top:2px">PC 조회 3,613건 중 QR 전환 실패</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:8px;padding:12px 14px;text-align:center">
-        <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">팝업 독립 전환력</div>
-        <div style="font-size:20px;font-weight:800;color:var(--orange);font-family:'JetBrains Mono',monospace;margin-top:4px">3.79%</div>
-        <div style="font-size:10.5px;color:var(--text-dim);margin-top:2px">영수증 없이는 독립 전환 어려움</div>
-      </div>
-    </div>
-
-    <!-- 전략 흐름 안내 -->
-    <div style="background:rgba(67,97,238,0.04);border:1px solid rgba(67,97,238,0.15);border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:12px;line-height:1.7">
-      <strong style="color:var(--accent)">🎯 신청률 개선 전략 로드맵</strong><br>
-      <span style="color:var(--text-dim)">전매장 확대(15,000개)를 전제로, 아래 전략들을 통해 신청률을 끌어올려 440건+를 초과 달성하는 것이 목표</span>
-    </div>
-
-    <!-- 액션 카드들 -->
-    <div style="display:flex;flex-direction:column;gap:12px">
-
-      <!-- ① QR 미출력 매장 개선 (기존 3번 → 1번으로) -->
-      <div style="background:white;border:1px solid rgba(219,46,122,0.2);border-radius:10px;overflow:hidden">
-        <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(219,46,122,0.06);border-bottom:1px solid rgba(219,46,122,0.12)">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--pink);color:white;font-size:11px;font-weight:800;flex-shrink:0">1</span>
-          <span style="font-size:12px;font-weight:700;color:var(--pink)">QR 미출력 매장 대안 채널 개선 (banner_qr60) · 매장당 신청률 0.20%</span>
-        </div>
-        <div style="padding:14px 16px;font-size:12px;line-height:1.8">
-          <div style="color:var(--text-dim);margin-bottom:10px">현재 설정: QR매장 → QR 인쇄 / 혼합매장 → QR 인쇄 / 문자매장 → 문자 인쇄</div>
-
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략 A</span>
-              <span><strong style="color:var(--red)">혼합매장을 "문자 인쇄"로 변경</strong> — 혼합매장은 QR 인쇄가 안 되는 매장도 포함되어 있으므로, 문자형으로 통일하여 출력 실패 방지</span>
-            </div>
-
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략 B</span>
-              <span><strong style="color:var(--red)">문자형 안내를 "○○○이 적힌 이미지 클릭"처럼 직관적 행동 유도로 변경</strong> — 현재 문자형 출력물은 "점주용 프로그램 내 노란 포스트잇 이미지 속 QR 코드를 스캔하라"는 안내인데, 어떤 이미지인지 정확히 특정하기 어렵고 설명이 길어 혼란 발생. "이미지 클릭" 방식이면 퍼널이 한 단계 늘더라도 대상을 명확히 특정할 수 있어 더 효과적</span>
-            </div>
-
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략 C</span>
-              <span><strong style="color:var(--red)">문자형 영수증 전용 신청 채널 신설 검토 (MO 방식 등)</strong> — 현재 문자형 영수증은 배너(banner_qr60)를 통해 신청하도록 유도하여 채널 구분이 어려움. 문자 영수증만의 전용 신청 경로를 만들면 채널별 성과 구분이 명확해지고, 사용자 입장에서도 더 간단한 신청 경험 제공 가능</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ② 팝업/배너 진입 후 이탈 -->
-      <div style="background:white;border:1px solid rgba(67,97,238,0.2);border-radius:10px;overflow:hidden">
-        <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(67,97,238,0.06);border-bottom:1px solid rgba(67,97,238,0.12)">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:800;flex-shrink:0">2</span>
-          <span style="font-size:12px;font-weight:700;color:var(--accent)">팝업/배너 진입 후 이탈 문제</span>
-        </div>
-        <div style="padding:14px 16px;font-size:12px;line-height:1.8">
-          <div style="color:var(--text-dim);margin-bottom:8px">노출당 진입률 1.68%로 클릭은 많으나, 이미지 형태 팝업의 특성상 <strong style="color:var(--text)">자세한 내용을 알지 못한 채 클릭하거나 QR을 인식</strong>하는 경우가 많아 이탈이 높음.</div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략 A</span>
-              <span><strong style="color:var(--red)">모바일 팝업 이미지 자체에 프로그램 설명·혜택 정보를 추가</strong> — 클릭 전에 무엇인지 인지할 수 있도록 하여 비관심자의 불필요한 진입을 줄이고, 관심자의 전환 품질을 높임</span>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략 B</span>
-              <span><strong style="color:var(--red)">신청 랜딩 첫 페이지에서 혜택 중심 후킹 포인트 배치</strong> — 현재 PC는 QR코드, 모바일은 간단한 설명+역할 선택이 먼저 노출. 진입 직후 혜택·보상을 먼저 보여줘 이탈 방지</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ③ 신청 폼 간소화 -->
-      <div style="background:white;border:1px solid rgba(14,165,160,0.2);border-radius:10px;overflow:hidden">
-        <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(14,165,160,0.06);border-bottom:1px solid rgba(14,165,160,0.12)">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent2);color:white;font-size:11px;font-weight:800;flex-shrink:0">3</span>
-          <span style="font-size:12px;font-weight:700;color:var(--accent2)">신청 폼 간소화 — 주소 입력 제거</span>
-        </div>
-        <div style="padding:14px 16px;font-size:12px;line-height:1.8">
-          <div style="color:var(--text-dim);margin-bottom:8px">현재 신청 단계에서 주소까지 입력받고 있으나, 이 퍼널의 목적은 <strong style="color:var(--text)">혜택에 관심 있는 사람의 DB를 일차적으로 수집</strong>하는 것.</div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략</span>
-              <span><strong style="color:var(--red)">신청 시 매장명 · 연락처 · 닉네임만 수집</strong>하여 입력 장벽을 낮춤 → 주소는 추후 리워드 정산 정보 입력 단계에서 수집</span>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(14,165,160,0.1);color:var(--accent2)">기대효과</span>
-              <span>폼 입력 시간 단축으로 <strong style="color:var(--accent2)">신청 전환율 상승</strong> + 리워드 정산 단계와 주소 중복 입력 문제 해소로 <strong style="color:var(--accent2)">데이터 관리 효율화</strong></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ④ 영수증 종료 영향 -->
-      <div style="background:white;border:1px solid rgba(224,72,78,0.2);border-radius:10px;overflow:hidden">
-        <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(224,72,78,0.06);border-bottom:1px solid rgba(224,72,78,0.12)">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--red);color:white;font-size:11px;font-weight:800;flex-shrink:0">4</span>
-          <span style="font-size:12px;font-weight:700;color:var(--red)">영수증 채널 종료 후 전 채널 CVR 동반 급감 (팝업 -74.7%)</span>
-        </div>
-        <div style="padding:14px 16px;font-size:12px;line-height:1.8">
-          <div style="color:var(--text-dim);margin-bottom:8px">영수증 채널 상시 운영이 이상적이나, <strong style="color:var(--text)">영수증 자체가 단기적 채널</strong>인 점을 감안해야 함.</div>
-          <div style="display:flex;align-items:flex-start;gap:8px">
-            <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략</span>
-            <span><strong style="color:var(--red)">프로젝트 구조가 검증되면, 신규 매장 도입 시 프로모션 패키지에 해당 프로모션을 포함</strong>하는 등 지속 가능한 운영 구조 설계 필요</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ⑤ 운영 자동화 -->
-      <div style="background:white;border:1px solid rgba(124,58,237,0.2);border-radius:10px;overflow:hidden">
-        <div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(124,58,237,0.06);border-bottom:1px solid rgba(124,58,237,0.12)">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--purple);color:white;font-size:11px;font-weight:800;flex-shrink:0">5</span>
-          <span style="font-size:12px;font-weight:700;color:var(--purple)">운영 자동화 — 매장명 매칭 · CRM 발송</span>
-        </div>
-        <div style="padding:14px 16px;font-size:12px;line-height:1.8">
-          <div style="color:var(--text-dim);margin-bottom:8px">현재 신청이 들어오면 <strong style="color:var(--text)">매장명 확인 → 패스오더 매장명 매칭을 수동으로 진행</strong>하고 있어, 신청 볼륨 증가 시 운영 병목 발생.</div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략 A</span>
-              <span><strong style="color:var(--red)">매장명 자동 매칭 시스템 구축</strong> — 기존 패스오더 서비스 매장 리스트를 활용하여, 신청 시 입력된 매장명을 자동으로 매칭. 전매장 확대 시 수동 처리로는 대응 불가</span>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:8px">
-              <span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(224,72,78,0.1);color:var(--red)">전략 B</span>
-              <span><strong style="color:var(--red)">선정 안내 CRM 발송 자동화</strong> — 매장명 매칭 완료 후 대상자에게 선정 안내 메시지를 자동 발송하는 워크플로우 구축. 현재 수동 발송 대비 응답 속도 및 일관성 향상</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-</div><!-- end content-wrap -->
-
 <script>
-Chart.defaults.color='#8b90a5';
-Chart.defaults.borderColor='rgba(0,0,0,0.06)';
-Chart.defaults.font.family="'Noto Sans KR','JetBrains Mono',sans-serif";
-Chart.defaults.font.size=11;
-
-// ★ 탭 전환 함수
-function switchDetailView(id) {
-  document.querySelectorAll('#view-detail-store, #view-detail-imp').forEach(p => p.classList.remove('active'));
-  document.getElementById('view-' + id).classList.add('active');
-  event.target.closest('.view-tabs').querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
-}
-
-// 1. Group Bar
-new Chart(document.getElementById('chartGroupBar'),{type:'bar',data:{
-  labels:['popup','receipt','banner_twice','banner_exclusive','banner_qr60'],
-  datasets:[
-    {label:'랜딩 진입',data:[3534,1170,614,494,472],
-     backgroundColor:['#4361ee30','#0ea5a030','#7c3aed30','#e8772e30','#db2e7a30'],
-     borderColor:['#4361ee','#0ea5a0','#7c3aed','#e8772e','#db2e7a'],
-     borderWidth:1.5,borderRadius:4},
-    {label:'신청건',data:[134,209,17,20,30],
-     backgroundColor:['#4361ee','#0ea5a0','#7c3aed','#e8772e','#db2e7a'],
-     borderRadius:4}
-  ]},options:{responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{position:'top',labels:{boxWidth:12,padding:14}}},
-  scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}
-});
-
-// 2. CVR
-new Chart(document.getElementById('chartGroupCVR'),{type:'bar',data:{
-  labels:['receipt\n(영수증QR)','banner_qr60\n(포스트잇QR)','banner_exclusive\n(전용혜택)','popup\n(팝업)','banner_twice\n(시급2배)'],
-  datasets:[{data:[17.86,6.36,4.05,3.79,2.77],
-    backgroundColor:['#0ea5a0','#db2e7a','#e8772e','#4361ee','#7c3aed'],
-    borderRadius:4,barThickness:26}]
-},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'%'}}},
-  scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}
-});
-
-// 3. Device
-new Chart(document.getElementById('chartDevice'),{type:'bar',data:{
-  labels:['PC→QR→모바일','모바일 직접\n(receipt+_mo)','PC 조회만'],
-  datasets:[
-    {label:'랜딩 진입',data:[343,2334,3613],
-     backgroundColor:['#7c3aed25','#0ea5a025','#e0484e10'],
-     borderColor:['#7c3aed','#0ea5a0','#e0484e'],
-     borderWidth:1.5,borderRadius:4},
-    {label:'신청',data:[65,343,2],
-     backgroundColor:['#7c3aed','#0ea5a0','#e0484e'],
-     borderRadius:4}
-  ]},options:{responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{position:'top',labels:{boxWidth:12,padding:12}}},
-  scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}
-});
-
-// 4. (차트 제거됨 — 매장당/노출당은 상세 테이블로 통합)
-
-// 5. Phase-out chart
-const pDates=["01/08","01/09","01/10","01/11","01/12","01/13","01/14","01/15","01/16","01/17","01/18","01/19","01/20","01/21","01/22","01/23","01/24","01/25","01/26","01/27","01/28","01/29","01/30","01/31"];
-const pStores=[8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,7948,6748,5148,0];
-const pRecPV=[16,19,12,12,9,23,30,75,104,132,88,65,177,169,131,94,150,93,54,60,50,45,28,4];
-const pRecApp=[2,3,1,1,1,5,3,10,18,25,13,9,34,28,20,12,20,10,6,5,8,3,1,0];
-
-new Chart(document.getElementById('chartPhaseout'),{type:'bar',data:{
-  labels:pDates,
-  datasets:[
-    {label:'영수증 랜딩 진입',data:pRecPV,
-     backgroundColor:'rgba(14,165,160,0.2)',borderColor:'#0ea5a0',borderWidth:1,borderRadius:2,yAxisID:'y'},
-    {label:'영수증 신청',data:pRecApp,
-     backgroundColor:'#0ea5a0',borderRadius:2,yAxisID:'y'},
-    {label:'적용 매장수',type:'line',data:pStores,
-     borderColor:'#e0484e',backgroundColor:'rgba(224,72,78,0.05)',
-     pointBackgroundColor:'#e0484e',pointRadius:2,
-     fill:true,tension:0.1,yAxisID:'y1',borderWidth:2}
-  ]},options:{responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{position:'top',labels:{boxWidth:12,padding:10,font:{size:10}}},
-    annotation:{annotations:{
-      box1:{type:'box',xMin:19.5,xMax:23.5,backgroundColor:'rgba(224,72,78,0.05)',
-        borderColor:'rgba(224,72,78,0.2)',borderWidth:1}
-    }}
-  },
-  scales:{
-    y:{beginAtZero:true,position:'left',title:{display:true,text:'진입/신청 건수',font:{size:10}}},
-    y1:{beginAtZero:true,grid:{display:false},position:'right',
-      title:{display:true,text:'적용 매장수',font:{size:10}},
-      ticks:{callback:v=>v>=1000?(v/1000)+'K':v}},
-    x:{grid:{display:false},ticks:{font:{size:8}}}
-  }}
-});
-
-// 7. Hourly
-new Chart(document.getElementById('chartHourly'),{type:'bar',data:{
-  labels:Array.from({length:24},(_,i)=>i+'시'),
-  datasets:[
-    {label:'랜딩 진입',data:[17,8,1,7,20,51,338,1381,1698,596,375,260,211,121,581,147,95,101,106,52,60,38,21,12],
-     backgroundColor:'rgba(67,97,238,0.15)',borderColor:'#4361ee',borderWidth:1,borderRadius:2,yAxisID:'y'},
-    {label:'신청',data:[0,0,0,0,2,0,13,60,126,43,15,16,13,9,75,17,4,5,8,1,1,1,0,1],
-     backgroundColor:'#0ea5a0',borderRadius:2,yAxisID:'y'},
-    {label:'CVR(%)',type:'line',
-     data:[0,0,0,0,10,0,3.85,4.34,7.42,7.21,4,6.15,6.16,7.44,12.91,11.56,4.21,4.95,7.55,1.92,1.67,2.63,0,8.33],
-     borderColor:'#e8772e',pointBackgroundColor:'#e8772e',pointRadius:3,fill:false,tension:0.3,yAxisID:'y1'}
-  ]},options:{responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{position:'top',labels:{boxWidth:12,padding:10}}},
-  scales:{y:{beginAtZero:true},y1:{beginAtZero:true,grid:{display:false},position:'right',ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
-});
-
-// 8. Daily
-const dD=["01/07","01/08","01/09","01/10","01/11","01/12","01/13","01/14","01/15","01/16","01/17","01/18","01/19","01/20","01/21","01/22","01/23","01/24","01/25","01/26","01/27","01/28","01/29","01/30","01/31","02/01","02/02"];
-const dPV=[6,68,151,85,71,90,99,263,484,406,452,344,281,445,480,373,283,389,295,221,252,302,237,205,6,4,5];
-const dA=[0,6,8,2,3,8,8,9,40,26,37,24,20,48,37,31,16,31,19,9,5,13,6,3,0,1,0];
-const dC=dPV.map((p,i)=>p>0?+(dA[i]/p*100).toFixed(2):0);
-
-new Chart(document.getElementById('chartDaily'),{type:'bar',data:{
-  labels:dD,
-  datasets:[
-    {label:'랜딩 진입',data:dPV,backgroundColor:'rgba(67,97,238,0.12)',borderColor:'#4361ee',borderWidth:1,borderRadius:2,yAxisID:'y'},
-    {label:'신청',data:dA,backgroundColor:'#0ea5a0',borderRadius:2,yAxisID:'y'},
-    {label:'CVR(%)',type:'line',data:dC,borderColor:'#e8772e',pointBackgroundColor:'#e8772e',pointRadius:2,fill:false,tension:0.3,yAxisID:'y1'}
-  ]},options:{responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{position:'top',labels:{boxWidth:12,padding:10,font:{size:10}}}},
-  scales:{y:{beginAtZero:true},y1:{beginAtZero:true,grid:{display:false},position:'right',ticks:{callback:v=>v+'%'}},x:{grid:{display:false},ticks:{font:{size:8}}}}}
-});
-
-// 9. TTS
-new Chart(document.getElementById('chartTTS'),{type:'bar',data:{
-  labels:['receipt\n(영수증)','banner_exclusive\n(전용혜택)','banner_qr60\n(포스트잇QR)','popup\n(팝업)','banner_twice\n(시급2배)'],
-  datasets:[{label:'중앙값(초)',data:[102,107,120,135,147],
-    backgroundColor:['#0ea5a0','#e8772e','#db2e7a','#4361ee','#7c3aed'],
-    borderRadius:4,barThickness:22}]
-},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'초 ('+(c.raw/60).toFixed(1)+'분)'}}},
-  scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'s'}},y:{grid:{display:false}}}}
-});
-
-// 10. Role
-new Chart(document.getElementById('chartRole'),{type:'bar',data:{
-  labels:['popup','receipt','banner_qr60','banner_exclusive','banner_twice'],
-  datasets:[
-    {label:'알바',data:[103,134,15,17,12],backgroundColor:'#4361ee',borderRadius:4},
-    {label:'점주',data:[31,75,15,3,5],backgroundColor:'#e8772e',borderRadius:4}
-  ]},options:{responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{position:'top',labels:{boxWidth:12,padding:14}}},
-  scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true}}}
-});
-
-// Raw Table
-const rawData=[
-  ['popup_pc',2387,0,'0.00%','PC 조회만 – QR 전환 없음','#4361ee'],
-  ['receipt',1170,209,'17.86%','🏆 최다 신청 채널 (모바일)','#0ea5a0'],
-  ['popup_mo',1087,128,'11.78%','모바일 직접 진입','#4361ee'],
-  ['banner_twice_pc',502,1,'0.20%','PC 조회만','#7c3aed'],
-  ['banner_exclusive_pc',393,0,'0.00%','PC 조회만','#e8772e'],
-  ['banner_qr60_pc',331,1,'0.30%','PC 조회만 (포스트잇 QR)','#db2e7a'],
-  ['banner_twice_pcqr',112,16,'14.29%','PC→QR 전환','#7c3aed'],
-  ['banner_exclusive_pcqr',101,20,'19.80%','PC→QR 전환 ★','#e8772e'],
-  ['banner_qr60_mo',71,6,'8.45%','모바일 직접 (포스트잇)','#db2e7a'],
-  ['banner_qr60_pcqr',70,23,'32.86%','🏆 최고 CVR','#db2e7a'],
-  ['popup_pcqr',60,6,'10.00%','PC→QR 전환','#4361ee'],
-];
-const tbody=document.querySelector('#rawTable tbody');
-rawData.forEach(r=>{
-  const cvr=parseFloat(r[3]);
-  const cvrW=Math.min(cvr/33*100,100);
-  const cvrC=cvr>=15?'var(--green)':cvr>=10?'var(--accent2)':cvr>=5?'var(--orange)':'var(--text-dim)';
-  const row=document.createElement('tr');
-  if(cvr>=15) row.classList.add('row-highlight');
-  row.innerHTML=`
-    <td><span class="channel-tag"><span class="channel-dot" style="background:${r[5]}"></span>${r[0]}</span></td>
-    <td>${r[1].toLocaleString()}</td><td>${r[2].toLocaleString()}</td>
-    <td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:${cvrW}%;background:${cvrC}"></div></div><span style="color:${cvrC};font-weight:${cvr>=15?700:400}">${r[3]}</span></div></td>
-    <td class="dim" style="text-align:left;font-family:'Pretendard';font-size:11px">${r[4]}</td>`;
-  tbody.appendChild(row);
-});
+Chart.defaults.color='#8b90a5';Chart.defaults.borderColor='rgba(0,0,0,0.06)';Chart.defaults.font.family="'Pretendard','JetBrains Mono',sans-serif";Chart.defaults.font.size=11;
+function switchDetailView(id){document.querySelectorAll('#view-detail-store,#view-detail-imp').forEach(p=>p.classList.remove('active'));document.getElementById('view-'+id).classList.add('active');event.target.closest('.view-tabs').querySelectorAll('.view-tab').forEach(t=>t.classList.remove('active'));event.target.classList.add('active')}
+new Chart(document.getElementById('chartGroupBar'),{type:'bar',data:{labels:['popup','receipt','banner_twice','banner_exclusive','banner_qr60'],datasets:[{label:'랜딩 진입',data:[3534,1170,614,494,472],backgroundColor:['#4361ee30','#0ea5a030','#7c3aed30','#e8772e30','#db2e7a30'],borderColor:['#4361ee','#0ea5a0','#7c3aed','#e8772e','#db2e7a'],borderWidth:1.5,borderRadius:4},{label:'신청건',data:[134,209,17,20,30],backgroundColor:['#4361ee','#0ea5a0','#7c3aed','#e8772e','#db2e7a'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:14}}},scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}});
+new Chart(document.getElementById('chartGroupCVR'),{type:'bar',data:{labels:['receipt\n(영수증QR)','banner_qr60\n(포스트잇QR)','banner_exclusive\n(전용혜택)','popup\n(팝업)','banner_twice\n(시급2배)'],datasets:[{data:[17.86,6.36,4.05,3.79,2.77],backgroundColor:['#0ea5a0','#db2e7a','#e8772e','#4361ee','#7c3aed'],borderRadius:4,barThickness:26}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'%'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}});
+new Chart(document.getElementById('chartDevice'),{type:'bar',data:{labels:['PC→QR→모바일','모바일 직접\n(receipt+_mo)','PC 조회만'],datasets:[{label:'랜딩 진입',data:[343,2334,3613],backgroundColor:['#7c3aed25','#0ea5a025','#e0484e10'],borderColor:['#7c3aed','#0ea5a0','#e0484e'],borderWidth:1.5,borderRadius:4},{label:'신청',data:[65,343,2],backgroundColor:['#7c3aed','#0ea5a0','#e0484e'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:12}}},scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}});
+const pDates=["01/08","01/09","01/10","01/11","01/12","01/13","01/14","01/15","01/16","01/17","01/18","01/19","01/20","01/21","01/22","01/23","01/24","01/25","01/26","01/27","01/28","01/29","01/30","01/31"];const pStores=[8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,8148,7948,6748,5148,0];const pRecPV=[16,19,12,12,9,23,30,75,104,132,88,65,177,169,131,94,150,93,54,60,50,45,28,4];const pRecApp=[2,3,1,1,1,5,3,10,18,25,13,9,34,28,20,12,20,10,6,5,8,3,1,0];
+new Chart(document.getElementById('chartPhaseout'),{type:'bar',data:{labels:pDates,datasets:[{label:'영수증 랜딩 진입',data:pRecPV,backgroundColor:'rgba(14,165,160,0.2)',borderColor:'#0ea5a0',borderWidth:1,borderRadius:2,yAxisID:'y'},{label:'영수증 신청',data:pRecApp,backgroundColor:'#0ea5a0',borderRadius:2,yAxisID:'y'},{label:'적용 매장수',type:'line',data:pStores,borderColor:'#e0484e',backgroundColor:'rgba(224,72,78,0.05)',pointBackgroundColor:'#e0484e',pointRadius:2,fill:true,tension:0.1,yAxisID:'y1',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:10,font:{size:10}}}},scales:{y:{beginAtZero:true,position:'left',title:{display:true,text:'진입/신청 건수',font:{size:10}}},y1:{beginAtZero:true,grid:{display:false},position:'right',title:{display:true,text:'적용 매장수',font:{size:10}},ticks:{callback:v=>v>=1000?(v/1000)+'K':v}},x:{grid:{display:false},ticks:{font:{size:8}}}}}});
+new Chart(document.getElementById('chartHourly'),{type:'bar',data:{labels:Array.from({length:24},(_,i)=>i+'시'),datasets:[{label:'랜딩 진입',data:[17,8,1,7,20,51,338,1381,1698,596,375,260,211,121,581,147,95,101,106,52,60,38,21,12],backgroundColor:'rgba(67,97,238,0.15)',borderColor:'#4361ee',borderWidth:1,borderRadius:2,yAxisID:'y'},{label:'신청',data:[0,0,0,0,2,0,13,60,126,43,15,16,13,9,75,17,4,5,8,1,1,1,0,1],backgroundColor:'#0ea5a0',borderRadius:2,yAxisID:'y'},{label:'CVR(%)',type:'line',data:[0,0,0,0,10,0,3.85,4.34,7.42,7.21,4,6.15,6.16,7.44,12.91,11.56,4.21,4.95,7.55,1.92,1.67,2.63,0,8.33],borderColor:'#e8772e',pointBackgroundColor:'#e8772e',pointRadius:3,fill:false,tension:0.3,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:10}}},scales:{y:{beginAtZero:true},y1:{beginAtZero:true,grid:{display:false},position:'right',ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+const dD=["01/07","01/08","01/09","01/10","01/11","01/12","01/13","01/14","01/15","01/16","01/17","01/18","01/19","01/20","01/21","01/22","01/23","01/24","01/25","01/26","01/27","01/28","01/29","01/30","01/31","02/01","02/02"];const dPV=[6,68,151,85,71,90,99,263,484,406,452,344,281,445,480,373,283,389,295,221,252,302,237,205,6,4,5];const dA=[0,6,8,2,3,8,8,9,40,26,37,24,20,48,37,31,16,31,19,9,5,13,6,3,0,1,0];const dC=dPV.map((p,i)=>p>0?+(dA[i]/p*100).toFixed(2):0);
+new Chart(document.getElementById('chartDaily'),{type:'bar',data:{labels:dD,datasets:[{label:'랜딩 진입',data:dPV,backgroundColor:'rgba(67,97,238,0.12)',borderColor:'#4361ee',borderWidth:1,borderRadius:2,yAxisID:'y'},{label:'신청',data:dA,backgroundColor:'#0ea5a0',borderRadius:2,yAxisID:'y'},{label:'CVR(%)',type:'line',data:dC,borderColor:'#e8772e',pointBackgroundColor:'#e8772e',pointRadius:2,fill:false,tension:0.3,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:10,font:{size:10}}}},scales:{y:{beginAtZero:true},y1:{beginAtZero:true,grid:{display:false},position:'right',ticks:{callback:v=>v+'%'}},x:{grid:{display:false},ticks:{font:{size:8}}}}}});
+new Chart(document.getElementById('chartTTS'),{type:'bar',data:{labels:['receipt\n(영수증)','banner_exclusive\n(전용혜택)','banner_qr60\n(포스트잇QR)','popup\n(팝업)','banner_twice\n(시급2배)'],datasets:[{label:'중앙값(초)',data:[102,107,120,135,147],backgroundColor:['#0ea5a0','#e8772e','#db2e7a','#4361ee','#7c3aed'],borderRadius:4,barThickness:22}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'초 ('+(c.raw/60).toFixed(1)+'분)'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'s'}},y:{grid:{display:false}}}}});
+new Chart(document.getElementById('chartRole'),{type:'bar',data:{labels:['popup','receipt','banner_qr60','banner_exclusive','banner_twice'],datasets:[{label:'알바',data:[103,134,15,17,12],backgroundColor:'#4361ee',borderRadius:4},{label:'점주',data:[31,75,15,3,5],backgroundColor:'#e8772e',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:14}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true}}}});
+const rawData=[['popup_pc',2387,0,'0.00%','PC 조회만 – QR 전환 없음','#4361ee'],['receipt',1170,209,'17.86%','🏆 최다 신청 채널 (모바일)','#0ea5a0'],['popup_mo',1087,128,'11.78%','모바일 직접 진입','#4361ee'],['banner_twice_pc',502,1,'0.20%','PC 조회만','#7c3aed'],['banner_exclusive_pc',393,0,'0.00%','PC 조회만','#e8772e'],['banner_qr60_pc',331,1,'0.30%','PC 조회만 (포스트잇 QR)','#db2e7a'],['banner_twice_pcqr',112,16,'14.29%','PC→QR 전환','#7c3aed'],['banner_exclusive_pcqr',101,20,'19.80%','PC→QR 전환 ★','#e8772e'],['banner_qr60_mo',71,6,'8.45%','모바일 직접 (포스트잇)','#db2e7a'],['banner_qr60_pcqr',70,23,'32.86%','🏆 최고 CVR','#db2e7a'],['popup_pcqr',60,6,'10.00%','PC→QR 전환','#4361ee']];
+const tbody=document.querySelector('#rawTable tbody');rawData.forEach(r=>{const cvr=parseFloat(r[3]);const cvrW=Math.min(cvr/33*100,100);const cvrC=cvr>=15?'var(--green)':cvr>=10?'var(--accent2)':cvr>=5?'var(--orange)':'var(--text-dim)';const row=document.createElement('tr');if(cvr>=15)row.classList.add('row-highlight');row.innerHTML=`<td><span class="channel-tag"><span class="channel-dot" style="background:${r[5]}"></span>${r[0]}</span></td><td>${r[1].toLocaleString()}</td><td>${r[2].toLocaleString()}</td><td><div class="cvr-cell"><div class="cvr-bar-bg"><div class="cvr-bar" style="width:${cvrW}%;background:${cvrC}"></div></div><span style="color:${cvrC};font-weight:${cvr>=15?700:400}">${r[3]}</span></div></td><td class="dim" style="text-align:left;font-family:'Pretendard';font-size:11px">${r[4]}</td>`;tbody.appendChild(row)});
 </script>
 </body>
 </html>
